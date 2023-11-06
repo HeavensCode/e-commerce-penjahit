@@ -19,3 +19,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('user.index-user');
 });
+Route::get('/register', function () {
+    return view('auth.register');
+});
