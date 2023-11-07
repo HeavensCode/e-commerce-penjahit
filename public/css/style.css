@@ -332,6 +332,7 @@ body {
     font-size: var(--fs-1);
     font-family: var(--ff-poppins);
 }
+
 .title-span {
     color: var(--gradient-1);
 }
@@ -364,4 +365,11 @@ body {
 
 .product-text span {
     font-weight: var(--fw-700);
+}
+
+/*about*/
+.about-title {
+    font-weight: var(--fw-800);
+    font-size: var(--fs-2);
+    font-family: var(--ff-poppins);
 }
