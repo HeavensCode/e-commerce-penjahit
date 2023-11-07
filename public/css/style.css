@@ -226,6 +226,7 @@ body {
     color: #000;
 }
 
+
 /* End Index footer */
 
 /* Carousel */
@@ -336,3 +337,22 @@ body {
     color: var(--gradient-1);
 }
 /* End Pengaturan Text setiap section */
+=======
+.register {
+    background: url('../image/register.jpg') center center no-repeat;
+    background-size: cover;
+    height: 280px;
+}
+
+.radio-group {
+    display: flex;
+justify-content: space-between;
+}
+.register .kontainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 35vh;
+}
+
