@@ -37,3 +37,7 @@ Route::get('/user/beranda', function () {
 Route::get('/user/detail', function () {
     return view('user.detail-produk');
 });
+
+Route::get('/user/produk', function () {
+    return view('user.produk');
+});
