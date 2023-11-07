@@ -13,8 +13,7 @@
         </div>
     </div>
     <div class="container">
-
-        <form class="row mt-5 px-4 py-4 border border-black">
+        <form class="row mt-5 px-4 py-4 border border-black rounded" style="background-color: #A17449">
             <h4>Registration</h4>
             <div class="col-md-6">
                 <label for="inputEmail4" class="form-label">Full Name *</label>
@@ -58,7 +57,7 @@
                 <button type="submit" class="btn btn-primary w-100">Register</button>
             </div>
             <div class="text-center">
-                <p>Sudah Punya Akun? <a href="" class="text-decoration-none text" style="color: #AC1818">Login</a>
+                <p>Sudah Punya Akun? <a href="/login" class="text-decoration-none text" style="color: #AC1818">Login</a>
                 </p>
             </div>
         </form>
