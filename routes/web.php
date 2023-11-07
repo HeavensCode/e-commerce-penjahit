@@ -22,3 +22,11 @@ Route::get('/', function () {
 Route::get('/register', function () {
     return view('auth.register');
 });
+
+Route::get('/user', function () {
+    return redirect('/user/beranda');
+});
+
+Route::get('/user/beranda', function () {
+    return view('user.beranda-user');
+});

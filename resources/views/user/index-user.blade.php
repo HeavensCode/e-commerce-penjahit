@@ -8,6 +8,11 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     {{-- font awesome --}}
     <script src="https://kit.fontawesome.com/9f3246d2c8.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&amp;display=swap"
+        rel="stylesheet">
+    <link href="https://site-assets.fontawesome.com/releases/v5.15.4/css/all.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
@@ -20,7 +25,7 @@
                 aria-controls="navbarsExample11" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse d-lg-flex" id="navbarsExample11">
+            <div class="navbar-collapse d-lg-flex collapse" id="navbarsExample11">
                 <a class="navbar-brand col-lg-3 me-0" href="#"><img src="{{ asset('image/navbar/logo.png') }}"
                         alt=""></a>
                 <ul class="navbar-nav col-lg-6 justify-content-lg-center">
@@ -53,8 +58,8 @@
     </nav>
 
     <div class="container">
-        <div id="userDropdown" class="user-dropdown ">
-            <div class="judul d-flex  justify-content-end">
+        <div id="userDropdown" class="user-dropdown">
+            <div class="judul d-flex justify-content-end">
                 <img src="{{ asset('image/logo-user.jpg') }}" alt="" width="50px" class="rounded-circle">
                 <h4 style="text-align: start">Welcome User</h4>
             </div>
@@ -79,14 +84,14 @@
     </div>
 
     {{-- main content --}}
-    <div class="container">
+    <div>
         @yield('container')
     </div>
 
     {{-- footer --}}
     <section class="footer" id="footer">
         <div class="container">
-            <footer class="row py-5 my-5 border-top justify-content-center">
+            <footer class="row border-top justify-content-center my-5 py-5">
                 <div class="col mb-4">
                     <h5>About Us</h5>
                     <hr>
@@ -99,13 +104,13 @@
                     <h5>Company</h5>
                     <hr>
                     <ul class="nav flex-column">
-                        <li class="nav-item mb-2 fs-5"><a href="#" class="nav-link p-0 text-body-secondary"><i
+                        <li class="nav-item fs-5 mb-2"><a href="#" class="nav-link text-body-secondary p-0"><i
                                     class="fa fa-arrow-right"></i> Products</a>
                         </li>
-                        <li class="nav-item mb-2 fs-5"><a href="#" class="nav-link p-0 text-body-secondary"><i
+                        <li class="nav-item fs-5 mb-2"><a href="#" class="nav-link text-body-secondary p-0"><i
                                     class="fa fa-arrow-right"></i> About Us</a>
                         </li>
-                        <li class="nav-item mb-2 fs-5"><a href="#" class="nav-link p-0 text-body-secondary"><i
+                        <li class="nav-item fs-5 mb-2"><a href="#" class="nav-link text-body-secondary p-0"><i
                                     class="fa fa-arrow-right"></i> Contact Us</a>
                         </li>
                     </ul>
@@ -114,13 +119,13 @@
                     <h5>Address</h5>
                     <hr>
                     <ul class="nav flex-column">
-                        <li class="nav-item mb-2 fs-5"><a href="#" class="nav-link p-0 text-body-secondary"><i
+                        <li class="nav-item fs-5 mb-2"><a href="#" class="nav-link text-body-secondary p-0"><i
                                     class="fa-solid fa-location-dot"></i> Makassar, Indonesia</a>
                         </li>
-                        <li class="nav-item mb-2 fs-5"><a href="#" class="nav-link p-0 text-body-secondary"><i
+                        <li class="nav-item fs-5 mb-2"><a href="#" class="nav-link text-body-secondary p-0"><i
                                     class="fa-solid fa-phone"></i> 08123489045</a>
                         </li>
-                        <li class="nav-item mb-2 fs-5"><a href="#" class="nav-link p-0 text-body-secondary"><i
+                        <li class="nav-item fs-5 mb-2"><a href="#" class="nav-link text-body-secondary p-0"><i
                                     class="fa-solid fa-envelope"></i> jahitku@gmail.com</a>
                         </li>
                     </ul>
