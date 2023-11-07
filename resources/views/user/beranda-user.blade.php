@@ -43,8 +43,8 @@
     <section class="feature-section reveal active my-4 mb-5" id="feature-promo-section ">
         <div class="container-features container">
             <!-- Judul Feature -->
-            <div class="header">
-                <h2 class="section-title text-center underline">Why Choose Us ?</h2>
+            <div class="header my-5 mb-3 mt-5">
+                <h2 class="section-title text-center">Why Choose Us ?</h2>
             </div>
             <div class="row g-3">
                 <div class="col-12 col-md-4">
@@ -90,8 +90,8 @@
                 <div class="col-12 col-md-4">
                     <!-- Feature Banner image -->
                     <div class="features-banner text-center">
-                        <img src="/img/banner/features-banner.webp" width="369" height="318" loading="lazy"
-                            alt="Features Banner" class="banner-animation img-fluid">
+                        <img src="{{ asset('image/why-choose-us/bannerwhychoose.png') }}" width="369" height="318"
+                            loading="lazy" alt="Features Banner" class="banner-animation img-fluid">
                     </div>
                 </div>
                 <div class="col-12 col-md-4">
@@ -140,138 +140,116 @@
 
     <section class="product-section reveal active my-4 mb-5" id="product-recom-section ">
         <!-- Judul dan Deskripsi Recom Section -->
-        <div class="header">
-            <h2 class="section-title text-center underline">Featured Products</h2>
+        <div class="header my-5 mb-3 mt-5">
+            <h2 class="section-title text-center">Rekomendasi <span class="title-span">Penjahit</span></h2>
             <p class="text-center">Makanan adalah setiap zat yang dikonsumsi untuk memberikan dukungan nutrisi bagi suatu
                 organisme.</p>
         </div>
 
         <!-- Product Recommendation List -->
         <div class="pro-container container">
-            <div class="row">
-                <div class="col-md-6 col-lg-3">
-                    <div class="pro-card rounded border p-3">
-                        <a href="/product-details/635cd5265139db4f31a56e8a">
+            <div class="row g-3">
+                <div class="col-6 col-lg-3">
+                    <a class="text-decoration-none" href="/product-details/635cd5265139db4f31a56e8a">
+                        <div class="pro-card rounded border p-3">
                             <!-- image product -->
-                            <div class="pro-image">
-                                <img src="https://drive.google.com/uc?export=view&amp;id=1zXf6sINrE3JjhvHmVpJ-TUOz78P60XdB"
-                                    alt="Jalangkote Setengah Masak" class="pro-animation img-fluid rounded"
-                                    loading="lazy">
+                            <div class="pro-image rounded">
+                                <img src="{{ asset('image/card/card-img.png') }}" alt="Jalangkote Setengah Masak"
+                                    class="pro-animation img-fluid rounded" loading="lazy">
                             </div>
 
                             <!-- product info -->
                             <div class="des-pro">
-                                <h3>Jalangkote Setengah Masak</h3>
+                                <h5 class="judul-card my-2">Jalangkote Setengah Masak</h5>
                                 <div class="star">
-                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                        class="fas fa-star"></i><i class="fas fa-star"></i>
+                                    <p class="rating-card m-0">
+                                        <i class="fas fa-star"></i>
+                                        4.7 --5.4k Reviews
+                                    </p>
                                 </div>
-                                <h4>8.000</h4>
+                                <p class="harga-card m-0">8.000</p>
+                                <p class="lokasi-card m-0"><i class="fa-solid fa-location-dot"></i> Makassar</p>
                             </div>
-                        </a>
-
-                        <!-- input hidden untuk id toko penjual, berat produk, no telp penjual -->
-                        <input type="hidden" name="idpenjual" value="635ccda31ae2ee8f47d58c43">
-                        <input type="hidden" name="beratproduct" value="80 gr">
-                        <input type="hidden" name="notelppenjual" value="6281250502698">
-
-                        <!-- product button Cart -->
-                        <i class="fal fa-shopping-cart btn-cart" data-idproduct="635cd5265139db4f31a56e8a"></i>
-                    </div>
+                        </div>
+                    </a>
                 </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="pro-card rounded border p-3">
-                        <a href="/product-details/635cd74cd494311aaaed7792">
+                <div class="col-6 col-lg-3">
+                    <a class="text-decoration-none" href="/product-details/635cd5265139db4f31a56e8a">
+                        <div class="pro-card rounded border p-3">
                             <!-- image product -->
-                            <div class="pro-image">
-                                <img src="https://drive.google.com/uc?export=view&amp;id=11_bcVtOkyxTuHO4K0cEHoU634hj2xsUz"
-                                    alt="Lumpia Setengah Masak" class="pro-animation img-fluid rounded" loading="lazy">
+                            <div class="pro-image rounded">
+                                <img src="{{ asset('image/card/card-img.png') }}" alt="Jalangkote Setengah Masak"
+                                    class="pro-animation img-fluid rounded" loading="lazy">
                             </div>
 
                             <!-- product info -->
                             <div class="des-pro">
-                                <h3>Lumpia Setengah Masak</h3>
+                                <h5 class="judul-card my-2">Jalangkote Setengah Masak</h5>
                                 <div class="star">
-                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                        class="fas fa-star"></i><i class="fas fa-star"></i>
+                                    <p class="rating-card m-0">
+                                        <i class="fas fa-star"></i>
+                                        4.7 --5.4k Reviews
+                                    </p>
                                 </div>
-                                <h4>8.000</h4>
+                                <p class="harga-card m-0">8.000</p>
+                                <p class="lokasi-card m-0"><i class="fa-solid fa-location-dot"></i> Makassar</p>
                             </div>
-                        </a>
-
-                        <!-- input hidden untuk id toko penjual, berat produk, no telp penjual -->
-                        <input type="hidden" name="idpenjual" value="635ccda31ae2ee8f47d58c43">
-                        <input type="hidden" name="beratproduct" value="100 gr">
-                        <input type="hidden" name="notelppenjual" value="6281250502698">
-
-                        <!-- product button Cart -->
-                        <i class="fal fa-shopping-cart btn-cart" data-idproduct="635cd74cd494311aaaed7792"></i>
-                    </div>
+                        </div>
+                    </a>
                 </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="pro-card rounded border p-3">
-                        <a href="/product-details/635cdc8b27fbd724c7b1da4e">
+                <div class="col-6 col-lg-3">
+                    <a class="text-decoration-none" href="/product-details/635cd5265139db4f31a56e8a">
+                        <div class="pro-card rounded border p-3">
                             <!-- image product -->
-                            <div class="pro-image">
-                                <img src="https://drive.google.com/uc?export=view&amp;id=1wuU2zn5mb0fhVPi30JzszNcBawmIM64c"
-                                    alt="Otak-Otak Ikan Tenggiri Setengah Masak" class="pro-animation img-fluid rounded"
-                                    loading="lazy">
+                            <div class="pro-image rounded">
+                                <img src="{{ asset('image/card/card-img.png') }}" alt="Jalangkote Setengah Masak"
+                                    class="pro-animation img-fluid rounded" loading="lazy">
                             </div>
 
                             <!-- product info -->
                             <div class="des-pro">
-                                <h3>Otak-Otak Ikan Tenggiri Setengah Masak</h3>
+                                <h5 class="judul-card my-2">Jalangkote Setengah Masak</h5>
                                 <div class="star">
-                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                        class="fas fa-star"></i><i class="fas fa-star"></i>
+                                    <p class="rating-card m-0">
+                                        <i class="fas fa-star"></i>
+                                        4.7 --5.4k Reviews
+                                    </p>
                                 </div>
-                                <h4>8.000</h4>
+                                <p class="harga-card m-0">8.000</p>
+                                <p class="lokasi-card m-0"><i class="fa-solid fa-location-dot"></i> Makassar</p>
                             </div>
-                        </a>
-
-                        <!-- input hidden untuk id toko penjual, berat produk, no telp penjual -->
-                        <input type="hidden" name="idpenjual" value="635ccda31ae2ee8f47d58c43">
-                        <input type="hidden" name="beratproduct" value="60 gr">
-                        <input type="hidden" name="notelppenjual" value="6281250502698">
-
-                        <!-- product button Cart -->
-                        <i class="fal fa-shopping-cart btn-cart" data-idproduct="635cdc8b27fbd724c7b1da4e"></i>
-                    </div>
+                        </div>
+                    </a>
                 </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="pro-card rounded border p-3">
-                        <a href="/product-details/635cf06035a01423faf720c1">
+                <div class="col-6 col-lg-3">
+                    <a class="text-decoration-none" href="/product-details/635cd5265139db4f31a56e8a">
+                        <div class="pro-card rounded border p-3">
                             <!-- image product -->
-                            <div class="pro-image">
-                                <img src="https://drive.google.com/uc?export=view&amp;id=1W0TpW7qsmnLKNLxqW9J2dHTN7Mrpm8Om"
-                                    alt="Bakso Halus Teryxu" class="pro-animation img-fluid rounded" loading="lazy">
+                            <div class="pro-image rounded">
+                                <img src="{{ asset('image/card/card-img.png') }}" alt="Jalangkote Setengah Masak"
+                                    class="pro-animation img-fluid rounded" loading="lazy">
                             </div>
 
                             <!-- product info -->
                             <div class="des-pro">
-                                <h3>Bakso Halus Teryxu</h3>
+                                <h5 class="judul-card my-2">Jalangkote Setengah Masak</h5>
                                 <div class="star">
-                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                        class="fas fa-star"></i><i class="fas fa-star"></i>
+                                    <p class="rating-card m-0">
+                                        <i class="fas fa-star"></i>
+                                        4.7 --5.4k Reviews
+                                    </p>
                                 </div>
-                                <h4>37.000</h4>
+                                <p class="harga-card m-0">8.000</p>
+                                <p class="lokasi-card m-0"><i class="fa-solid fa-location-dot"></i> Makassar</p>
                             </div>
-                        </a>
-
-                        <!-- input hidden untuk id toko penjual, berat produk, no telp penjual -->
-                        <input type="hidden" name="idpenjual" value="635ce4404646d439fe0d89d8">
-                        <input type="hidden" name="beratproduct" value="300 gr / 18-20 biji">
-                        <input type="hidden" name="notelppenjual" value="6285298989518">
-
-                        <!-- product button Cart -->
-                        <i class="fal fa-shopping-cart btn-cart" data-idproduct="635cf06035a01423faf720c1"></i>
-                    </div>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 
-    {{-- <section class="banncta-section reveal active" id="banner-cta-section">
+    {{-- <section class="banncta-section reveal active" id="banner-cta-section"5
         <div class="cta-container">
 
             <!-- List of CTA Banner -->
@@ -284,9 +262,9 @@
 
                         <div class="banner-item-content">
                             <p class="banner-subtitle">100% Free Admin Fees!</p>
-                            <h3 class="banner-title">Try Our Delicious Tasty Product!</h3>
+                            <h4 class="banner-title">Try Our Delicious Tasty Product!</h4>
                             <p class="banner-text">Free Admin Fees! For Any Transaction</p>
-                            <button class="btn"><a href="/product">Order Now</a></button>
+                            <button class="btn"><a class="text-decoration-none" href="/product">Order Now</a></button>
                         </div>
                     </div>
                 </li>
@@ -298,11 +276,11 @@
                             alt="CTA Banner Picture" class="banner-img">
 
                         <div class="banner-item-content">
-                            <h3 class="banner-title">Delicious Sausage</h3>
+                            <h4 class="banner-title">Delicious Sausage</h4>
 
                             <p class="banner-text">100% Free Admin Fees</p>
 
-                            <button class="btn"><a href="/product">Order Now</a></button>
+                            <button class="btn"><a class="text-decoration-none" href="/product">Order Now</a></button>
                         </div>
                     </div>
                 </li>
@@ -318,7 +296,7 @@
 
                             <p class="banner-text">100% Free Admin Fees</p>
 
-                            <button class="btna"><a href="/product">Order Now</a></button>
+                            <button class="btna"><a class="text-decoration-none" href="/product">Order Now</a></button>
                         </div>
                     </div>
                 </li>
@@ -334,7 +312,7 @@
 
                             <p class="banner-text">Free Admin Fees for Certain Period</p>
 
-                            <button class="btn"><a href="/product">Order Now</a></button>
+                            <button class="btn"><a class="text-decoration-none" href="/product">Order Now</a></button>
                         </div>
                     </div>
                 </li>
