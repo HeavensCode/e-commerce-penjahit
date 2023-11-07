@@ -57,8 +57,8 @@
         </div>
     </nav>
 
-    <div class="container">
-        <div id="userDropdown" class="user-dropdown">
+    <div class="container" style="display: flex; justify-content: flex-end;">
+        <div id="userDropdown" class="user-dropdown position-absolute" style="margin-left: auto;">
             <div class="judul d-flex justify-content-end">
                 <img src="{{ asset('image/logo-user.jpg') }}" alt="" width="50px" class="rounded-circle">
                 <h4 style="text-align: start">Welcome User</h4>
@@ -88,51 +88,82 @@
         @yield('container')
     </div>
 
-    {{-- footer --}}
-    <section class="footer" id="footer">
-        <div class="container">
-            <footer class="row border-top justify-content-center my-5 py-5">
-                <div class="col mb-4">
-                    <h5>About Us</h5>
-                    <hr>
-                    <p class="fs-5">Jahitku Merupakan suatu web application yang dapat menghubungkan pembeli dan
-                        penjual dalam suatu
-                        komunitas.</p>
-                </div>
 
-                <div class="col mb-4">
-                    <h5>Company</h5>
-                    <hr>
-                    <ul class="nav flex-column">
-                        <li class="nav-item fs-5 mb-2"><a href="#" class="nav-link text-body-secondary p-0"><i
-                                    class="fa fa-arrow-right"></i> Products</a>
-                        </li>
-                        <li class="nav-item fs-5 mb-2"><a href="#" class="nav-link text-body-secondary p-0"><i
-                                    class="fa fa-arrow-right"></i> About Us</a>
-                        </li>
-                        <li class="nav-item fs-5 mb-2"><a href="#" class="nav-link text-body-secondary p-0"><i
-                                    class="fa fa-arrow-right"></i> Contact Us</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col mb-4">
-                    <h5>Address</h5>
-                    <hr>
-                    <ul class="nav flex-column">
-                        <li class="nav-item fs-5 mb-2"><a href="#" class="nav-link text-body-secondary p-0"><i
-                                    class="fa-solid fa-location-dot"></i> Makassar, Indonesia</a>
-                        </li>
-                        <li class="nav-item fs-5 mb-2"><a href="#" class="nav-link text-body-secondary p-0"><i
-                                    class="fa-solid fa-phone"></i> 08123489045</a>
-                        </li>
-                        <li class="nav-item fs-5 mb-2"><a href="#" class="nav-link text-body-secondary p-0"><i
-                                    class="fa-solid fa-envelope"></i> jahitku@gmail.com</a>
-                        </li>
-                    </ul>
+
+    {{-- footer --}}
+    <footer class="footer mt-5" id="footer" style="background-color: #ED7D31">
+        <div class="container pt-4 py-0">
+            <footer>
+                <div class="row">
+                    <div class="col-6 col-md-6 mb-3">
+                        <h2>Subscribe for Offers and News</h1>
+                            <h6>Get E-mail updates about our latest Products and <span class="text-warning">
+                                    Special offers. </span> </h6>
+                    </div>
+                    <div class="col-md-4 offset-md-1 mb-3">
+                        <form>
+                            <div class="d-flex">
+                                <label for="newsletter1" class="visually-hidden">Your Email address</label>
+                                <input id="newsletter1" type="text" class="form-control"
+                                    placeholder="Your Email Address">
+                                <button class="btn btn-primary" type="button">Subscribe</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </footer>
         </div>
-    </section>
+        <section class="footer" id="footer">
+            <div class="container">
+                <footer class="row py-5  justify-content-center">
+                    <div class="col mb-4">
+                        <h5>About Us</h5>
+                        <hr>
+                        <p class="fs-5">Jahitku Merupakan suatu web application yang dapat menghubungkan pembeli dan
+                            penjual dalam suatu
+                            komunitas.</p>
+                    </div>
+
+                    <div class="col mb-4">
+                        <h5>Company</h5>
+                        <hr>
+                        <ul class="nav flex-column">
+                            <li class="nav-item mb-2 fs-5"><a href="#"
+                                    class="nav-link p-0 text-body-secondary"><i class="fa fa-arrow-right"></i>
+                                    Products</a>
+                            </li>
+                            <li class="nav-item mb-2 fs-5"><a href="#"
+                                    class="nav-link p-0 text-body-secondary"><i class="fa fa-arrow-right"></i> About
+                                    Us</a>
+                            </li>
+                            <li class="nav-item mb-2 fs-5"><a href="#"
+                                    class="nav-link p-0 text-body-secondary"><i class="fa fa-arrow-right"></i> Contact
+                                    Us</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col mb-4">
+                        <h5>Address</h5>
+                        <hr>
+                        <ul class="nav flex-column">
+                            <li class="nav-item mb-2 fs-5"><a href="#"
+                                    class="nav-link p-0 text-body-secondary"><i class="fa-solid fa-location-dot"></i>
+                                    Makassar, Indonesia</a>
+                            </li>
+                            <li class="nav-item mb-2 fs-5"><a href="#"
+                                    class="nav-link p-0 text-body-secondary"><i class="fa-solid fa-phone"></i>
+                                    08123489045</a>
+                            </li>
+                            <li class="nav-item mb-2 fs-5"><a href="#"
+                                    class="nav-link p-0 text-body-secondary"><i class="fa-solid fa-envelope"></i>
+                                    jahitku@gmail.com</a>
+                            </li>
+                        </ul>
+                    </div>
+                </footer>
+            </div>
+        </section>
+    </footer>
     <script src="{{ asset('js/main.js') }}"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"

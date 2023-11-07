@@ -226,6 +226,7 @@ body {
     color: #000;
 }
 
+
 /* End Index footer */
 
 /* Carousel */
@@ -373,3 +374,35 @@ body {
     font-size: var(--fs-2);
     font-family: var(--ff-poppins);
 }
+
+.register {
+    background: url('../image/register.jpg') center center no-repeat;
+    background-size: cover;
+    height: 280px;
+}
+
+.radio-group {
+    display: flex;
+justify-content: space-between;
+}
+.register .kontainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 35vh;
+}
+.login .kontainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 35vh;
+}
+
+.login {
+    background: url('../image/login.png') center center no-repeat;
+    background-size: cover;
+    height: 300px;
+}
+
