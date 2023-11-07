@@ -1,0 +1,154 @@
+html {
+    scroll-behavior: smooth;
+  }
+
+ body{
+    background: #eee;
+ }
+.icon {
+    color: #000;
+    font-size: 25px;
+    border-radius: 8px;
+    margin-right: 40px;
+    margin-top: 8px;
+}
+
+
+.navbar .user{
+    margin-right: 7px;
+    margin-top: 10px;
+    font-size: 15px;
+}
+.navbar{
+    background-color: #DEB887;
+}
+
+
+/* sidebar */
+#side_nav{
+    background: #F3EEEA;
+     min-width: 200px;
+    max-width: 250px;
+     width: 250px;
+    transition: all 0.3s;
+}
+
+.sidebar .sidebar-heading{
+    padding-left:0.5rem;
+    padding-bottom: 15px;
+}
+.content {
+    min-height: 100vh;
+    width: 100%;
+}
+
+hr .h-color{
+    background: #eee;
+}
+.sidebar li.active{
+    background: #eee;
+    border-radius: 8px;
+}
+
+.sidebar li.active a,
+.sidebar li.active a:hover{
+    color: #000;
+}
+.sidebar li a{
+    color: #000;
+}
+
+.list-unstyled .toggler-sidebar{
+    text-align: center;
+}
+.sidebar.active {
+    width: 300px;
+}
+
+
+/* sidebar end*/
+
+.content-box{
+    position: relative;
+
+}
+
+.cards {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    text-align: center;
+}
+.card {
+    width: 230px;
+    height: 130px;
+    background: #F0E68C;
+    display: flex;
+    margin-top: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    box-shadow: 10px 10px 10px 0px rgba(10, 206, 85, 0.2), 10px 10px 10px 0px rgba(14, 149, 190, 0.19);
+
+}
+
+.container-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    background-color: #f1f1f1;
+  }
+
+  .content-chart {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 50px;
+  }
+
+  .charts {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  .chart-box {
+    padding-top: 4rem;
+    /* padding-left: 4rem; */
+    justify-content: space-around;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 400px;
+  }
+
+
+
+/* navbar bottom start*/
+.navbar-bottom{
+    padding-top: 3rem;
+}
+/* navbar bottom end*/
+
+/* media queries */
+@media (max-width: 767px){
+    #side_nav{
+        margin-left: -250px;
+        position: fixed;
+        min-height: 100vh;
+        z-index: 1;
+    }
+    #side_nav.active{
+        margin-left: 0;
+    }
+}
+

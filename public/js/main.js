@@ -27,3 +27,20 @@ userButton.addEventListener("click", function () {
         userDropdown.style.display = "none";
     }
 });
+
+// Get a reference to the sidebar element
+var sidebar = document.getElementById("side_nav");
+
+// Get a reference to the sidebar toggle button
+var sidebarToggle = document.getElementById("sidebar-toggle");
+
+// Add a click event listener to the toggle button
+sidebarToggle.addEventListener("click", function () {
+    // Toggle the 'active' class of the sidebar
+    sidebar.classList.toggle("active");
+});
+
+// Function to toggle the sidebar
+function toggleSidebar() {
+    sidebar.classList.toggle("active");
+}

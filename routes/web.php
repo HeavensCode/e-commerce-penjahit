@@ -49,3 +49,9 @@ Route::get('/produk', function () {
 Route::get('/about', function () {
     return view('user.about');
 });
+Route::get('/dashboard', function () {
+    return view('user.profile-user.index-profile-user');
+});
+Route::get('/profile', function () {
+    return view('user.profile-user.profile-user');
+});
