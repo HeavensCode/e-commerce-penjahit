@@ -164,7 +164,7 @@
                                 <div class="star">
                                     <p class="rating-card m-0">
                                         <i class="fas fa-star"></i>
-                                        4.7 --5.4k Reviews
+                                        4.7 - 5.4k Terjual
                                     </p>
                                 </div>
                                 <p class="harga-card m-0">8.000</p>
@@ -188,7 +188,7 @@
                                 <div class="star">
                                     <p class="rating-card m-0">
                                         <i class="fas fa-star"></i>
-                                        4.7 --5.4k Reviews
+                                        4.7 - 5.4k Terjual
                                     </p>
                                 </div>
                                 <p class="harga-card m-0">8.000</p>
@@ -212,7 +212,7 @@
                                 <div class="star">
                                     <p class="rating-card m-0">
                                         <i class="fas fa-star"></i>
-                                        4.7 --5.4k Reviews
+                                        4.7 - 5.4k Terjual
                                     </p>
                                 </div>
                                 <p class="harga-card m-0">8.000</p>
@@ -236,7 +236,7 @@
                                 <div class="star">
                                     <p class="rating-card m-0">
                                         <i class="fas fa-star"></i>
-                                        4.7 --5.4k Reviews
+                                        4.7 - 5.4k Terjual
                                     </p>
                                 </div>
                                 <p class="harga-card m-0">8.000</p>
