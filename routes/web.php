@@ -25,6 +25,9 @@ Route::get('/register', function () {
 Route::get('/login', function () {
     return view('auth.login');
 });
+Route::get('/contact', function () {
+    return view('user.contact');
+});
 
 Route::get('/user', function () {
     return redirect('/user/beranda');

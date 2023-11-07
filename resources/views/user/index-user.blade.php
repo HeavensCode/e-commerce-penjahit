@@ -39,7 +39,7 @@
                         <a class="nav-link navlink active" href="#">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link navlink active" href="#">Contact</a>
+                        <a class="nav-link navlink active" href="/contact">Contact</a>
                     </li>
                 </ul>
                 <div class="d-lg-flex col-lg-3 justify-content-lg-start">
@@ -57,8 +57,8 @@
         </div>
     </nav>
 
-    <div class="container" style="display: flex; justify-content: flex-end;">
-        <div id="userDropdown" class="user-dropdown position-absolute" style="margin-left: auto;">
+    <div class="container " style="display: flex; justify-content: flex-end;">
+        <div id="userDropdown" class="user-dropdown position-absolute bg-white px-3 py-3" style="margin-left: auto;">
             <div class="judul d-flex justify-content-end">
                 <img src="{{ asset('image/logo-user.jpg') }}" alt="" width="50px" class="rounded-circle">
                 <h4 style="text-align: start">Welcome User</h4>

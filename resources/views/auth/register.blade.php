@@ -2,7 +2,7 @@
 
 @section('container')
     <div class="register">
-        <div class="container kontainer">
+        <div class=" kontainer">
             <div class="judulregister d-flex justify-content-center text-center">
                 <h1 class="text-dark">Register</h1>
             </div>
