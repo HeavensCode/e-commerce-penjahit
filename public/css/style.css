@@ -49,5 +49,21 @@
 #footer .container hr {
     border-width: 2px;
     color: #000;
-  }
+}
+.register {
+    background: url('../image/register.jpg') center center no-repeat;
+    background-size: cover;
+    height: 280px;
+}
 
+.radio-group {
+    display: flex;
+justify-content: space-between;
+}
+.register .kontainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 35vh;
+}
