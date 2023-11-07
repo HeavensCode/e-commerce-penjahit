@@ -16,9 +16,7 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-Route::get('/', function () {
-    return view('user.index-user');
-});
+
 Route::get('/register', function () {
     return view('auth.register');
 });
@@ -29,25 +27,25 @@ Route::get('/contact', function () {
     return view('user.contact');
 });
 
+Route::get('/', function () {
+    return redirect('/beranda');
+});
 Route::get('/user', function () {
-    return redirect('/user/beranda');
+    return redirect('/beranda');
 });
 
-Route::get('/user/beranda', function () {
+Route::get('/beranda', function () {
     return view('user.beranda-user');
 });
 
-Route::get('/user/detail', function () {
+Route::get('/detail', function () {
     return view('user.detail-produk');
 });
 
-Route::get('/user/produk', function () {
+Route::get('/produk', function () {
     return view('user.produk');
 });
 
-Route::get('/user/about', function () {
+Route::get('/about', function () {
     return view('user.about');
-});
-Route::get('/profile', function () {
-    return view('user.profile-user.profile-user');
 });
