@@ -48,3 +48,6 @@ Route::get('/user/produk', function () {
 Route::get('/user/about', function () {
     return view('user.about');
 });
+Route::get('/profile', function () {
+    return view('user.profile-user.profile-user');
+});
