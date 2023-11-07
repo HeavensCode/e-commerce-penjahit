@@ -41,3 +41,7 @@ Route::get('/user/detail', function () {
 Route::get('/user/produk', function () {
     return view('user.produk');
 });
+
+Route::get('/user/about', function () {
+    return view('user.about');
+});
