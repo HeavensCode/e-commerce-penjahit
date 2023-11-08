@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use App\Models\DetailProduct;
 use App\Http\Requests\StoreDetailProductRequest;
 use App\Http\Requests\UpdateDetailProductRequest;
@@ -15,7 +16,8 @@ class DetailProductController extends Controller
      */
     public function index()
     {
-        //
+        // $products = Product::with('detailProduct', 'detailGambarProduct', 'toko')->find();
+        // return view('user.detail-produk', ['products' => $products]);
     }
 
     /**
@@ -47,7 +49,6 @@ class DetailProductController extends Controller
      */
     public function show(DetailProduct $detailProduct)
     {
-        //
     }
 
     /**
