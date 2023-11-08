@@ -19,49 +19,52 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/register', function () {
     return view('auth.register');
-});
+})->name('register');
+
 Route::get('/login', function () {
     return view('auth.login');
-});
+})->name('login');
 
 Route::get('/contact', function () {
     return view('user.contact');
-});
+})->name('contact');
 
-Route::get('/', function () {
-    return redirect('/beranda');
-});
-Route::get('/user', function () {
-    return redirect('/beranda');
-});
+Route::redirect('/', '/beranda');
+
+Route::redirect('/user', '/beranda');
 
 Route::get('/beranda', function () {
     return view('user.beranda-user');
-});
+})->name('beranda');
 
 Route::get('/detail', function () {
     return view('user.detail-produk');
-});
+})->name('detail');
 
 Route::get('/produk', function () {
     return view('user.produk');
-});
+})->name('produk');
 
 Route::get('/about', function () {
     return view('user.about');
-});
+})->name('about');
+
 Route::get('/dashboard', function () {
     return view('user.profile-user.index-profile-user');
 });
+
 Route::get('/profile', function () {
     return view('user.profile-user.profile-user');
-});
+})->name('profile');
+
 Route::get('/toko', function () {
     return view('user.profile-user.toko-user');
-});
+})->name('toko');
+
 Route::get('/alamat', function () {
     return view('user.profile-user.alamat-user');
-});
+})->name('alamat');
+
 
 
 // super admin
