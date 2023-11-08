@@ -30,16 +30,16 @@
                         alt=""></a>
                 <ul class="navbar-nav col-lg-6 justify-content-lg-center">
                     <li class="nav-item">
-                        <a class="nav-link navlink active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link navlink active" aria-current="page" href="/beranda">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link navlink active" href="#">Product</a>
+                        <a class="nav-link navlink active" href="/produk">Product</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link navlink active" href="#">About</a>
+                        <a class="nav-link navlink active" href="/about">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link navlink active" href="#">Contact</a>
+                        <a class="nav-link navlink active" href="/contact">Contact</a>
                     </li>
                 </ul>
                 <div class="d-lg-flex col-lg-3 justify-content-lg-start">
@@ -128,15 +128,15 @@
                         <h5>Company</h5>
                         <hr>
                         <ul class="nav flex-column">
-                            <li class="nav-item mb-2 fs-5"><a href="#"
+                            <li class="nav-item mb-2 fs-5"><a href="/product"
                                     class="nav-link p-0 text-body-secondary"><i class="fa fa-arrow-right"></i>
                                     Products</a>
                             </li>
-                            <li class="nav-item mb-2 fs-5"><a href="#"
+                            <li class="nav-item mb-2 fs-5"><a href="/about"
                                     class="nav-link p-0 text-body-secondary"><i class="fa fa-arrow-right"></i> About
                                     Us</a>
                             </li>
-                            <li class="nav-item mb-2 fs-5"><a href="#"
+                            <li class="nav-item mb-2 fs-5"><a href="/contact"
                                     class="nav-link p-0 text-body-secondary"><i class="fa fa-arrow-right"></i> Contact
                                     Us</a>
                             </li>

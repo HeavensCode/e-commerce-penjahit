@@ -23,6 +23,7 @@ Route::get('/register', function () {
 Route::get('/login', function () {
     return view('auth.login');
 });
+
 Route::get('/contact', function () {
     return view('user.contact');
 });
@@ -60,4 +61,28 @@ Route::get('/toko', function () {
 });
 Route::get('/alamat', function () {
     return view('user.profile-user.alamat-user');
+});
+
+
+// super admin
+Route::get('/admin', function () {
+    return view('admin.index-admin');
+});
+Route::get('/login-admin', function () {
+    return view('admin.auth-admin.login-admin');
+});
+Route::get('/register-admin', function () {
+    return view('admin.auth-admin.register-admin');
+});
+Route::get('/dashboard-admin', function () {
+    return view('admin.dashboard-admin');
+});
+Route::get('/users', function () {
+    return view('admin.user.index-user');
+});
+Route::get('/toko-admin', function () {
+    return view('admin.toko.index');
+});
+Route::get('/edit-toko-admin', function () {
+    return view('admin.toko.edit');
 });

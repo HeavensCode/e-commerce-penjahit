@@ -22,13 +22,8 @@
     {{-- navbar --}}
     <nav class="navbar navbar-expand-lg" aria-label="Thirteenth navbar example">
         <div class="container-fluid">
-            <button id="sidebar-toggle" class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample11"
                 aria-controls="navbarsExample11" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <button id="sidebar-toggle" class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarsExample11" aria-controls="navbarsExample11" aria-expanded="false"
-                aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="navbar-collapse d-lg-flex collapse" id="navbarsExample11">
@@ -36,16 +31,16 @@
                         alt=""></a>
                 <ul class="navbar-nav col-lg-6 justify-content-lg-center">
                     <li class="nav-item">
-                        <a class="nav-link navlink active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link navlink active" aria-current="page" href="/beranda">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link navlink active" href="#">Product</a>
+                        <a class="nav-link navlink active" href="/produk">Product</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link navlink active" href="#">About</a>
+                        <a class="nav-link navlink active" href="/about">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link navlink active" href="#">Contact</a>
+                        <a class="nav-link navlink active" href="/contact">Contact</a>
                     </li>
                 </ul>
                 <div class="d-lg-flex col-lg-3 justify-content-lg-start">
