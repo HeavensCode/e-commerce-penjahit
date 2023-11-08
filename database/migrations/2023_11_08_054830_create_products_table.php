@@ -16,6 +16,7 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('nama_product');
+            $table->foreignId('id_toko')->nullable();
             $table->integer('stock');
             $table->string('rating');
             $table->integer('harga');
