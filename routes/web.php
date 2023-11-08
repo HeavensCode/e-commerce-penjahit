@@ -75,10 +75,13 @@ Route::get('/login-admin', function () {
 Route::get('/dashboard-admin', function () {
     return view('admin.dashboard-admin');
 });
+Route::get('/register-admin', [AdminLoginController::class, 'showFormRegister']);
+Route::post('/admin-register', [AdminLoginController::class, 'registerAdmin'])->name('register.admin');
 
-Route::get('/register-admin', function () {
-    return view('admin.auth-admin.register-admin');
-});
+// Route::get('/register-admin', function () {
+//     return view('admin.auth-admin.register-admin');
+// });
+
 Route::get('/users', function () {
     return view('admin.user.index-user');
 });
