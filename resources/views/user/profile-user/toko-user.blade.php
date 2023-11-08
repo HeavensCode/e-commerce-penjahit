@@ -89,4 +89,21 @@
             </div>
         </div>
     </section>
+    <script>
+        document.getElementById("gambarProduk").addEventListener("change", function() {
+            var preview = document.getElementById("previewGambar");
+            var file = this.files[0];
+            var reader = new FileReader();
+
+            reader.onload = function() {
+                preview.src = reader.result;
+            }
+
+            if (file) {
+                reader.readAsDataURL(file);
+            } else {
+                preview.src = "";
+            }
+        });
+    </script>
 @endsection
