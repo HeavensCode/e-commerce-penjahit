@@ -23,7 +23,6 @@ class CreatePembeliansTable extends Migration
             $table->foreignId('id_pembelian')->nullable();
             $table->String('jenis_pembayaran');
             $table->timestamps();
-
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
     }
