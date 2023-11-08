@@ -34,13 +34,13 @@
                         <a class="nav-link navlink active" aria-current="page" href="/beranda">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link navlink active" href="/produk">Product</a>
+                        <a class="nav-link navlink active" href="{{ route('produk') }}">Product</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link navlink active" href="/about">About</a>
+                        <a class="nav-link navlink active" href="{{ route('about') }}">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link navlink active" href="/contact">Contact</a>
+                        <a class="nav-link navlink active" href="{{ route('contact') }}">Contact</a>
                     </li>
                 </ul>
                 <div class="d-lg-flex col-lg-3 justify-content-lg-start">
@@ -90,31 +90,34 @@
     <div class="div-main-container d-flex">
         <div class="sidebar" id="side_nav">
             <ul class="list-unstyled px-2">
-                <li class="active"> <a href="" class="text-decoration-none px-3 py-2 d-block"> <i
+                <li class="active"> <a href="" class="text-decoration-none d-block px-3 py-2"> <i
                             class="fa-solid fa-house"></i> Dashboard</a></li>
                 <hr>
                 <div>
-                    <li class=""> <a href="" class="text-decoration-none px-3  d-block d-flex"
+                    <li class=""> <a href="" class="text-decoration-none d-block d-flex px-3"
                             style="padding-top: 0;"> <img src="{{ asset('image/logo-user.jpg') }}" alt="logo user"
-                                class="rounded rounded-circle" width="40px">
+                                class="rounded-circle rounded" width="40px">
                             <div>
                                 <p>Nama User</p>
                             </div>
                     </li>
                 </div>
                 <div class="pt-3">
-                    <li class=""> <a href="" class="text-decoration-none px-3 py-2 d-block"
-                            style="padding-top: 0;"> <i class="fa-solid fa-user"></i> Profile</a></li>
-                    <li class=""> <a href="" class="text-decoration-none px-3 py-2 d-block"
-                            style="padding-top: 0;"> <i class="fa-solid fa-location-dot"></i> Alamat</a></li>
-                    <li class=""> <a href="" class="text-decoration-none px-3 py-2 d-block">
+                    <li class=""> <a href="{{ route('profile') }}"
+                            class="text-decoration-none d-block px-3 py-2" style="padding-top: 0;"> <i
+                                class="fa-solid fa-user"></i> Profile</a></li>
+                    <li class=""> <a href="{{ route('alamat') }}"
+                            class="text-decoration-none d-block px-3 py-2" style="padding-top: 0;"> <i
+                                class="fa-solid fa-location-dot"></i> Alamat</a></li>
+                    <li class=""> <a href="{{ route('toko') }}"
+                            class="text-decoration-none d-block px-3 py-2">
                             <i class="fa-solid fa-store"></i> Toko Saya</a>
                     </li>
                 </div>
             </ul>
             <hr class="h-color mx-2">
             <ul class="list-unstyled px-2">
-                <button class="toggler-sidebar text-decoration-none px-3 py-2 d-block" onclick="toggleSidebar()"><i
+                <button class="toggler-sidebar text-decoration-none d-block px-3 py-2" onclick="toggleSidebar()"><i
                         class="fa-solid fa-arrow-right"></i></button>
             </ul>
         </div>
@@ -130,7 +133,7 @@
             <footer class="footer mt-5" id="footer">
                 <section class="footer" id="footer">
                     <div class="container">
-                        <footer class="row py-5  justify-content-center">
+                        <footer class="row justify-content-center py-5">
                             <div class="col mb-4">
                                 <h5>About Us</h5>
                                 <hr>
@@ -144,17 +147,17 @@
                                 <h5>Company</h5>
                                 <hr>
                                 <ul class="nav flex-column">
-                                    <li class="nav-item mb-2 fs-5"><a href="#"
-                                            class="nav-link p-0 text-body-secondary"><i class="fa fa-arrow-right"></i>
+                                    <li class="nav-item fs-5 mb-2"><a href="#"
+                                            class="nav-link text-body-secondary p-0"><i class="fa fa-arrow-right"></i>
                                             Products</a>
                                     </li>
-                                    <li class="nav-item mb-2 fs-5"><a href="#"
-                                            class="nav-link p-0 text-body-secondary"><i class="fa fa-arrow-right"></i>
+                                    <li class="nav-item fs-5 mb-2"><a href="#"
+                                            class="nav-link text-body-secondary p-0"><i class="fa fa-arrow-right"></i>
                                             About
                                             Us</a>
                                     </li>
-                                    <li class="nav-item mb-2 fs-5"><a href="#"
-                                            class="nav-link p-0 text-body-secondary"><i class="fa fa-arrow-right"></i>
+                                    <li class="nav-item fs-5 mb-2"><a href="#"
+                                            class="nav-link text-body-secondary p-0"><i class="fa fa-arrow-right"></i>
                                             Contact
                                             Us</a>
                                     </li>
@@ -164,17 +167,17 @@
                                 <h5>Address</h5>
                                 <hr>
                                 <ul class="nav flex-column">
-                                    <li class="nav-item mb-2 fs-5"><a href="#"
-                                            class="nav-link p-0 text-body-secondary"><i
+                                    <li class="nav-item fs-5 mb-2"><a href="#"
+                                            class="nav-link text-body-secondary p-0"><i
                                                 class="fa-solid fa-location-dot"></i>
                                             Makassar, Indonesia</a>
                                     </li>
-                                    <li class="nav-item mb-2 fs-5"><a href="#"
-                                            class="nav-link p-0 text-body-secondary"><i class="fa-solid fa-phone"></i>
+                                    <li class="nav-item fs-5 mb-2"><a href="#"
+                                            class="nav-link text-body-secondary p-0"><i class="fa-solid fa-phone"></i>
                                             08123489045</a>
                                     </li>
-                                    <li class="nav-item mb-2 fs-5"><a href="#"
-                                            class="nav-link p-0 text-body-secondary"><i
+                                    <li class="nav-item fs-5 mb-2"><a href="#"
+                                            class="nav-link text-body-secondary p-0"><i
                                                 class="fa-solid fa-envelope"></i>
                                             jahitku@gmail.com</a>
                                     </li>
