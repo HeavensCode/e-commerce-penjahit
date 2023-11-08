@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\beranda;
+use App\Http\Controllers\DetailProductController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminLoginController;
@@ -38,9 +39,7 @@ Route::redirect('/user', '/beranda');
 
 Route::get('/beranda', [beranda::class, 'index'])->name('beranda');
 
-Route::get('/detail', function () {
-    return view('user.detail-produk');
-})->name('detail');
+Route::get('/detail/{id}',  [DetailProductController::class, 'index'])->name('detail');
 
 Route::get('/produk', [ProductController::class, 'show'])->name('produk');
 
