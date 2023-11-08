@@ -1,8 +1,8 @@
 @extends('user.index-user')
 
 @section('container')
-    <section class="prodetails-section reveal active" id="product-details-section">
-        <div class="prodetails-section-card m-5 rounded border p-4">
+    <section class="prodetails-section reveal active container-md" id="product-details-section">
+        <div class="prodetails-section-card w-100 rounded border p-4">
             <!-- Product Details img & content -->
             <div class="row border-bottom pb-4">
                 <!-- Container Foto Kiri Detail Produk -->
@@ -59,40 +59,28 @@
                         <!-- Harga Produk -->
                         <data class="product-price bg-body-secondary row col-12 px-3">Rp8000</data>
 
-                        {{-- <!-- Rating Star Produk -->
+                        <!-- Rating Star Produk -->
                         <div class="rating-wrapper col-12">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div> --}}
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                        </div>
 
                         <!-- Deskripsi Singkat Produk -->
                         <div class="product-text col-12">
                             <p>Pengiriman : <span>Pre Order</span></p>
                         </div>
 
-                        <!-- Harga Produk -->
+                        <!-- Berat Produk -->
                         <div class="product-text col-12">
                             <div class="row align-items-center g-2">
-                                <div class="col-2 text-center">
-                                    <p class="m-0 p-1 text-start">Harga : </p>
+                                <div class="col-4 col-md-2 text-center">
+                                    <p class="m-0 p-1 text-start">Berat : </p>
                                 </div>
-                                <div class="col-2 harga rounded text-center">
-                                    <p class="bg-warning-subtle m-0 p-1">Rp5000</p>
-                                </div>
-                                <div class="col-2 harga rounded text-center">
-                                    <p class="bg-warning-subtle m-0 p-1">Rp5000</p>
-                                </div>
-                                <div class="col-2 harga rounded text-center">
-                                    <p class="bg-warning-subtle m-0 p-1">Rp5000</p>
-                                </div>
-                                <div class="col-2 harga rounded text-center">
-                                    <p class="bg-warning-subtle m-0 p-1">Rp5000</p>
-                                </div>
-                                <div class="col-2 harga rounded text-center">
-                                    <p class="bg-warning-subtle m-0 p-1">Rp5000</p>
+                                <div class="col-4 col-md-2 rounded text-center">
+                                    <p class="bg-warning-subtle m-0 rounded p-1"><b>300 gr</b></p>
                                 </div>
                             </div>
                         </div>
@@ -100,16 +88,16 @@
                         <!-- Kuantitas Produk -->
                         <div class="product-text col-12">
                             <div class="row align-items-center g-2">
-                                <div class="col-2 text-center">
+                                <div class="col-4 col-md-2 text-center">
                                     <p class="m-0 p-1 text-start">Kuantitas: </p>
                                 </div>
-                                <div class="col-2 kuantitas">
+                                <div class="col-4 col-md-2 kuantitas">
                                     <div class="input-group">
                                         <input type="number" class="form-control text-center" id="quantityInput"
                                             value="1" min="1" max="50">
                                     </div>
                                 </div>
-                                <div class="col-2 text-center">
+                                <div class="col-4 col-md-2 text-center">
                                     <a href="#" class="text-decoration-none p-0">
                                         <button class="btn btn-primary">Add to Cart</button>
                                     </a>
@@ -153,7 +141,7 @@
             <div class="row border-bottom py-4">
                 <h4 class="description-title">Spesifiksi Produk : </h4>
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-12 col-sm-10 col-md-8 col-lg-6">
                         <table class="table-responsive table">
                             <tbody>
                                 <tr>
@@ -206,19 +194,6 @@
                     item.classList.remove("active");
                 });
                 thumbnail.classList.add("active");
-            });
-        });
-    </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const productPrice = document.querySelector('.product-price');
-            const priceItems = document.querySelectorAll('.product-text .harga');
-
-            priceItems.forEach((priceItem, index) => {
-                priceItem.addEventListener('click', function() {
-                    const newPrice = this.textContent;
-                    productPrice.textContent = newPrice;
-                });
             });
         });
     </script>

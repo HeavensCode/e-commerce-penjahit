@@ -288,8 +288,6 @@ body {
 }
 
 .harga-card {
-    color: var(--st-patricks-blue);
-    font-size: var(--fs-8);
     font-weight: var(--fw-700);
 }
 
@@ -348,19 +346,14 @@ body {
 }
 
 .product-title {
-    font-size: var(--fs-2);
+    font-size: var(--fs-3);
     font-weight: var(--fw-700);
 }
 
 .product-price {
-    font-size: var(--fs-3);
-    font-weight: var(--fw-800);
+    font-size: var(--fs-4);
+    font-weight: var(--fw-700);
     opacity: 0.9;
-}
-
-.product-text .harga:hover {
-    background-color: var(--yellowstar);
-    cursor: pointer;
 }
 
 .product-text span {
