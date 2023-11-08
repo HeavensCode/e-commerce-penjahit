@@ -18,8 +18,16 @@
                         <h5>Lokasi : <b>Indonesia</b></h5>
                     </div>
                     <div class="row mb-3 gap-3">
-                        <button class="btn btn-success col-12 col-md-3">Tambah Produk</button>
-                        <button class="btn btn-secondary col-12 col-md-3">Edit data toko</button>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-success col-12 col-md-3" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal">
+                            Tambah Produk
+                        </button>
+                        <button type="button" class="btn btn-secondary col-12 col-md-3" data-bs-toggle="modal"
+                            data-bs-target="#modal-edit-produk">
+                            Edit Produk
+                        </button>
+                        @include('user.profile-user.tambah-produk-modal')
                     </div>
                 </div>
             </div>
@@ -81,4 +89,21 @@
             </div>
         </div>
     </section>
+    <script>
+        document.getElementById("gambarProduk").addEventListener("change", function() {
+            var preview = document.getElementById("previewGambar");
+            var file = this.files[0];
+            var reader = new FileReader();
+
+            reader.onload = function() {
+                preview.src = reader.result;
+            }
+
+            if (file) {
+                reader.readAsDataURL(file);
+            } else {
+                preview.src = "";
+            }
+        });
+    </script>
 @endsection
