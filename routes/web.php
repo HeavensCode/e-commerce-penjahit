@@ -24,7 +24,7 @@ Route::get('/register', function () {
     return view('auth.register');
 })->name('register');
 
-Route::get('/login', function () {
+Route::get('/login-user', function () {
     return view('auth.login');
 });
 
@@ -65,15 +65,15 @@ Route::get('/alamat', function () {
 })->name('alamat');
 
 
-// Route::get('/panitia/test/tambah', [TestController::class, 'showtraining'])->name('tambahtest');
 // super admin
 
-Route::get('/admin/login', [AdminLoginController::class, 'showLoginForm'])->name('admin.login');
-
-Route::post('/login', [AdminLoginController::class, 'login'])->name('login.post');
+Route::post('/login', [AdminLoginController::class, 'login'])->name('login');
 
 Route::get('/login-admin', function () {
     return view('admin.auth-admin.login-admin');
+});
+Route::get('/dashboard-admin', function () {
+    return view('admin.dashboard-admin');
 });
 
 Route::get('/register-admin', function () {

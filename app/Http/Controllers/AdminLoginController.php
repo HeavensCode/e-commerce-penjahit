@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use PhpParser\Node\Stmt\Return_;
 
 class AdminLoginController extends Controller
 {
@@ -14,12 +14,14 @@ class AdminLoginController extends Controller
             'password' => 'required',
         ]);
 
-        $credentials = $request->only('email', 'password');
-
-        if (Auth::attempt($credentials)) {
-            return redirect('/dashboard-admin');
-        } else {
-            return back()->with('error', 'Email atau kata sandi salah');
+        if (auth()->attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) {
+            $user = auth()->user();
+            if ($user->role === 'admin') {
+                return redirect('/dashboard-admin');
+            } else {
+                return redirect()->back()->with('error', 'Anda tidak memiliki akses sebagai admin.');
+            }
         }
+        return redirect()->back()->with('error', 'Login gagal. Pastikan email dan password Anda benar.');
     }
 }

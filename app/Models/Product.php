@@ -9,6 +9,12 @@ class Product extends Model
 {
     use HasFactory;
 
+    protected $table = 'products';
+    protected $primaryKey = 'id';
+    protected $guarded = ['id'];
+    protected $fillable = ['nama_product', 'id_toko', 'stock' . 'rating', 'harga'];
+
+
     public function detailProduct()
     {
         return $this->hasOne(DetailProduct::class, 'id_product');

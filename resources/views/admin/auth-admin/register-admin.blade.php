@@ -39,26 +39,30 @@
                             <form class="user">
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="text" class="form-control form-control-user"
-                                            id="exampleFirstName" placeholder="First Name">
+                                        <input type="text" class="form-control form-control-user" placeholder="Nama"
+                                            name="nama" id="nama">
                                     </div>
                                     <div class="col-sm-6">
-                                        <input type="text" class="form-control form-control-user"
-                                            id="exampleLastName" placeholder="Last Name">
+                                        <input type="email" class="form-control form-control-user" placeholder="email"
+                                            name="email" id="email">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" class="form-control form-control-user" id="exampleInputEmail"
-                                        placeholder="Email Address">
+                                    <input type="password" class="form-control form-control-user" placeholder="password"
+                                        name="password" id="password">
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="password" class="form-control form-control-user"
-                                            id="exampleInputPassword" placeholder="Password">
+                                        <input type="number" class="form-control form-control-user"
+                                            placeholder="No Telp" id="no_telp" name="no_telp">
                                     </div>
                                     <div class="col-sm-6">
-                                        <input type="password" class="form-control form-control-user"
-                                            id="exampleRepeatPassword" placeholder="Repeat Password">
+                                        <label for="" class="form-control">Jenis Kelamin</label>
+                                        <select name="gender" id="gender" class="form-control">
+                                            <option value="laki-laki">Laki - Laki</option>
+                                            <option value="perempuan">Perempuan</option>
+                                            <option value="tidak memilih">tidak memilih</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary btn-user btn-block">
