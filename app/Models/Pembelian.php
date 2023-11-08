@@ -9,7 +9,5 @@ l<?php
     {
         use HasFactory;
         protected $table = 'discusses';
-        protected $primaryKey = 'id';
         protected $guarded = ['id'];
-        protected $fillable = ['id_user', 'id_pembayaran', 'jumlah_pembelian' . 'total_pembayaran', 'subtotal', 'id_pembelian', 'jenis_pembayaran'];
     }
