@@ -5,6 +5,7 @@ use App\Http\Controllers\DetailProductController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminLoginController;
+use App\Http\Controllers\UserLoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,7 @@ Route::get('/register', function () {
 Route::get('/login-user', function () {
     return view('auth.login');
 });
+Route::post('/login-user', [UserLoginController::class, 'login'])->name('login.user');
 
 Route::get('/contact', function () {
     return view('user.contact');
@@ -64,9 +66,10 @@ Route::get('/alamat', function () {
 })->name('alamat');
 
 
-// super admin
 
-Route::post('/login', [AdminLoginController::class, 'login'])->name('login');
+
+// super admin
+Route::post('/login', [AdminLoginController::class, 'login'])->name('login.admin');
 
 Route::get('/login-admin', function () {
     return view('admin.auth-admin.login-admin');

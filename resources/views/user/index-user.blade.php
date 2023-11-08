@@ -56,6 +56,9 @@
             </div>
         </div>
     </nav>
+    @if (session('error'))
+        <div class="alert alert-danger">{{ session('error') }}</div>
+    @endif
 
     <div class="container" style="display: flex; justify-content: flex-end;">
         <div id="userDropdown" class="user-dropdown position-absolute" style="margin-left: auto;">
@@ -64,7 +67,8 @@
                 <h4 style="text-align: start">Welcome User</h4>
             </div>
             <div class="d-flex justify-content-end pt-3">
-                <a class="btn btn-danger mx-3" href="/login"> <i class="fa-solid fa-right-to-bracket"></i> Login</a>
+                <a class="btn btn-danger mx-3" href="/login-user"> <i class="fa-solid fa-right-to-bracket"></i>
+                    Login</a>
                 <a class="btn btn-primary" href="/register"><i class="fa-solid fa-plus"></i> Register</a>
             </div>
         </div>

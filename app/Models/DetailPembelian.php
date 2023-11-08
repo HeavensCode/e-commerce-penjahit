@@ -8,7 +8,4 @@ use Illuminate\Database\Eloquent\Model;
 class DetailPembelian extends Model
 {
     use HasFactory;
-    protected $table = 'detail_pembelians';
-
-    protected $fillable = ['id_pembelian', 'nama_product', 'jumlah_pembelian', 'total_biaya'];
 }
