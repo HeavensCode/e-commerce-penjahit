@@ -226,7 +226,6 @@ body {
     color: #000;
 }
 
-
 /* End Index footer */
 
 /* Carousel */
@@ -376,23 +375,23 @@ body {
 }
 
 .register {
-    background: url('../image/register.jpg') center center no-repeat;
+    background: url("../image/register.jpg") center center no-repeat;
     background-size: cover;
     height: 280px;
 }
 
 .radio-group {
     display: flex;
-justify-content: space-between;
+    justify-content: space-between;
 }
-.register .kontainer{
+.register .kontainer {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 35vh;
 }
-.login .kontainer{
+.login .kontainer {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -401,16 +400,16 @@ justify-content: space-between;
 }
 
 .login {
-    background: url('../image/login.png') center center no-repeat;
+    background: url("../image/login.png") center center no-repeat;
     background-size: cover;
     height: 300px;
 }
 .contact-us {
-    background: url('../image/contact.png') center center no-repeat;
+    background: url("../image/contact.png") center center no-repeat;
     background-size: cover;
     height: 300px;
 }
-.contact-us .kontainer{
+.contact-us .kontainer {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -418,17 +417,25 @@ justify-content: space-between;
     height: 40vh;
 }
 
-
 .container .animated-image {
     animation: moveUpDown 2s ease infinite alternate; /* Animasi akan berlangsung selamanya */
-  }
+}
 
-  @keyframes moveUpDown {
+@keyframes moveUpDown {
     0% {
-      transform: translateY(0); /* Posisi awal */
+        transform: translateY(0); /* Posisi awal */
     }
     100% {
-      transform: translateY(-20px); /* Posisi akhir (bergerak ke atas) */
+        transform: translateY(-20px); /* Posisi akhir (bergerak ke atas) */
     }
-  }
+}
 
+/* toko saya */
+.filter-btn {
+    background-color: rgb(214, 175, 139);
+    font-weight: 500;
+}
+.filter-btn:hover {
+    background-color: rgb(196, 145, 98);
+    font-weight: 6 00;
+}

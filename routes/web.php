@@ -55,3 +55,9 @@ Route::get('/dashboard', function () {
 Route::get('/profile', function () {
     return view('user.profile-user.profile-user');
 });
+Route::get('/toko', function () {
+    return view('user.profile-user.toko-user');
+});
+Route::get('/alamat', function () {
+    return view('user.profile-user.alamat-user');
+});
