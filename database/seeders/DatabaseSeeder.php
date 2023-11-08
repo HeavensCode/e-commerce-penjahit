@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $this->call(TokoSeeder::class);
         $this->call(ProductSeeder::class);
 
         DB::table('users')->insert([
