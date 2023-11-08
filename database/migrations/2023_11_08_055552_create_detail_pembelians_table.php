@@ -19,7 +19,6 @@ class CreateDetailPembeliansTable extends Migration
             $table->string('jumlah_pembelian');
             $table->string('total_biaya');
             $table->timestamps();
-
             $table->foreign('id_pembelian')->references('id')->on('pembelians')->onDelete('cascade')->onUpdate('cascade');
         });
     }
