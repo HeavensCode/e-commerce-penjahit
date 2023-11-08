@@ -22,13 +22,9 @@ use App\Http\Controllers\UserLoginController;
 //     return view('welcome');
 // });
 
-Route::get('/register', function () {
-    return view('auth.register');
-})->name('register');
-
-Route::get('/login-user', function () {
-    return view('auth.login');
-});
+Route::get('/login-user', [UserLoginController::class, 'showFormLogin'])->name('form-login-user');
+Route::post('/register', [UserLoginController::class, 'userRegister'])->name('form-register-user');
+Route::get('/register', [UserLoginController::class, 'showFormRegister'])->name('user.register');
 Route::post('/login-user', [UserLoginController::class, 'login'])->name('login.user');
 
 Route::get('/contact', function () {

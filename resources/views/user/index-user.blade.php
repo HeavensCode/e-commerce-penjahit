@@ -56,9 +56,6 @@
             </div>
         </div>
     </nav>
-    @if (session('error'))
-        <div class="alert alert-danger">{{ session('error') }}</div>
-    @endif
 
     <div class="container" style="display: flex; justify-content: flex-end;">
         <div id="userDropdown" class="user-dropdown position-absolute" style="margin-left: auto;">
@@ -87,6 +84,21 @@
         </form>
     </div>
 
+    {{-- alert --}}
+    <div class="container">
+        <div class="row my-3">
+            @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
+            @if (session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
+        </div>
+    </div>
     {{-- main content --}}
     <div>
         @yield('container')

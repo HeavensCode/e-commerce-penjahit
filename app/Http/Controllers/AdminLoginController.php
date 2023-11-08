@@ -42,7 +42,7 @@ class AdminLoginController extends Controller
         $user->password = bcrypt($request->input('password'));
         $user->no_telp = $request->input('no_telp');
         $user->gender = $request->input('gender');
-        $user->role = 'admin';
+        $user->role = 'user';
         $user->save();
 
         return redirect()->back()->with('Succes', 'Akun Berhasil Dibuat !.');

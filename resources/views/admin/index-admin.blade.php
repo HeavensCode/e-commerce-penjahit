@@ -220,6 +220,21 @@
                 </nav>
                 <!-- End of Topbar -->
 
+                {{-- alert --}}
+                <div class="container">
+                    <div class="row my-3">
+                        @if (session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+                        @if (session('error'))
+                            <div class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
+                        @endif
+                    </div>
+                </div>
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     @yield('container')
