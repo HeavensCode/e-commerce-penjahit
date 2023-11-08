@@ -20,6 +20,8 @@ class CreatePembeliansTable extends Migration
             $table->string('jumlah_pembelian');
             $table->string('total_pembayaran');
             $table->string('subtotal');
+            $table->foreignId('id_pembelian')->nullable();
+            $table->String('jenis_pembayaran');
             $table->timestamps();
 
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
