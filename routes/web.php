@@ -6,6 +6,9 @@ use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminLoginController;
 use App\Http\Controllers\UserLoginController;
+use App\Http\Controllers\DashboardAdminController;
+use App\Http\Controllers\UserAdminController;
+use App\Http\Controllers\TokoAdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,22 +73,20 @@ Route::post('/login', [AdminLoginController::class, 'login'])->name('login.admin
 Route::get('/login-admin', function () {
     return view('admin.auth-admin.login-admin');
 });
-Route::get('/dashboard-admin', function () {
-    return view('admin.dashboard-admin');
-});
+Route::get('/dashboard-admin', [DashboardAdminController::class, 'index'])->name('dashboard.admin');
+
 Route::get('/register-admin', [AdminLoginController::class, 'showFormRegister']);
 Route::post('/admin-register', [AdminLoginController::class, 'registerAdmin'])->name('register.admin');
 
-// Route::get('/register-admin', function () {
-//     return view('admin.auth-admin.register-admin');
-// });
+// user super admin
+Route::get('/users', [UserAdminController::class, 'index'])->name('index.user-admin');
+Route::get('/edit-users/{id}', [UserAdminController::class, 'edit'])->name('user.edit');
+Route::post('/edit-users/{id}', [UserAdminController::class, 'update'])->name('user.update');
+Route::delete('/delete-users/{id}', [UserAdminController::class, 'destroy'])->name('user.delete');
 
-Route::get('/users', function () {
-    return view('admin.user.index-user');
-});
-Route::get('/toko-admin', function () {
-    return view('admin.toko.index');
-});
-Route::get('/edit-toko-admin', function () {
-    return view('admin.toko.edit');
-});
+// toko super admin
+
+Route::get('/toko-admin', [TokoAdminController::class, 'index'])->name('index.toko-admin');
+Route::get('/edit-toko/{id}', [TokoAdminController::class, 'edit'])->name('toko.edit');
+Route::post('/edit-toko/{id}', [TokoAdminController::class, 'update'])->name('toko.update');
+Route::delete('/delete-toko/{id}', [TokoAdminController::class, 'destroy'])->name('toko.delete');

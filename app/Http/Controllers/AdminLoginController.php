@@ -18,7 +18,7 @@ class AdminLoginController extends Controller
         if (auth()->attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) {
             $user = auth()->user();
             if ($user->role === 'admin') {
-                return redirect('/dashboard-admin');
+                return redirect('/dashboard-admin')->with('succes', 'Selemat Datang Admin!');
             } else {
                 return redirect()->back()->with('error', 'Anda tidak memiliki akses sebagai admin.');
             }
