@@ -169,11 +169,21 @@
                                 <!-- product info -->
                                 <div class="des-pro">
                                     <h5 class="judul-card my-2">{{ $product->nama_product }}</h5>
-                                    <div class="star">
-                                        <p class="rating-card m-0">
-                                            <i class="fas fa-star"></i>
-                                            {{ $product->rating }}
-                                        </p>
+                                    <!-- Rating Produk -->
+                                    <div class="rating-wrapper">
+                                        @php
+                                            $rating = floatval($product->rating);
+                                        @endphp
+
+                                        @for ($i = 1; $i <= 5; $i++)
+                                            @if ($i <= $rating)
+                                                <i class="fas fa-star text-warning"></i>
+                                            @elseif ($i - 0.5 <= $rating)
+                                                <i class="fas fa-star-half-alt text-warning"></i>
+                                            @else
+                                                <i class="fas fa-star"></i>
+                                            @endif
+                                        @endfor
                                     </div>
                                     <p class="harga-card m-0">{{ $product->harga }}</p>
                                     <p class="lokasi-card m-0"><i class="fa-solid fa-location-dot"></i>

@@ -61,15 +61,33 @@
         <div id="userDropdown" class="user-dropdown position-absolute" style="margin-left: auto;">
             <div class="judul d-flex justify-content-end">
                 <img src="{{ asset('image/logo-user.jpg') }}" alt="" width="50px" class="rounded-circle">
-                <h4 style="text-align: start">Welcome User</h4>
+                @auth
+                    <h4 style="text-align: start">Welcome {{ Auth::user()->name }}</h4>
+                @endauth
+                @guest
+                    <h4 style="text-align: start">Welcome User</h4>
+                @endguest
             </div>
             <div class="d-flex justify-content-end pt-3">
-                <a class="btn btn-danger mx-3" href="/login-user"> <i class="fa-solid fa-right-to-bracket"></i>
-                    Login</a>
+                @auth
+                    <a class="btn btn-danger mx-3" href="{{ route('logout') }}"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <i class="fa-solid fa-right-to-bracket"></i> Logout
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                @endauth
+                @guest
+                    <a class="btn btn-danger mx-3" href="/login-user">
+                        <i class="fa-solid fa-right-to-bracket"></i> Login
+                    </a>
+                @endguest
                 <a class="btn btn-primary" href="/register"><i class="fa-solid fa-plus"></i> Register</a>
             </div>
         </div>
     </div>
+
 
     {{-- form searching --}}
     <div class="container">
@@ -108,7 +126,7 @@
 
     {{-- footer --}}
     <footer class="footer mt-5" id="footer" style="background-color: #ED7D31">
-        <div class="container pt-4 py-0">
+        <div class="container py-0 pt-4">
             <footer>
                 <div class="row">
                     <div class="col-6 col-md-6 mb-3">
@@ -131,7 +149,7 @@
         </div>
         <section class="footer" id="footer">
             <div class="container">
-                <footer class="row py-5  justify-content-center">
+                <footer class="row justify-content-center py-5">
                     <div class="col mb-4">
                         <h5>About Us</h5>
                         <hr>
@@ -144,16 +162,16 @@
                         <h5>Company</h5>
                         <hr>
                         <ul class="nav flex-column">
-                            <li class="nav-item mb-2 fs-5"><a href="/product"
-                                    class="nav-link p-0 text-body-secondary"><i class="fa fa-arrow-right"></i>
+                            <li class="nav-item fs-5 mb-2"><a href="/product"
+                                    class="nav-link text-body-secondary p-0"><i class="fa fa-arrow-right"></i>
                                     Products</a>
                             </li>
-                            <li class="nav-item mb-2 fs-5"><a href="/about"
-                                    class="nav-link p-0 text-body-secondary"><i class="fa fa-arrow-right"></i> About
+                            <li class="nav-item fs-5 mb-2"><a href="/about"
+                                    class="nav-link text-body-secondary p-0"><i class="fa fa-arrow-right"></i> About
                                     Us</a>
                             </li>
-                            <li class="nav-item mb-2 fs-5"><a href="/contact"
-                                    class="nav-link p-0 text-body-secondary"><i class="fa fa-arrow-right"></i> Contact
+                            <li class="nav-item fs-5 mb-2"><a href="/contact"
+                                    class="nav-link text-body-secondary p-0"><i class="fa fa-arrow-right"></i> Contact
                                     Us</a>
                             </li>
                         </ul>
@@ -162,16 +180,16 @@
                         <h5>Address</h5>
                         <hr>
                         <ul class="nav flex-column">
-                            <li class="nav-item mb-2 fs-5"><a href="#"
-                                    class="nav-link p-0 text-body-secondary"><i class="fa-solid fa-location-dot"></i>
+                            <li class="nav-item fs-5 mb-2"><a href="#"
+                                    class="nav-link text-body-secondary p-0"><i class="fa-solid fa-location-dot"></i>
                                     Makassar, Indonesia</a>
                             </li>
-                            <li class="nav-item mb-2 fs-5"><a href="#"
-                                    class="nav-link p-0 text-body-secondary"><i class="fa-solid fa-phone"></i>
+                            <li class="nav-item fs-5 mb-2"><a href="#"
+                                    class="nav-link text-body-secondary p-0"><i class="fa-solid fa-phone"></i>
                                     08123489045</a>
                             </li>
-                            <li class="nav-item mb-2 fs-5"><a href="#"
-                                    class="nav-link p-0 text-body-secondary"><i class="fa-solid fa-envelope"></i>
+                            <li class="nav-item fs-5 mb-2"><a href="#"
+                                    class="nav-link text-body-secondary p-0"><i class="fa-solid fa-envelope"></i>
                                     jahitku@gmail.com</a>
                             </li>
                         </ul>

@@ -40,7 +40,7 @@ Route::redirect('/user', '/beranda');
 
 Route::get('/beranda', [beranda::class, 'index'])->name('beranda');
 
-Route::get('/detail/{id}',  [DetailProductController::class, 'index'])->name('detail');
+Route::get('/produk-detail/{id}',  [DetailProductController::class, 'index'])->name('detail');
 
 Route::get('/produk', [ProductController::class, 'show'])->name('produk');
 
@@ -80,6 +80,7 @@ Route::post('/admin-register', [AdminLoginController::class, 'registerAdmin'])->
 
 // user super admin
 Route::get('/users', [UserAdminController::class, 'index'])->name('index.user-admin');
+Route::post('/logout', [UserLoginController::class, 'logout'])->name('logout');
 Route::get('/edit-users/{id}', [UserAdminController::class, 'edit'])->name('user.edit');
 Route::post('/edit-users/{id}', [UserAdminController::class, 'update'])->name('user.update');
 Route::delete('/delete-users/{id}', [UserAdminController::class, 'destroy'])->name('user.delete');

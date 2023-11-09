@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 
 class UserLoginController extends Controller
@@ -52,5 +53,10 @@ class UserLoginController extends Controller
         } else {
             return redirect()->back()->with('error', 'Gagal disimpan.');
         }
+    }
+    public function logout()
+    {
+        Auth::logout(); // Melakukan logout pengguna
+        return redirect('/'); // Redirect pengguna ke halaman utama atau halaman lain sesuai kebutuhan
     }
 }
