@@ -11,6 +11,11 @@ use App\Http\Controllers\AdminLoginController;
 use App\Http\Controllers\DetailProductController;
 use App\Http\Controllers\DashboardAdminController;
 
+use App\Http\Controllers\ProdukAdminController;
+use App\Http\Controllers\VoucherController;
+use App\Http\Controllers\CartController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -72,6 +77,11 @@ Route::post('/toko/edit-data', [TokoController::class, 'updateDataToko'])->name(
 Route::get('/alamat',  [TokoController::class, 'alamat'])->name('alamat');
 
 
+// checkout user
+// routes/web.php
+Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('add-to-cart')->middleware('checkUserLogin');
+// Route::post('/add-to-cart', 'CartController@addToCart')->name('add-to-cart');
+
 
 // super admin
 Route::post('/login', [AdminLoginController::class, 'login'])->name('login.admin');
@@ -92,8 +102,24 @@ Route::post('/edit-users/{id}', [UserAdminController::class, 'update'])->name('u
 Route::delete('/delete-users/{id}', [UserAdminController::class, 'destroy'])->name('user.delete');
 
 // toko super admin
-
 Route::get('/toko-admin', [TokoAdminController::class, 'index'])->name('index.toko-admin');
 Route::get('/edit-toko/{id}', [TokoAdminController::class, 'edit'])->name('toko.edit');
 Route::post('/edit-toko/{id}', [TokoAdminController::class, 'update'])->name('toko.update');
+
+
 Route::delete('/delete-toko/{id}', [TokoAdminController::class, 'destroy'])->name('toko.delete');
+
+// produk super admin
+Route::get('/produk-admin', [ProdukAdminController::class, 'index'])->name('index.products-admin');
+Route::get('/edit-product/{id}', [ProdukAdminController::class, 'edit'])->name('product.edit');
+Route::post('/edit-product/{id}', [ProdukAdminController::class, 'update'])->name('product.update');
+Route::delete('/delete-product/{id}', [ProdukAdminController::class, 'destroy'])->name('product.delete');
+
+// voucher super admin
+Route::get('/voucher-admin', [VoucherController::class, 'index'])->name('index.voucher-admin');
+Route::get('/edit-voucher/{id}', [VoucherController::class, 'edit'])->name('voucher.edit');
+Route::post('/edit-voucher/{id}', [VoucherController::class, 'update'])->name('voucher.update');
+Route::delete('/delete-voucher/{id}', [VoucherController::class, 'destroy'])->name('voucher.delete');
+Route::get('/tambah-voucher', [VoucherController::class, 'create'])->name('voucher.create');
+Route::post('/proses-voucher', [VoucherController::class, 'store'])->name('voucher.store');
+
