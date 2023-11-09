@@ -9,6 +9,8 @@ use App\Http\Controllers\UserLoginController;
 use App\Http\Controllers\DashboardAdminController;
 use App\Http\Controllers\UserAdminController;
 use App\Http\Controllers\TokoAdminController;
+use App\Http\Controllers\ProdukAdminController;
+use App\Http\Controllers\VoucherController;
 
 /*
 |--------------------------------------------------------------------------
@@ -86,8 +88,21 @@ Route::post('/edit-users/{id}', [UserAdminController::class, 'update'])->name('u
 Route::delete('/delete-users/{id}', [UserAdminController::class, 'destroy'])->name('user.delete');
 
 // toko super admin
-
 Route::get('/toko-admin', [TokoAdminController::class, 'index'])->name('index.toko-admin');
 Route::get('/edit-toko/{id}', [TokoAdminController::class, 'edit'])->name('toko.edit');
 Route::post('/edit-toko/{id}', [TokoAdminController::class, 'update'])->name('toko.update');
 Route::delete('/delete-toko/{id}', [TokoAdminController::class, 'destroy'])->name('toko.delete');
+
+// produk super admin
+Route::get('/produk-admin', [ProdukAdminController::class, 'index'])->name('index.products-admin');
+Route::get('/edit-product/{id}', [ProdukAdminController::class, 'edit'])->name('product.edit');
+Route::post('/edit-product/{id}', [ProdukAdminController::class, 'update'])->name('product.update');
+Route::delete('/delete-product/{id}', [ProdukAdminController::class, 'destroy'])->name('product.delete');
+
+// voucher super admin
+Route::get('/voucher-admin', [VoucherController::class, 'index'])->name('index.voucher-admin');
+Route::get('/edit-voucher/{id}', [VoucherController::class, 'edit'])->name('voucher.edit');
+Route::post('/edit-voucher/{id}', [VoucherController::class, 'update'])->name('voucher.update');
+Route::delete('/delete-voucher/{id}', [VoucherController::class, 'destroy'])->name('voucher.delete');
+Route::get('/tambah-voucher', [VoucherController::class, 'create'])->name('voucher.create');
+Route::post('/proses-voucher', [VoucherController::class, 'store'])->name('voucher.store');

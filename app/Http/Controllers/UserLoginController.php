@@ -16,7 +16,7 @@ class UserLoginController extends Controller
             'password' => 'required',
         ]);
         if (auth()->attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) {
-            return redirect('/beranda');
+            return redirect('/beranda')->with('succes', 'Selamat Datang !.');
         } else {
             return redirect()->back()->with('error', 'Login gagal. Pastikan email dan password Anda benar.');
         }
@@ -56,7 +56,7 @@ class UserLoginController extends Controller
     }
     public function logout()
     {
-        Auth::logout(); // Melakukan logout pengguna
-        return redirect('/'); // Redirect pengguna ke halaman utama atau halaman lain sesuai kebutuhan
+        Auth::logout();
+        return redirect('/');
     }
 }
