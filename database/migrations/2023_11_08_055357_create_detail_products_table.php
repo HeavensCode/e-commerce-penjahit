@@ -15,7 +15,6 @@ class CreateDetailProductsTable extends Migration
     {
         Schema::create('detail_products', function (Blueprint $table) {
             $table->foreignId('id_product')->nullable();
-            $table->foreignId('id_toko')->nullable();
             $table->string('deskripsi');
             $table->integer('rating');
             $table->string('merk');
@@ -27,7 +26,6 @@ class CreateDetailProductsTable extends Migration
             $table->timestamps();
 
             $table->foreign('id_product')->references('id')->on('products')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('id_toko')->references('id')->on('tokos')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
