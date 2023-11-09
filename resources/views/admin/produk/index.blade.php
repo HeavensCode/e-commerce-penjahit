@@ -16,6 +16,14 @@
                                 <th>Stock</th>
                                 <th>Rating</th>
                                 <th>Harga</th>
+                                <th>Gambar</th>
+                                <th>Rating</th>
+                                <th>Merk</th>
+                                <th>Motif</th>
+                                <th>panjang_kain</th>
+                                <th>Seller</th>
+                                <th>Bahan</th>
+                                <th>Size</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -26,6 +34,14 @@
                                     <td>{{ $product->stock }}</td>
                                     <td>{{ $product->rating }}</td>
                                     <td>{{ $product->harga }}</td>
+                                    <td>{{ $product->gambar }}</td>
+                                    <td>{{ $product->rating }}</td>
+                                    <td>{{ $product->merk }}</td>
+                                    <td>{{ $product->motif }}</td>
+                                    <td>{{ $product->panjang_kain }}</td>
+                                    <td>{{ $product->seller }}</td>
+                                    <td>{{ $product->bahan }}</td>
+                                    <td>{{ $product->size }}</td>
                                     <td>
                                         <a href="{{ route('product.edit', $product->id) }}" class="btn btn-primary">Edit</a>
                                         <form method="POST" action="{{ route('product.delete', $product->id) }}">
