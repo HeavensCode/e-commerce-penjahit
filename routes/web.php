@@ -9,6 +9,7 @@ use App\Http\Controllers\UserLoginController;
 use App\Http\Controllers\DashboardAdminController;
 use App\Http\Controllers\UserAdminController;
 use App\Http\Controllers\TokoAdminController;
+use App\Http\Controllers\ProductAdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -85,8 +86,13 @@ Route::post('/edit-users/{id}', [UserAdminController::class, 'update'])->name('u
 Route::delete('/delete-users/{id}', [UserAdminController::class, 'destroy'])->name('user.delete');
 
 // toko super admin
-
 Route::get('/toko-admin', [TokoAdminController::class, 'index'])->name('index.toko-admin');
 Route::get('/edit-toko/{id}', [TokoAdminController::class, 'edit'])->name('toko.edit');
 Route::post('/edit-toko/{id}', [TokoAdminController::class, 'update'])->name('toko.update');
 Route::delete('/delete-toko/{id}', [TokoAdminController::class, 'destroy'])->name('toko.delete');
+
+// product super admin
+Route::get('/product-admin', [TokoAdminController::class, 'index'])->name('index.product-admin');
+Route::get('/edit-product/{id}', [TokoAdminController::class, 'edit'])->name('product.edit');
+Route::post('/edit-product/{id}', [TokoAdminController::class, 'update'])->name('toko.update');
+Route::delete('/delete-product/{id}', [TokoAdminController::class, 'destroy'])->name('product.delete');
