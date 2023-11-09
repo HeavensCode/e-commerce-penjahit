@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StoreTokoRequest;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Storage;
 
 class TokoController extends Controller
 {
@@ -43,7 +44,7 @@ class TokoController extends Controller
     public function profil(Request $request)
     {
         $user = User::with('toko')->find($request->user()->id);
-
+        // dd($user);
         return view('user.profile-user.profile-user', ['user' => $user]);
     }
 
@@ -61,14 +62,14 @@ class TokoController extends Controller
                 ]);
 
             if ($result) {
-                DB::commit(); // Commit transaksi jika berhasil
+                DB::commit();
                 return redirect('/toko')->with('success', 'Data toko berhasil diperbarui.');
             } else {
-                DB::rollBack(); // Rollback transaksi jika gagal
+                DB::rollBack();
                 return redirect('/toko')->with('error', 'Gagal memperbarui data toko.');
             }
         } catch (QueryException $e) {
-            DB::rollBack(); // Rollback transaksi jika terjadi kesalahan
+            DB::rollBack();
             return redirect('/toko')->with('error', 'Terjadi kesalahan saat memperbarui data toko: ' . $e->getMessage());
         }
     }
@@ -89,14 +90,14 @@ class TokoController extends Controller
                 ]);
 
             if ($result) {
-                DB::commit(); // Commit transaksi jika berhasil
+                DB::commit();
                 return redirect('/alamat')->with('success', 'Data toko berhasil diperbarui.');
             } else {
-                DB::rollBack(); // Rollback transaksi jika gagal
+                DB::rollBack();
                 return redirect('/alamat')->with('error', 'Gagal memperbarui data toko.');
             }
         } catch (QueryException $e) {
-            DB::rollBack(); // Rollback transaksi jika terjadi kesalahan
+            DB::rollBack();
             return redirect('/alamat')->with('error', 'Terjadi kesalahan saat memperbarui data toko: ' . $e->getMessage());
         }
     }
@@ -151,8 +152,19 @@ class TokoController extends Controller
      * @param  \App\Models\Toko  $toko
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Toko $toko)
+    public function destroy($id)
     {
-        //
+        $product = Product::findOrFail($id);
+
+        $product->detailGambarProduct()->delete();
+        $product->detailProduct()->delete();
+        if ($product->gambar) {
+            Storage::disk('public')->delete($product->gambar);
+        }
+
+        $product->delete();
+
+        return redirect()->route('toko')->with('success', 'Produk berhasil dihapus.');
     }
+
 }

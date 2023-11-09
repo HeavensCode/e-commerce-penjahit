@@ -6,7 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-
+use App\Models\Toko;
 
 class UserLoginController extends Controller
 {
@@ -42,6 +42,7 @@ class UserLoginController extends Controller
             'gender' => 'required',
         ]);
 
+        // Membuat user baru
         $user = new User();
         $user->nama = $request->input('nama');
         $user->email = $request->input('email');
@@ -50,10 +51,29 @@ class UserLoginController extends Controller
         $user->gender = $request->input('gender');
         $user->role = 'user';
 
+        // Menyimpan user baru
         if ($user->save()) {
-            return redirect()->back()->with('success', 'Akun berhasil dibuat!');
+            // Membuat toko baru
+            $toko = new Toko();
+            $toko->id_user = $user->id; // Menggunakan id dari user yang baru dibuat
+            $toko->no_telp = $request->input('no_telp');
+            $toko->email = $request->input('email');
+            $toko->nama_toko = $request->input('nama');
+            $toko->alamat_toko = 'Belum di set';
+            $toko->kota ='Belum di set';
+            $toko->kecamatan ='Belum di set';
+            $toko->provinsi ='Belum di set';
+            $toko->kode_pos ='55555';
+            // Menyimpan toko baru
+            if ($toko->save()) {
+                return redirect()->back()->with('success', 'Akun dan toko berhasil dibuat!');
+            } else {
+                // Rollback jika penyimpanan toko gagal
+                $user->delete();
+                return redirect()->back()->with('error', 'Gagal menyimpan toko.');
+            }
         } else {
-            return redirect()->back()->with('error', 'Gagal disimpan.');
+            return redirect()->back()->with('error', 'Gagal menyimpan akun.');
         }
     }
 
@@ -67,26 +87,21 @@ class UserLoginController extends Controller
 
     public function updateProfile(Request $request, $id)
     {
-        try {
-            $user = User::find($id);
-            dd($user);
+           // Validasi form jika diperlukan
+    $request->validate([
+        'nama' => 'required|string',
+        'email' => 'required|email',
+        'no_telp' => 'required|numeric',
+        'gender' => 'required|in:laki-laki,Perempuan,Tidak Memilih',
+    ]);
 
-            if (!$user) {
-                return redirect()->route('profile')->with('error', 'Profil tidak ditemukan.');
-            }
-
-            $user->nama = $request->input('edit_username');
-            $user->email = $request->input('edit_email');
-            $user->no_telp = $request->input('edit_nomor_telepon');
-            $user->gender = $request->input('edit_gender');
-
-            if ($user->save()) {
-                return redirect()->route('profile')->with('success', 'Profil berhasil diperbarui.');
-            } else {
-                return redirect()->route('profile')->with('error', 'Gagal memperbarui profil.');
-            }
-        } catch (\Exception $e) {
-            return redirect()->route('profile')->with('error', 'Terjadi kesalahan saat memperbarui profil: ' . $e->getMessage());
-        }
+    // Lakukan update data
+    $user = User::find($id);
+    $user->nama = $request->input('nama');
+    $user->email = $request->input('email');
+    $user->no_telp = $request->input('no_telp');
+    $user->gender = $request->input('gender');
+    $user->save();
+        return redirect()->back()->with('success', 'User updated successfully');
     }
 }

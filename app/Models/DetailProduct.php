@@ -22,10 +22,9 @@ class DetailProduct extends Model
         'bahan',
         'size',
     ];
-}
+
     public function product()
     {
-        return $this->belongsTo(Product::class, 'id_products', 'id');
+        return $this->belongsTo(Product::class, 'id_product', 'id');
     }
 }
-

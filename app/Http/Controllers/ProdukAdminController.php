@@ -160,7 +160,6 @@ class ProdukAdminController extends Controller
             $detailGambar->save();
         }
 
-
         return redirect()->route('index.products-admin')->with('success', 'Product updated successfully');
     }
 
@@ -185,9 +184,6 @@ class ProdukAdminController extends Controller
         }
 
         $product->delete();
-
         return redirect()->route('index.products-admin')->with('success', 'Produk berhasil dihapus.');
     }
-
-
 }

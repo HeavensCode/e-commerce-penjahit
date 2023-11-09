@@ -10,10 +10,6 @@
                 </div>
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label for="gambarProduk" class="form-label">Upload Gambar</label>
-                        <input type="file" class="form-control" id="gambarProduk" name="gambarProduk[]" multiple>
-                    </div>
-                    <div class="mb-3">
                         <label for="namaProduk" class="form-label">Nama Produk</label>
                         <input type="text" class="form-control" id="namaProduk" name="namaProduk" required>
                     </div>
@@ -56,6 +52,11 @@
                     <div class="mb-3">
                         <label for="size" class="form-label">Size</label>
                         <input type="text" class="form-control" id="size" name="size" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="gambarProduk" class="form-label">Upload Gambar</label>
+                        <input type="file" class="form-control" id="gambarProduk" name="gambarProduk[]" multiple>
+                        <button type="button" class="btn btn-primary text-center" id="btntambahgambar">Tambah Gambar</button>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -161,3 +162,21 @@
         </div>
     </div>
 </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var btnTambahGambar = document.getElementById("btntambahgambar");
+        var modalBody = document.querySelector(".modal-body");
+        btnTambahGambar.addEventListener("click", function () {
+            var newInput = document.createElement("input");
+            newInput.type = "file";
+            newInput.className = "form-control";
+            newInput.name = "gambarProduk[]";
+            newInput.multiple = true;
+            var inputContainer = document.createElement("div");
+            inputContainer.className = "mb-3";
+            inputContainer.appendChild(newInput);
+            modalBody.appendChild(inputContainer);
+        });
+    });
+</script>
+

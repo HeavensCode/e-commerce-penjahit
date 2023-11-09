@@ -90,6 +90,7 @@
                                     @include('user.profile-user.edit-produk-modal')
                                     <!-- Tombol Hapus -->
                                     <form action="{{ route('delete-product', ['id' => $product->id]) }}" method="POST">
+                                    <form  method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger">Hapus</button>

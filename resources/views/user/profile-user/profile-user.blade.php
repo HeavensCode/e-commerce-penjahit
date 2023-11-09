@@ -2,7 +2,6 @@
 
 @section('container')
     <div class="profiles-user" style="width: 100%; height: 100%;background-color: #EDCEB1">
-        <form action="" class="mx-5 py-5">
             <h3>Profile Saya</h3>
             <div class="w-100 h-100 container">
                 <label for="inputPassword6" class="col-form-label">Username</label>
@@ -32,6 +31,5 @@
                     </button>
                     @include('user.profile-user.edit-profile-modal')
                 </div>
-        </form>
-    </div>
+        </div>
 @endsection

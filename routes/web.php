@@ -67,23 +67,23 @@ Route::get('/dashboard', function () {
 Route::get('/profile', [TokoController::class, 'profil'])->name('profile');
 
 Route::post('/toko/{id}/update', [UserLoginController::class, 'updateProfile'])->name('user-profile.update');
-
 Route::get('/toko', [TokoController::class, 'index'])->name('toko');
-
 Route::post('/toko/edit-alamat', [TokoController::class, 'updateToko'])->name('edit-alamat-toko');
-
 Route::post('/toko/edit-data', [TokoController::class, 'updateDataToko'])->name('edit-toko');
+// toko hapus produk
+Route::delete('/delete-product/toko/{id}', [TokoController::class, 'destroy'])->name('delete-product');
 
 Route::get('/alamat',  [TokoController::class, 'alamat'])->name('alamat');
 
-
 // checkout user
+
 // routes/web.php
 Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('add-to-cart')->middleware('checkUserLogin');
-// Route::post('/add-to-cart', 'CartController@addToCart')->name('add-to-cart');
 
 
-// super admin
+
+
+// super admin start
 Route::post('/login', [AdminLoginController::class, 'login'])->name('login.admin');
 
 Route::get('/login-admin', function () {

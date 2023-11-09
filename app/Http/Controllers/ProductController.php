@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -113,21 +114,19 @@ class ProductController extends Controller
             $produk->nama_product = $request->input('namaProduk');
             $produk->harga = $request->input('harga');
             $produk->stock = $request->input('stok');
+            $produk->id_toko = Auth::id();
 
             if ($produk->save()) {
                 if ($request->hasFile('gambarProduk')) {
                     foreach ($request->file('gambarProduk') as $file) {
                         $namaFile = time() . '_' . $file->getClientOriginalName();
                         Storage::disk('public')->put('gambar/' . $namaFile, file_get_contents($file));
-
                         $detailGambar = new DetailGambarProduct();
                         $detailGambar->id_product = $produk->id;
                         $detailGambar->gambar = $namaFile;
                         $detailGambar->save();
                     }
                 }
-
-
                 $detailProduk = new DetailProduct();
                 $detailProduk->id_product = $produk->id;
                 $detailProduk->rating = $request->input('rating');

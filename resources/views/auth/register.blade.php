@@ -58,7 +58,7 @@
                 <button type="submit" class="btn btn-primary w-100">Register</button>
             </div>
             <div class="text-center">
-                <p>Sudah Punya Akun? <a href="/login" class="text-decoration-none text" style="color: #AC1818">Login</a>
+                <p>Sudah Punya Akun? <a href="/login-user" class="text-decoration-none text" style="color: #AC1818">Login</a>
                 </p>
             </div>
         </form>
