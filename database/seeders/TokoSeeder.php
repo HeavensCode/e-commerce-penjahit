@@ -17,6 +17,7 @@ class TokoSeeder extends Seeder
         // Toko 1
         Toko::create([
             'nama_toko' => 'Toko A',
+            'id_user' => '1',
             'alamat_toko' => 'Jl. Toko A No. 123',
             'no_telp' => '08123456789',
             'email' => 'tokoA@example.com',
@@ -29,6 +30,7 @@ class TokoSeeder extends Seeder
         // Toko 2
         Toko::create([
             'nama_toko' => 'Toko B',
+            'id_user' => '2',
             'alamat_toko' => 'Jl. Toko B No. 456',
             'no_telp' => '08234567890',
             'email' => 'tokoB@example.com',
@@ -41,6 +43,7 @@ class TokoSeeder extends Seeder
         // Toko 3
         Toko::create([
             'nama_toko' => 'Toko C',
+            'id_user' => '3',
             'alamat_toko' => 'Jl. Toko C No. 789',
             'no_telp' => '08345678901',
             'email' => 'tokoC@example.com',

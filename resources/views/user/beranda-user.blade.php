@@ -156,15 +156,12 @@
                                 <!-- image product -->
                                 <div class="pro-image rounded">
                                     @if ($product->detailGambarProduct->isNotEmpty())
-                                        <img src="{{ $product->detailGambarProduct[0]->gambar }}"
-                                            alt="{{ $product->nama_product }}" class="pro-animation img-fluid rounded"
-                                            loading="lazy">
-                                    @else
-                                        <img src="{{ asset('image/card/card-img.png') }}"
+                                        <img src="{{ asset('storage/gambar/' . $product->detailGambarProduct[0]->gambar) }}"
                                             alt="{{ $product->nama_product }}" class="pro-animation img-fluid rounded"
                                             loading="lazy">
                                     @endif
                                 </div>
+
 
                                 <!-- product info -->
                                 <div class="des-pro">

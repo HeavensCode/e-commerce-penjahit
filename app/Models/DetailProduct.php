@@ -10,8 +10,22 @@ class DetailProduct extends Model
     use HasFactory;
     protected $table = 'detail_products';
     protected $primaryKey = 'id_product';
+
+    protected $fillable = [
+        'id_product',
+        'deskripsi',
+        'rating',
+        'merk',
+        'motif',
+        'panjang_kain',
+        'seller',
+        'bahan',
+        'size',
+    ];
+}
     public function product()
     {
         return $this->belongsTo(Product::class, 'id_products', 'id');
     }
 }
+

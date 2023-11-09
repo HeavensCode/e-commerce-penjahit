@@ -58,16 +58,38 @@
         </div>
     </nav>
 
-    <div class="container" style="display: flex; justify-content: flex-end;">
+    <div class="position-absolute container" style="display: flex; justify-content: flex-end; z-index: 99;">
         <div id="userDropdown" class="user-dropdown position-absolute" style="margin-left: auto;">
             <div class="judul d-flex justify-content-end">
                 <img src="{{ asset('image/logo-user.jpg') }}" alt="" width="50px" class="rounded-circle">
-                <h4 style="text-align: start">Welcome User</h4>
+                @auth
+                    <h4 style="text-align: start">Welcome {{ Auth::user()->nama }}</h4>
+                @endauth
+                @guest
+                    <h4 style="text-align: start">Welcome User</h4>
+                @endguest
             </div>
-            <div class="d-flex justify-content-end pt-3">
-                <a class="btn btn-danger mx-3" href="/login"> <i class="fa-solid fa-right-to-bracket"></i>
-                    Login</a>
-                <a class="btn btn-primary" href="/register"><i class="fa-solid fa-plus"></i> Register</a>
+            <div class="row justify-content-center pt-3">
+                @auth
+                    <a class="btn btn-danger col-5 mx-1" href="{{ route('logout') }}"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <i class="fa-solid fa-right-to-bracket"></i>Logout
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                @endauth
+                @guest
+                    <a class="btn btn-danger col-5 mx-1" href="{{ route('form-login-user') }}">
+                        <i class="fa-solid fa-right-to-bracket"></i>Login
+                    </a>
+                @endguest
+                @auth
+                    <a class="btn btn-primary col-5 mx-1" href="{{ route('profile') }}">Profil</a>
+                @endauth
+                @guest
+                    <a class="btn btn-primary col-5 mx-1" href="/register">Register</a>
+                @endguest
             </div>
         </div>
     </div>
