@@ -64,7 +64,8 @@
                 <h4 style="text-align: start">Welcome User</h4>
             </div>
             <div class="d-flex justify-content-end pt-3">
-                <a class="btn btn-danger mx-3" href="/login"> <i class="fa-solid fa-right-to-bracket"></i> Login</a>
+                <a class="btn btn-danger mx-3" href="/login-user"> <i class="fa-solid fa-right-to-bracket"></i>
+                    Login</a>
                 <a class="btn btn-primary" href="/register"><i class="fa-solid fa-plus"></i> Register</a>
             </div>
         </div>
@@ -83,6 +84,21 @@
         </form>
     </div>
 
+    {{-- alert --}}
+    <div class="container">
+        <div class="row my-3">
+            @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
+            @if (session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
+        </div>
+    </div>
     {{-- main content --}}
     <div>
         @yield('container')

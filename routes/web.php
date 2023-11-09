@@ -1,6 +1,14 @@
 <?php
 
+use App\Http\Controllers\beranda;
+use App\Http\Controllers\DetailProductController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminLoginController;
+use App\Http\Controllers\UserLoginController;
+use App\Http\Controllers\DashboardAdminController;
+use App\Http\Controllers\UserAdminController;
+use App\Http\Controllers\TokoAdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,13 +25,10 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/register', function () {
-    return view('auth.register');
-})->name('register');
-
-Route::get('/login', function () {
-    return view('auth.login');
-})->name('login');
+Route::get('/login-user', [UserLoginController::class, 'showFormLogin'])->name('form-login-user');
+Route::post('/register', [UserLoginController::class, 'userRegister'])->name('form-register-user');
+Route::get('/register', [UserLoginController::class, 'showFormRegister'])->name('user.register');
+Route::post('/login-user', [UserLoginController::class, 'login'])->name('login.user');
 
 Route::get('/contact', function () {
     return view('user.contact');
@@ -33,17 +38,11 @@ Route::redirect('/', '/beranda');
 
 Route::redirect('/user', '/beranda');
 
-Route::get('/beranda', function () {
-    return view('user.beranda-user');
-})->name('beranda');
+Route::get('/beranda', [beranda::class, 'index'])->name('beranda');
 
-Route::get('/detail', function () {
-    return view('user.detail-produk');
-})->name('detail');
+Route::get('/detail/{id}',  [DetailProductController::class, 'index'])->name('detail');
 
-Route::get('/produk', function () {
-    return view('user.produk');
-})->name('produk');
+Route::get('/produk', [ProductController::class, 'show'])->name('produk');
 
 Route::get('/about', function () {
     return view('user.about');
@@ -67,25 +66,27 @@ Route::get('/alamat', function () {
 
 
 
+
 // super admin
-Route::get('/admin', function () {
-    return view('admin.index-admin');
-});
+Route::post('/login', [AdminLoginController::class, 'login'])->name('login.admin');
+
 Route::get('/login-admin', function () {
     return view('admin.auth-admin.login-admin');
 });
-Route::get('/register-admin', function () {
-    return view('admin.auth-admin.register-admin');
-});
-Route::get('/dashboard-admin', function () {
-    return view('admin.dashboard-admin');
-});
-Route::get('/users', function () {
-    return view('admin.user.index-user');
-});
-Route::get('/toko-admin', function () {
-    return view('admin.toko.index');
-});
-Route::get('/edit-toko-admin', function () {
-    return view('admin.toko.edit');
-});
+Route::get('/dashboard-admin', [DashboardAdminController::class, 'index'])->name('dashboard.admin');
+
+Route::get('/register-admin', [AdminLoginController::class, 'showFormRegister']);
+Route::post('/admin-register', [AdminLoginController::class, 'registerAdmin'])->name('register.admin');
+
+// user super admin
+Route::get('/users', [UserAdminController::class, 'index'])->name('index.user-admin');
+Route::get('/edit-users/{id}', [UserAdminController::class, 'edit'])->name('user.edit');
+Route::post('/edit-users/{id}', [UserAdminController::class, 'update'])->name('user.update');
+Route::delete('/delete-users/{id}', [UserAdminController::class, 'destroy'])->name('user.delete');
+
+// toko super admin
+
+Route::get('/toko-admin', [TokoAdminController::class, 'index'])->name('index.toko-admin');
+Route::get('/edit-toko/{id}', [TokoAdminController::class, 'edit'])->name('toko.edit');
+Route::post('/edit-toko/{id}', [TokoAdminController::class, 'update'])->name('toko.update');
+Route::delete('/delete-toko/{id}', [TokoAdminController::class, 'destroy'])->name('toko.delete');

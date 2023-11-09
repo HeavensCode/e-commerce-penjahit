@@ -23,7 +23,21 @@
 </head>
 
 <body class="bg-gradient-primary">
-
+    {{-- alert --}}
+    <div class="container">
+        <div class="row my-3">
+            @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
+            @if (session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
+        </div>
+    </div>
     <div class="container">
 
         <div class="card o-hidden border-0 shadow-lg my-5">
@@ -36,29 +50,34 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
                             </div>
-                            <form class="user">
+                            <form class="user" method="post" action="{{ route('register.admin') }}">
+                                @csrf
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="text" class="form-control form-control-user"
-                                            id="exampleFirstName" placeholder="First Name">
+                                        <input type="text" class="form-control form-control-user" placeholder="Nama"
+                                            name="nama" id="nama">
                                     </div>
                                     <div class="col-sm-6">
-                                        <input type="text" class="form-control form-control-user"
-                                            id="exampleLastName" placeholder="Last Name">
+                                        <input type="email" class="form-control form-control-user" placeholder="email"
+                                            name="email" id="email">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" class="form-control form-control-user" id="exampleInputEmail"
-                                        placeholder="Email Address">
+                                    <input type="password" class="form-control form-control-user" placeholder="password"
+                                        name="password" id="password">
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="password" class="form-control form-control-user"
-                                            id="exampleInputPassword" placeholder="Password">
+                                        <input type="number" class="form-control form-control-user"
+                                            placeholder="No Telp" id="no_telp" name="no_telp">
                                     </div>
                                     <div class="col-sm-6">
-                                        <input type="password" class="form-control form-control-user"
-                                            id="exampleRepeatPassword" placeholder="Repeat Password">
+                                        <label for="" class="form-control">Jenis Kelamin</label>
+                                        <select name="gender" id="gender" class="form-control">
+                                            <option value="laki-laki">Laki - Laki</option>
+                                            <option value="perempuan">Perempuan</option>
+                                            <option value="tidak memilih">tidak memilih</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary btn-user btn-block">

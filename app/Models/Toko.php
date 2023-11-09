@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Toko extends Model
 {
     use HasFactory;
+
+    public function produk()
+    {
+        return $this->hasMany(Produk::class, 'id_toko');
+    }
 }

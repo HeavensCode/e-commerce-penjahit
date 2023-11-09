@@ -149,102 +149,40 @@
         <!-- Product Recommendation List -->
         <div class="pro-container container">
             <div class="row g-3">
-                <div class="col-6 col-lg-3">
-                    <a class="text-decoration-none" href="/product-details/635cd5265139db4f31a56e8a">
-                        <div class="pro-card rounded border p-3">
-                            <!-- image product -->
-                            <div class="pro-image rounded">
-                                <img src="{{ asset('image/card/card-img.png') }}" alt="Jalangkote Setengah Masak"
-                                    class="pro-animation img-fluid rounded" loading="lazy">
-                            </div>
-
-                            <!-- product info -->
-                            <div class="des-pro">
-                                <h5 class="judul-card my-2">Jalangkote Setengah Masak</h5>
-                                <div class="star">
-                                    <p class="rating-card m-0">
-                                        <i class="fas fa-star"></i>
-                                        4.7 - 5.4k Terjual
-                                    </p>
+                @foreach ($products as $product)
+                    <div class="col-6 col-lg-3">
+                        <a class="text-decoration-none" href="{{ route('detail', ['id' => $product->id]) }}">
+                            <div class="pro-card rounded border p-3">
+                                <!-- image product -->
+                                <div class="pro-image rounded">
+                                    @if ($product->detailGambarProduct->isNotEmpty())
+                                        <img src="{{ $product->detailGambarProduct[0]->gambar }}"
+                                            alt="{{ $product->nama_product }}" class="pro-animation img-fluid rounded"
+                                            loading="lazy">
+                                    @else
+                                        <img src="{{ asset('image/card/card-img.png') }}"
+                                            alt="{{ $product->nama_product }}" class="pro-animation img-fluid rounded"
+                                            loading="lazy">
+                                    @endif
                                 </div>
-                                <p class="harga-card m-0">8.000</p>
-                                <p class="lokasi-card m-0"><i class="fa-solid fa-location-dot"></i> Makassar</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-6 col-lg-3">
-                    <a class="text-decoration-none" href="/product-details/635cd5265139db4f31a56e8a">
-                        <div class="pro-card rounded border p-3">
-                            <!-- image product -->
-                            <div class="pro-image rounded">
-                                <img src="{{ asset('image/card/card-img.png') }}" alt="Jalangkote Setengah Masak"
-                                    class="pro-animation img-fluid rounded" loading="lazy">
-                            </div>
 
-                            <!-- product info -->
-                            <div class="des-pro">
-                                <h5 class="judul-card my-2">Jalangkote Setengah Masak</h5>
-                                <div class="star">
-                                    <p class="rating-card m-0">
-                                        <i class="fas fa-star"></i>
-                                        4.7 - 5.4k Terjual
-                                    </p>
+                                <!-- product info -->
+                                <div class="des-pro">
+                                    <h5 class="judul-card my-2">{{ $product->nama_product }}</h5>
+                                    <div class="star">
+                                        <p class="rating-card m-0">
+                                            <i class="fas fa-star"></i>
+                                            {{ $product->rating }}
+                                        </p>
+                                    </div>
+                                    <p class="harga-card m-0">{{ $product->harga }}</p>
+                                    <p class="lokasi-card m-0"><i class="fa-solid fa-location-dot"></i>
+                                        {{ $product->toko->kota }}</p>
                                 </div>
-                                <p class="harga-card m-0">8.000</p>
-                                <p class="lokasi-card m-0"><i class="fa-solid fa-location-dot"></i> Makassar</p>
                             </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-6 col-lg-3">
-                    <a class="text-decoration-none" href="/product-details/635cd5265139db4f31a56e8a">
-                        <div class="pro-card rounded border p-3">
-                            <!-- image product -->
-                            <div class="pro-image rounded">
-                                <img src="{{ asset('image/card/card-img.png') }}" alt="Jalangkote Setengah Masak"
-                                    class="pro-animation img-fluid rounded" loading="lazy">
-                            </div>
-
-                            <!-- product info -->
-                            <div class="des-pro">
-                                <h5 class="judul-card my-2">Jalangkote Setengah Masak</h5>
-                                <div class="star">
-                                    <p class="rating-card m-0">
-                                        <i class="fas fa-star"></i>
-                                        4.7 - 5.4k Terjual
-                                    </p>
-                                </div>
-                                <p class="harga-card m-0">8.000</p>
-                                <p class="lokasi-card m-0"><i class="fa-solid fa-location-dot"></i> Makassar</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-6 col-lg-3">
-                    <a class="text-decoration-none" href="/product-details/635cd5265139db4f31a56e8a">
-                        <div class="pro-card rounded border p-3">
-                            <!-- image product -->
-                            <div class="pro-image rounded">
-                                <img src="{{ asset('image/card/card-img.png') }}" alt="Jalangkote Setengah Masak"
-                                    class="pro-animation img-fluid rounded" loading="lazy">
-                            </div>
-
-                            <!-- product info -->
-                            <div class="des-pro">
-                                <h5 class="judul-card my-2">Jalangkote Setengah Masak</h5>
-                                <div class="star">
-                                    <p class="rating-card m-0">
-                                        <i class="fas fa-star"></i>
-                                        4.7 - 5.4k Terjual
-                                    </p>
-                                </div>
-                                <p class="harga-card m-0">8.000</p>
-                                <p class="lokasi-card m-0"><i class="fa-solid fa-location-dot"></i> Makassar</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
+                        </a>
+                    </div>
+                @endforeach
             </div>
         </div>
     </section>

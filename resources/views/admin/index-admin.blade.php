@@ -81,6 +81,21 @@
                     </div>
                 </div>
             </li>
+            <!-- Nav Item - Utilities Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilitiess"
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>Product Menu</span>
+                </a>
+                <div id="collapseUtilitiess" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Menu Product:</h6>
+                        <a class="collapse-item" href="/toko-admin">Daftar Product</a>
+                    </div>
+                </div>
+            </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -220,6 +235,21 @@
                 </nav>
                 <!-- End of Topbar -->
 
+                {{-- alert --}}
+                <div class="container">
+                    <div class="row my-3">
+                        @if (session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+                        @if (session('error'))
+                            <div class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
+                        @endif
+                    </div>
+                </div>
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     @yield('container')

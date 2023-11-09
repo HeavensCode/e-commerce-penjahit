@@ -1,5 +1,4 @@
 @extends('user.index-user')
-
 @section('container')
     <div class="register">
         <div class="container kontainer">
@@ -13,11 +12,13 @@
         </div>
     </div>
     <div class="container">
-        <form class="row mt-5 px-4 py-4 border border-black rounded" style="background-color: #A17449">
+        <form class="row mt-5 px-4 py-4 border border-black rounded" style="background-color: #A17449" method="post"
+            action="{{ route('user.register') }}">
+            @csrf
             <h4>Registration</h4>
             <div class="col-md-6">
                 <label for="inputEmail4" class="form-label">Full Name *</label>
-                <input type="text" class="form-control" id="full_name" name="full_name" required>
+                <input type="text" class="form-control" id="nama" name="nama" required>
             </div>
             <div class="col-md-6">
                 <label for="inputPassword4" class="form-label">Username *</label>
@@ -29,7 +30,7 @@
             </div>
             <div class="col-md-6">
                 <label for="inputPassword4" class="form-label">Phone Number *</label>
-                <input type="number" class="form-control" id="phone_number" name="phone_number" required>
+                <input type="number" class="form-control" id="no_telp" name="no_telp" required>
             </div>
             <div class="col-md-6">
                 <label for="inputPassword4" class="form-label">Password *</label>
@@ -43,13 +44,13 @@
                 <label for="inputState" class="form-label">Gender</label>
                 <div class="radio-group">
                     <div>
-                        <input type="radio" id="gender" name="gender" value="male"> Male
+                        <input type="radio" id="gender" name="gender" value="male" required> Male
                     </div>
                     <div>
-                        <input type="radio" id="gender" name="gender" value="female"> Female
+                        <input type="radio" id="gender" name="gender" value="female" required> Female
                     </div>
                     <div>
-                        <input type="radio" id="gender" name="gender" value="none"> Tidak Dulu
+                        <input type="radio" id="gender" name="gender" value="none" required> Tidak Dulu
                     </div>
                 </div>
             </div>

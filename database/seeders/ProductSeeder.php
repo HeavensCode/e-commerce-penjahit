@@ -19,6 +19,7 @@ class ProductSeeder extends Seeder
         // Buat produk pertama
         $product1 = Product::create([
             'nama_product' => 'Baju Gaun Elegan',
+            'id_toko' => 3,
             'stock' => 20,
             'rating' => '4.5',
             'harga' => 500000,
@@ -73,6 +74,7 @@ class ProductSeeder extends Seeder
         // Buat produk kedua
         $product2 = Product::create([
             'nama_product' => 'Kemeja Klasik Pria',
+            'id_toko' => 1,
             'stock' => 15,
             'rating' => '4.7',
             'harga' => 250000,
@@ -155,6 +157,7 @@ class ProductSeeder extends Seeder
         // Buat produk ketiga
         $product3 = Product::create([
             'nama_product' => 'Jaket Kulit Stylish',
+            'id_toko' => 2,
             'stock' => 8,
             'rating' => '4.9',
             'harga' => 350000,
@@ -216,6 +219,7 @@ class ProductSeeder extends Seeder
         // Buat produk keempat
         $product4 = Product::create([
             'nama_product' => 'Dress Cantik Wanita',
+            'id_toko' => 3,
             'stock' => 12,
             'rating' => '4.6',
             'harga' => 200000,
@@ -249,6 +253,7 @@ class ProductSeeder extends Seeder
         // Buat produk kelima
         $product5 = Product::create([
             'nama_product' => 'Sepatu Sneakers Kasual',
+            'id_toko' => 3,
             'stock' => 20,
             'rating' => '4.7',
             'harga' => 150000,

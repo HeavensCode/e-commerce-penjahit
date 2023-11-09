@@ -13,7 +13,9 @@
         </div>
     </div>
     <div class="container form-signin w-50 ">
-        <form class="row mt-5 px-4 py-4 border border-black rounded" style="background-color: #A17449">
+        <form class="row mt-5 px-4 py-4 border border-black rounded" method="post" action="{{ route('login.user') }}"
+            style="background-color: #A17449">
+            @csrf
             <h4 class="text-center">Login Dulu</h4>
             <div class="d-flex">
                 <div class="h-70 d-flex justify-content-center rounded"
@@ -27,7 +29,7 @@
                     style="width: 50px; align-items: center; background-color: #FFFFD9">
                     <i class="fa-solid fa-lock"></i>
                 </div>
-                <input type="text" class="form-control" id="username" name="username" required>
+                <input type="password" class="form-control" id="password" name="password" required>
             </div>
             <div class="text-center pt-3">
                 <button type="submit" class="btn btn-primary w-100">Login</button>

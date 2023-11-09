@@ -15,7 +15,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $products = Product::with('detailProduct', 'detailGambarProduct', 'toko')->get();
+        // Mengarahkan ke halaman produk dengan data produk
+        return $products;
     }
 
     /**
@@ -47,8 +49,11 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        $products = Product::with('detailProduct', 'detailGambarProduct', 'toko')->get();
+        // Mengarahkan ke halaman produk dengan data produk
+        return view('user.produk', ['products' => $products]);
     }
+
 
     /**
      * Show the form for editing the specified resource.
