@@ -21,7 +21,6 @@ class ProductSeeder extends Seeder
             'nama_product' => 'Baju Gaun Elegan',
             'id_toko' => 3,
             'stock' => 20,
-            'rating' => '4.5',
             'harga' => 500000,
             'created_at' => now(),
             'updated_at' => now()
@@ -76,7 +75,6 @@ class ProductSeeder extends Seeder
             'nama_product' => 'Kemeja Klasik Pria',
             'id_toko' => 1,
             'stock' => 15,
-            'rating' => '4.7',
             'harga' => 250000,
             'created_at' => now(),
             'updated_at' => now()
@@ -159,7 +157,6 @@ class ProductSeeder extends Seeder
             'nama_product' => 'Jaket Kulit Stylish',
             'id_toko' => 2,
             'stock' => 8,
-            'rating' => '4.9',
             'harga' => 350000,
             'created_at' => now(),
             'updated_at' => now()
@@ -221,7 +218,6 @@ class ProductSeeder extends Seeder
             'nama_product' => 'Dress Cantik Wanita',
             'id_toko' => 3,
             'stock' => 12,
-            'rating' => '4.6',
             'harga' => 200000,
             'created_at' => now(),
             'updated_at' => now()
@@ -255,7 +251,6 @@ class ProductSeeder extends Seeder
             'nama_product' => 'Sepatu Sneakers Kasual',
             'id_toko' => 3,
             'stock' => 20,
-            'rating' => '4.7',
             'harga' => 150000,
             'created_at' => now(),
             'updated_at' => now()

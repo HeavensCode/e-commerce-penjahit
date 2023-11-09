@@ -8,16 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
-
+    protected $fillable = ['nama_product', 'stock', 'harga', 'id_toko', 'gambar'];
 
     public function detailProduct()
     {
-        return $this->hasOne(DetailProduct::class, 'id_product');
+        return $this->hasOne(DetailProduct::class, 'id_product', 'id');
     }
 
     public function detailGambarProduct()
     {
-        return $this->hasMany(detailGambarProduct::class, 'id_product');
+        return $this->hasMany(detailGambarProduct::class, 'id_product' ,'id');
     }
 
     public function toko()

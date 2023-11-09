@@ -14,7 +14,7 @@
             <div class="row g-3">
                 @foreach ($products as $product)
                     <div class="col-6 col-lg-3">
-                        <a class="text-decoration-none" href="/product-details/{{ $product->id }}">
+                        <a class="text-decoration-none" href="{{ route('detail', ['id' => $product->id]) }}">
                             <div class="pro-card rounded border p-3">
                                 <!-- image product -->
                                 <div class="pro-image rounded">

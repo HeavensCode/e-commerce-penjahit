@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use Illuminate\Http\Request;
 use App\Models\DetailProduct;
 use App\Http\Requests\StoreDetailProductRequest;
 use App\Http\Requests\UpdateDetailProductRequest;
@@ -14,10 +15,16 @@ class DetailProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request, $id)
     {
-        // $products = Product::with('detailProduct', 'detailGambarProduct', 'toko')->find();
-        // return view('user.detail-produk', ['products' => $products]);
+        // Cari produk berdasarkan ID dan join tabel detailProduct, detailGambarProduct, dan toko
+        $product = Product::with('detailProduct', 'detailGambarProduct', 'toko')->find($id);
+        if ($product) {
+            return view('user.detail-produk', ['product' => $product]);
+        } else {
+            // Handle jika produk tidak ditemukan
+            return abort(404);
+        }
     }
 
     /**

@@ -18,7 +18,6 @@ class CreateProductsTable extends Migration
             $table->string('nama_product');
             $table->foreignId('id_toko')->nullable();
             $table->integer('stock');
-            $table->string('rating');
             $table->integer('harga');
             $table->timestamps();
         });

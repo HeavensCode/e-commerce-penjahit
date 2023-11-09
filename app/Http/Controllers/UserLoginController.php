@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 
 class UserLoginController extends Controller
@@ -15,7 +17,7 @@ class UserLoginController extends Controller
             'password' => 'required',
         ]);
         if (auth()->attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) {
-            return redirect('/beranda');
+            return redirect('/beranda')->with('succes', 'Selamat Datang !.');
         } else {
             return redirect()->back()->with('error', 'Login gagal. Pastikan email dan password Anda benar.');
         }
@@ -52,5 +54,12 @@ class UserLoginController extends Controller
         } else {
             return redirect()->back()->with('error', 'Gagal disimpan.');
         }
+    }
+    public function logout()
+    {
+        Session::forget('cart');
+
+        Auth::logout();
+        return redirect('/');
     }
 }
