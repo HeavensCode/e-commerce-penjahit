@@ -71,8 +71,8 @@ Route::get('/alamat', function () {
 
 // checkout user
 // routes/web.php
-Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('add-to-cart');
-
+Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('add-to-cart')->middleware('checkUserLogin');
+// Route::post('/add-to-cart', 'CartController@addToCart')->name('add-to-cart');
 
 
 

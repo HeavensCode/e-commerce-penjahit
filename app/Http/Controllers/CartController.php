@@ -37,6 +37,9 @@ class CartController extends Controller
 
         return redirect()->back()->with('success', 'Product added to cart.');
     }
-
+    public function __construct()
+    {
+        $this->middleware('checkUserLogin')->only('addToCart');
+    }
 
 }

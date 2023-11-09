@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 
 class UserLoginController extends Controller
@@ -56,6 +57,8 @@ class UserLoginController extends Controller
     }
     public function logout()
     {
+        Session::forget('cart');
+
         Auth::logout();
         return redirect('/');
     }
