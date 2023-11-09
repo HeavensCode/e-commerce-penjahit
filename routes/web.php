@@ -66,6 +66,9 @@ Route::get('/toko', function () {
 Route::get('/alamat', function () {
     return view('user.profile-user.alamat-user');
 })->name('alamat');
+Route::get('/checkout', function () {
+    return view('user.pembayaran-user');
+})->name('alamat');
 
 
 
