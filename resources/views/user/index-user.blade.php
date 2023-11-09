@@ -40,6 +40,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link navlink active" href="/contact">Contact</a>
+                        <!-- Contoh penggunaan di suatu view -->
+                        <p>Cart Quantity: {{ count($cart) }}</p>
+                        {{-- {{ dd($cart) }} --}}
                     </li>
                 </ul>
                 <div class="d-lg-flex col-lg-3 justify-content-lg-start">

@@ -11,6 +11,7 @@ use App\Http\Controllers\UserAdminController;
 use App\Http\Controllers\TokoAdminController;
 use App\Http\Controllers\ProdukAdminController;
 use App\Http\Controllers\VoucherController;
+use App\Http\Controllers\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,6 +66,17 @@ Route::get('/toko', function () {
 Route::get('/alamat', function () {
     return view('user.profile-user.alamat-user');
 })->name('alamat');
+
+
+
+// checkout user
+// routes/web.php
+Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('add-to-cart');
+
+
+
+
+
 
 
 

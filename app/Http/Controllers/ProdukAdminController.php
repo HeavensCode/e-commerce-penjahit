@@ -20,10 +20,13 @@ class ProdukAdminController extends Controller
         $products = DB::table('products')
             ->join('detail_gambar_products', 'products.id', '=', 'detail_gambar_products.id_product')
             ->join('detail_products', 'products.id', '=', 'detail_products.id_product')
-            ->select('products.*', 'detail_gambar_products.*', 'detail_products.*')
+            ->select('products.*', 'detail_gambar_products.gambar', 'detail_products.*')
+            ->distinct('detail_gambar_products.gambar')
             ->get();
+
         return view('admin.produk.index', ['products' => $products]);
     }
+
 
 
     /**
