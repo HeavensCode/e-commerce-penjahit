@@ -1,14 +1,15 @@
 <?php
 
 use App\Http\Controllers\beranda;
-use App\Http\Controllers\DetailProductController;
-use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AdminLoginController;
-use App\Http\Controllers\UserLoginController;
-use App\Http\Controllers\DashboardAdminController;
-use App\Http\Controllers\UserAdminController;
+use App\Http\Controllers\TokoController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TokoAdminController;
+use App\Http\Controllers\UserAdminController;
+use App\Http\Controllers\UserLoginController;
+use App\Http\Controllers\AdminLoginController;
+use App\Http\Controllers\DetailProductController;
+use App\Http\Controllers\DashboardAdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +45,12 @@ Route::get('/produk-detail/{id}',  [DetailProductController::class, 'index'])->n
 
 Route::get('/produk', [ProductController::class, 'show'])->name('produk');
 
+Route::post('/produk/store', [ProductController::class, 'storeProduct'])->name('store-produk');
+
+Route::delete('/delete-product/{id}', [ProductController::class, 'delete'])->name('delete-product');
+
+Route::post('/update-product/{id}', [ProductController::class, 'updateProduct'])->name('edit-product');
+
 Route::get('/about', function () {
     return view('user.about');
 })->name('about');
@@ -52,18 +59,17 @@ Route::get('/dashboard', function () {
     return view('user.profile-user.index-profile-user');
 });
 
-Route::get('/profile', function () {
-    return view('user.profile-user.profile-user');
-})->name('profile');
+Route::get('/profile', [TokoController::class, 'profil'])->name('profile');
 
-Route::get('/toko', function () {
-    return view('user.profile-user.toko-user');
-})->name('toko');
+Route::post('/toko/{id}/update', [UserLoginController::class, 'updateProfile'])->name('user-profile.update');
 
-Route::get('/alamat', function () {
-    return view('user.profile-user.alamat-user');
-})->name('alamat');
+Route::get('/toko', [TokoController::class, 'index'])->name('toko');
 
+Route::post('/toko/edit-alamat', [TokoController::class, 'updateToko'])->name('edit-alamat-toko');
+
+Route::post('/toko/edit-data', [TokoController::class, 'updateDataToko'])->name('edit-toko');
+
+Route::get('/alamat',  [TokoController::class, 'alamat'])->name('alamat');
 
 
 

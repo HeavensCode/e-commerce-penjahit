@@ -2,7 +2,7 @@
 
 @section('container')
     <div class="login">
-        <div class="container kontainer">
+        <div class="kontainer container">
             <div class="judulregister d-flex justify-content-center text-center">
                 <h1 class="text-dark">Login</h1>
             </div>
@@ -12,8 +12,8 @@
             </div>
         </div>
     </div>
-    <div class="container form-signin w-50 ">
-        <form class="row mt-5 px-4 py-4 border border-black rounded" method="post" action="{{ route('login.user') }}"
+    <div class="form-signin w-50 container">
+        <form class="row mt-5 rounded border border-black px-4 py-4" method="post" action="{{ route('login.user') }}"
             style="background-color: #A17449">
             @csrf
             <h4 class="text-center">Login Dulu</h4>
@@ -31,7 +31,7 @@
                 </div>
                 <input type="password" class="form-control" id="password" name="password" required>
             </div>
-            <div class="text-center pt-3">
+            <div class="pt-3 text-center">
                 <button type="submit" class="btn btn-primary w-100">Login</button>
             </div>
             <div class="text-center">

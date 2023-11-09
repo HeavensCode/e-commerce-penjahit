@@ -10,7 +10,8 @@
                     <!-- Foto Besar Produk -->
                     <div class="row">
                         <figure class="product-display col">
-                            <img class="h-100 w-100" src="{{ $product->detailGambarProduct[0]->gambar }}" width="700"
+                            <img class="h-100 w-100"
+                                src="{{ asset('storage/gambar/' . $product->detailGambarProduct[0]->gambar) }}" width="700"
                                 height="700" loading="lazy" alt="{{ $product->nama_product }}">
                         </figure>
                     </div>
@@ -18,8 +19,8 @@
                     <div class="row g-2" style="overflow-x: auto; white-space: nowrap;">
                         @foreach ($product->detailGambarProduct as $gambar)
                             <div class="product-thumbnail-item col" style="max-width: 25%; overflow: hidden;">
-                                <img class="h-100 w-100" src="{{ $gambar->gambar }}" width="700" height="700"
-                                    loading="lazy" alt="{{ $product->nama_product }}">
+                                <img class="h-100 w-100" src="{{ asset('storage/gambar/' . $gambar->gambar) }}"
+                                    width="700" height="700" loading="lazy" alt="{{ $product->nama_product }}">
                             </div>
                         @endforeach
                     </div>
@@ -61,11 +62,11 @@
                         <div class="product-text col-12">
                             <div class="row align-items-center g-2">
                                 <div class="col-4 col-md-2 text-center">
-                                    <p class="m-0 p-1 text-start">Berat : </p>
+                                    <p class="m-0 p-1 text-start">Brand : </p>
                                 </div>
-                                <div class="col-4 col-md-2 rounded text-center">
+                                <div class="col-8 col-md-4 rounded text-center">
                                     <p class="bg-warning-subtle m-0 rounded p-1">
-                                        <b>{{ $product->detailProduct->panjang_kain }} gr</b>
+                                        <b>{{ $product->detailProduct->merk }}</b>
                                     </p>
                                 </div>
                             </div>

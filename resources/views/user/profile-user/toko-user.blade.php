@@ -12,20 +12,20 @@
             <div class="row align-content-start">
                 <div class="col-12">
                     <div class="mb-3">
-                        <h5>Produk : <b>15</b></h5>
+                        <h5>Produk : <b>{{ $productcount }}</b></h5>
                     </div>
                     <div class="mb-3">
-                        <h5>Lokasi : <b>Indonesia</b></h5>
+                        <h5>Lokasi : <b>{{ $toko->alamat_toko }}</b></h5>
                     </div>
                     <div class="row mb-3 gap-3">
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-success col-12 col-md-3" data-bs-toggle="modal"
-                            data-bs-target="#exampleModal">
+                            data-bs-target="#tambah-produk-toko-modal">
                             Tambah Produk
                         </button>
                         <button type="button" class="btn btn-secondary col-12 col-md-3" data-bs-toggle="modal"
-                            data-bs-target="#modal-edit-produk">
-                            Edit Produk
+                            data-bs-target="#modal-edit-toko">
+                            Edit Data Toko
                         </button>
                         @include('user.profile-user.tambah-produk-modal')
                     </div>
@@ -62,7 +62,6 @@
                 </div>
             </div>
 
-
             <!-- Tabel Data Produk -->
             <div class="table-responsive row my-2">
                 <table class="table">
@@ -71,19 +70,33 @@
                             <th>Nama Produk</th>
                             <th>Harga</th>
                             <th>Stok</th>
+                            <th>Aksi</th> <!-- Kolom untuk tombol aksi -->
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Produk 1</td>
-                            <td>100.00</td>
-                            <td>50</td>
-                        </tr>
-                        <tr>
-                            <td>Produk 2</td>
-                            <td>75.00</td>
-                            <td>30</td>
-                        </tr>
+                        @foreach ($productarray as $product)
+                            <tr>
+                                <td>{{ $product->nama_product }}</td>
+                                <td>{{ $product->harga }}</td>
+                                <td>{{ $product->stock }}</td>
+                                <td>
+                                    <!-- Tombol Edit -->
+                                    <form action="{{ route('edit-product', ['id' => $product->id]) }}" method="GET">
+                                        @csrf
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                            data-bs-target="#edit-produk-modal{{ $product->id }}"
+                                            data-id="{{ $product->id }}">Edit</button>
+                                    </form>
+                                    @include('user.profile-user.edit-produk-modal')
+                                    <!-- Tombol Hapus -->
+                                    <form action="{{ route('delete-product', ['id' => $product->id]) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger">Hapus</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

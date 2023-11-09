@@ -2,34 +2,35 @@
 
 @section('container')
     <div class="profiles-user" style="width: 100%; height: 100%;background-color: #EDCEB1">
-        <form action="" class="py-5 mx-5 ">
+        <form action="" class="mx-5 py-5">
             <h3>Profile Saya</h3>
-            <div class="container w-100 h-100">
+            <div class="w-100 h-100 container">
                 <label for="inputPassword6" class="col-form-label">Username</label>
                 <div class="col-md-8 mx-2">
-                    <input type="text" name="username" id="username" class="form-control" required>
-                </div>
-                <label for="inputPassword6" class="col-form-label">Nama</label>
-                <div class="col-md-8 mx-2">
-                    <input type="text" name="nama" id="nama" class="form-control" required>
+                    <input value="{{ $user->nama }}" type="text" name="username" id="username" class="form-control"
+                        disabled>
                 </div>
                 <label for="inputPassword6" class="col-form-label">Email</label>
                 <div class="col-md-8 mx-2">
-                    <input type="email" name="email" id="email" class="form-control" required>
+                    <input value="{{ $user->email }}" type="email" name="email" id="email" class="form-control"
+                        disabled>
                 </div>
                 <label for="inputPassword6" class="col-form-label">Nomor Telepon</label>
                 <div class="col-md-8 mx-2">
-                    <input type="number" name="nomor_telepon" id="nomor_telepon" class="form-control" required>
-                </div>
-                <label for="inputPassword6" class="col-form-label">Nama Toko</label>
-                <div class="col-md-8 mx-2">
-                    <input type="text" name="nama_toko" id="nama_toko" class="form-control ">
+                    <input value="{{ $user->no_telp }}" type="number" name="nomor_telepon" id="nomor_telepon"
+                        class="form-control" disabled>
                 </div>
                 <label for="inputPassword6" class="col-form-label">Jenis Kelamin</label>
                 <div class="col-md-8 mx-2">
-                    <input type="radio" name="jenis_kelamin" id="jenis_kelamin" value="Laki- Laki"> Laki - Laki
-                    <input type="radio" name="jenis_kelamin" id="jenis_kelamin" value="Laki- Laki"> Perempuan
-                    <input type="radio" name="jenis_kelamin" id="jenis_kelamin" value="Laki- Laki"> Lainnya
+                    <input value="{{ $user->gender }}" type="text" name="edit_gender" id="edit-nomor-telepon"
+                        class="form-control" disabled>
+                </div>
+                <div class="col-md-8 mx-2">
+                    <button type="button" class="btn btn-primary my-2" data-bs-toggle="modal"
+                        data-bs-target="#edit-profile-modal">
+                        Edit Profile
+                    </button>
+                    @include('user.profile-user.edit-profile-modal')
                 </div>
         </form>
     </div>
