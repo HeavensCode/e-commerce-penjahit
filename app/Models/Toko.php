@@ -2,15 +2,24 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Toko extends Model
 {
     use HasFactory;
 
-    public function produk()
+    protected $fillable = [
+        'alamat_toko',
+        'kota',
+        'kecamatan',
+        'provinsi',
+        'kode_pos',
+    ];
+
+    public function product()
     {
-        return $this->hasMany(Produk::class, 'id_toko');
+        return $this->hasMany(Product::class, 'id_toko');
     }
 }

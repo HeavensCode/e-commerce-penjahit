@@ -26,6 +26,7 @@ class UserLoginController extends Controller
     {
         return view('auth.login');
     }
+
     public function showFormRegister()
     {
         return view('auth.register');
@@ -55,11 +56,37 @@ class UserLoginController extends Controller
             return redirect()->back()->with('error', 'Gagal disimpan.');
         }
     }
+
     public function logout()
     {
         Session::forget('cart');
 
         Auth::logout();
         return redirect('/');
+    }
+
+    public function updateProfile(Request $request, $id)
+    {
+        try {
+            $user = User::find($id);
+            dd($user);
+
+            if (!$user) {
+                return redirect()->route('profile')->with('error', 'Profil tidak ditemukan.');
+            }
+
+            $user->nama = $request->input('edit_username');
+            $user->email = $request->input('edit_email');
+            $user->no_telp = $request->input('edit_nomor_telepon');
+            $user->gender = $request->input('edit_gender');
+
+            if ($user->save()) {
+                return redirect()->route('profile')->with('success', 'Profil berhasil diperbarui.');
+            } else {
+                return redirect()->route('profile')->with('error', 'Gagal memperbarui profil.');
+            }
+        } catch (\Exception $e) {
+            return redirect()->route('profile')->with('error', 'Terjadi kesalahan saat memperbarui profil: ' . $e->getMessage());
+        }
     }
 }

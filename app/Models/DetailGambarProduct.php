@@ -10,8 +10,14 @@ class DetailGambarProduct extends Model
     use HasFactory;
     protected $table = 'detail_gambar_products';
     protected $primaryKey = 'id_product';
+    protected $fillable = [
+        'id_product',
+        'gambar',
+    ];
+  }
     public function product()
     {
         return $this->belongsTo(Product::class, 'id_products', 'id');
     }
 }
+
