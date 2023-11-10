@@ -32,8 +32,11 @@ use App\Http\Controllers\CartController;
 // });
 
 Route::get('/login-user', [UserLoginController::class, 'showFormLogin'])->name('form-login-user');
+
 Route::post('/register', [UserLoginController::class, 'userRegister'])->name('form-register-user');
+
 Route::get('/register', [UserLoginController::class, 'showFormRegister'])->name('user.register');
+
 Route::post('/login-user', [UserLoginController::class, 'login'])->name('login.user');
 
 Route::get('/contact', function () {
@@ -80,6 +83,10 @@ Route::get('/alamat',  [TokoController::class, 'alamat'])->name('alamat');
 // routes/web.php
 Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('add-to-cart')->middleware('checkUserLogin');
 
+Route::post('/update-cart/{productId}', [CartController::class, 'updateCart'])->name('update-cart');
+
+Route::get('/shopping-cart', [CartController::class, 'shoppingcart'])->name('shopping-cart');
+
 
 
 
@@ -122,4 +129,3 @@ Route::post('/edit-voucher/{id}', [VoucherController::class, 'update'])->name('v
 Route::delete('/delete-voucher/{id}', [VoucherController::class, 'destroy'])->name('voucher.delete');
 Route::get('/tambah-voucher', [VoucherController::class, 'create'])->name('voucher.create');
 Route::post('/proses-voucher', [VoucherController::class, 'store'])->name('voucher.store');
-
