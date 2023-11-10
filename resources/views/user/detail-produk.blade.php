@@ -73,22 +73,22 @@
                         </div>
                         <!-- Kuantitas Produk -->
                         <div class="product-text col-12">
-                            <div class="row align-items-center g-2">
-                                <div class="col-4 col-md-2 text-center">
-                                    <p class="m-0 p-1 text-start">Kuantitas: </p>
-                                </div>
-                                <div class="col-4 col-md-2 kuantitas">
-                                    <form action="{{ route('add-to-cart') }}" method="post">
-                                        @csrf
+                            <form action="{{ route('add-to-cart') }}" method="post">
+                                @csrf
+                                <div class="row align-items-center g-2">
+                                    <div class="col-3 col-md-2 text-center">
+                                        <p class="m-0 p-1 text-start">Kuantitas: </p>
+                                    </div>
+                                    <div class="col-9 col-md-4 d-flex">
                                         <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                        <div class="input-group">
-                                            <input type="number" class="form-control text-center" name="quantity"
-                                                value="1" min="1" max="50">
-                                            <button type="submit" class="btn btn-primary">Add to Cart</button>
-                                        </div>
-                                    </form>
+                                        <input type="number" class="form-control text-center" name="quantity"
+                                            value="1" min="1" max="50">
+                                    </div>
+                                    <div class="col-12 col-md-4">
+                                        <button type="submit" class="w-100 btn btn-primary">Add to Cart</button>
+                                    </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
 
                         <!-- Description & Information Product Details -->
@@ -131,6 +131,33 @@
                             </div>
                         </div>
                     </div>
+                </div>
+
+            </div>
+            <!-- Container comment Content -->
+            <div class="row border-bottom py-4">
+
+                <div id="disqus_thread"></div>
+                <script>
+                    /**
+                     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+                    /*
+                    var disqus_config = function () {
+                    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                    };
+                    */
+                    (function() { // DON'T EDIT BELOW THIS LINE
+                        var d = document,
+                            s = d.createElement('script');
+                        s.src = 'https://jahitku.disqus.com/embed.js';
+                        s.setAttribute('data-timestamp', +new Date());
+                        (d.head || d.body).appendChild(s);
+                    })();
+                </script>
+            </div>
+        </div>
     </section>
 
 
