@@ -27,7 +27,7 @@
                                 <div class="row card mb-3 rounded">
                                     <div class="col-12 btn btn-info p-2 text-center">Hubungi Penjual</div>
                                 </div>
-                                <form action="{{ route('handle-payment') }}" method="POST" id="paymentForm" enctype="multipart/form-data">
+                                <form action="{{ route('handle-payment') }}" method="POST" id="paymentForm">
                                     @csrf
                                     <div class="mb-3">
                                         <input type="hidden" name="jumlah_pembelian" id="jumlah_pembelian">
@@ -40,7 +40,7 @@
                                         <input type="file" class="form-control" id="bukti_pembayaran" name="bukti_pembayaran" required >
                                       </div>
                                     <div class="row card mb-3 rounded">
-                                        <button type="submit" class="btn btn-primary" onclick="()">Bayar</button>
+                                        <button type="submit" class="btn btn-primary" onclick="preparePayment()">Bayar</button>
                                     </div>
                                 </form>
                             </div>
@@ -124,41 +124,43 @@
 @endsection
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        var subtotalElements = document.querySelectorAll('.subtotal');
-        var totalPrice = 0;
-        subtotalElements.forEach(function (subtotalElement) {
-            var subtotalValue = parseInt(subtotalElement.value.replace('Rp. ', '').replace(',', ''), 10);
-            totalPrice += subtotalValue;
-        });
-        var ongkosKirim = 15000;
-        totalPrice += ongkosKirim;
-        document.getElementById('totalPrice').value = totalPrice;
-        document.getElementById('yourFormId').addEventListener('submit', function (event) {
-            var totalHarga = document.getElementById('totalPrice').value;
-            var totalHargaInput = document.createElement('input');
-            totalHargaInput.type = 'number';
-            totalHargaInput.name = 'totalharga';
-            totalHargaInput.value = totalHarga;
-            this.appendChild(totalHargaInput);
-        });
+    var subtotalElements = document.querySelectorAll('.subtotal');
+    var totalPrice = 0;
+    subtotalElements.forEach(function (subtotalElement) {
+        var subtotalValue = parseFloat(subtotalElement.value.replace('Rp. ', '').replace(',', ''));
+        totalPrice += subtotalValue;
     });
-</script>
+    var ongkosKirim = 15000;
+    totalPrice += ongkosKirim;
+    document.getElementById('totalPrice').value = totalPrice;
+    document.getElementById('yourFormId').addEventListener('submit', function (event) {
+        var totalHarga = document.getElementById('totalPrice').value;
+        var totalHargaInput = document.createElement('input');
+        totalHargaInput.type = 'number';
+        totalHargaInput.name = 'totalharga';
+        totalHargaInput.value = totalHarga;
+        this.appendChild(totalHargaInput);
+    });
+});
 
-<script>
-    function preparePayment() {
-        var totalharga = document.getElementById('totalPrice').value;
+function preparePayment() {
+    var totalharga = document.getElementById('totalPrice').value;
 
-        var totalBiayaValue = parseFloat(totalharga) * 0.1;
-        document.getElementById('jumlah_pembelian').value = document.querySelector('.form-control[name="jumlah_pembelian"]').value;
+    var totalBiayaValue = parseFloat(totalharga) * 0.1;
+    document.getElementById('jumlah_pembelian').value = document.querySelector('.form-control[name="quantity"]').value;
 
-        document.getElementById('total_pembayaran').value = totalharga;
-        document.getElementById('sub_total').value = document.querySelector('.form-control.subtotal').value;
-        document.getElementById('nama_product').value = document.querySelector('.col-12.mb-2 b').innerText;
-        document.getElementById('total_biaya').value = totalBiayaValue.toFixed(2);
+    document.getElementById('total_pembayaran').value = totalharga;
+    document.getElementById('jumlah_pembelian').value = document.querySelector('.form-control[name="quantity"]').value;
 
-        // Set the value for pemasukan_admin or remove the field if not needed
-        document.getElementById('pemasukan_admin').value = totalBiayaValue.toFixed(2);
+    // Extract only the numeric part of the subtotal value
+    var subtotalNumeric = parseFloat(document.querySelector('.form-control.subtotal').value.replace('Rp. ', '').replace(',', ''));
+    document.getElementById('sub_total').value = subtotalNumeric;
 
-        document.getElementById('paymentForm').submit();
-    }
+    document.getElementById('nama_product').value = document.querySelector('.col-12.mb-2 b').innerText;
+    document.getElementById('total_biaya').value = totalBiayaValue.toFixed(2);
+    document.getElementById('pemasukan_admin').value = (parseFloat(totalharga) * 0.1).toFixed(2);
+
+    document.getElementById('paymentForm').submit();
+}
+
 </script>

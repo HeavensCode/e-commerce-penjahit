@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class PemasukanAdmin  extends Model
 {
     use HasFactory;
+    protected $table = 'pemasukanadmins';
 }
