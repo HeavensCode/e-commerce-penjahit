@@ -45,15 +45,13 @@
                                             <input type="hidden" name="jumlah_pembelian_array[]" id="jumlah_pembelian" value="{{ $item['quantity'] }}">
                                             <input type="hidden" name="sub_total_array[]" id="sub_total" value="{{ $item['quantity'] * $item['price'] }}">
                                             <input type="hidden" name="nama_product_array[]" id="nama_product" value="{{ $item['name'] }}">
+                                            {{-- <input type="hidden" name="total_biaya_array[]" id="total_biaya" value="{{ $totalPrice }}"> --}}
                                             <input type="file" class="form-control" id="bukti_pembayaran" name="bukti_pembayaran[]" required >
                                         </div>
                                     @endforeach
                                       </div>
                                     <div class="row card mb-3 rounded">
-                                        <button type="submit" class="btn btn-primary" onclick="preparePayment()"  {{ $addressNotSet ? 'disabled' : '' }}>Bayar</button>
-                                        @if ($addressNotSet)
-                                            <p>Harap set alamat dahulu.</p>
-                                        @endif
+                                        <button type="submit" class="btn btn-primary" onclick="preparePayment()" >Bayar</button>
                                     </div>
                                 </form>
                             </div>
@@ -62,21 +60,14 @@
                     <div class="col-12 col-lg-6">
                         <h2 class="title text-start">Order Summary</h2>
                         <div class="row p-3">
-                            @php
-                                $totalOrder = 0;
-                            @endphp
-
                             @foreach ($cart as $productId => $item)
                                 <div class="col-12 border-bottom pb-4">
                                     <div class="row card-produk mb-3 rounded border p-2">
-                                        <!-- Konten kartu produk ... -->
-
-                                        <div class="col-12 mb-2">
-                                            <input type="text" name="subtotal"
-                                                value="Rp. {{ number_format($item['price'] * $item['quantity']) }}"
-                                                class="form-control" id="subtotal" readonly>
+                                        <div class="col-3">
+                                            <img src="{{ asset('storage/gambar/' . $item['gambar']) }}"
+                                                alt="{{ $item['name'] }}" class="pro-animation img-fluid rounded"
+                                                loading="lazy">
                                         </div>
-
                                         <div class="col">
                                             <div class="row">
                                                 <div class="col-12 mb-2"><b>{{ $item['name'] }}</b></div>
@@ -113,15 +104,7 @@
                                                 </div>
                                             </div>
 
-
-                                        <div class="col-12 mb-2">
-                                            <input type="text" name="merk" value="{{ $item['merk'] }}"
-                                                class="form-control" id="merk" readonly>
                                         </div>
-
-                                        @php
-                                            $totalOrder += $item['price'] * $item['quantity'];
-                                        @endphp
                                     </div>
                                 </div>
                             @endforeach
@@ -138,13 +121,12 @@
                                     <div class="col-12 border-bottom pt-3">
                                         <div class="d-flex w-100 justify-content-between">
                                             <p><b>Total</b></p>
-                                            <p class="ml-auto"><b>Rp. {{ number_format($totalOrder) }}</b></p>
+                                            <input type="number" name="totalharga" id="totalPrice" readonly class="form-check-label">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -174,15 +156,21 @@
 
 function preparePayment() {
     var totalharga = document.getElementById('totalPrice').value;
+
     var totalBiayaValue = parseFloat(totalharga) * 0.1;
     document.getElementById('jumlah_pembelian').value = document.querySelector('.form-control[name="quantity"]').value;
+
     document.getElementById('total_pembayaran').value = totalharga;
     document.getElementById('jumlah_pembelian').value = document.querySelector('.form-control[name="quantity"]').value;
+
+    // Extract only the numeric part of the subtotal value
     var subtotalNumeric = parseFloat(document.querySelector('.form-control.subtotal').value.replace('Rp. ', '').replace(',', ''));
     document.getElementById('sub_total').value = subtotalNumeric;
+
     document.getElementById('nama_product').value = document.querySelector('.col-12.mb-2 b').innerText;
     document.getElementById('total_biaya').value = totalBiayaValue.toFixed(2);
     document.getElementById('pemasukan_admin').value = (parseFloat(totalharga) * 0.1).toFixed(2);
+
     document.getElementById('paymentForm').submit();
 }
 

@@ -18,7 +18,7 @@ class CreateDetailPembeliansTable extends Migration
             $table->integer('id_product');
             $table->string('nama_product');
             $table->string('bukti_pembayaran');
-            $table->string('jumlah_pembelian');
+            $table->integer('jumlah_pembelian');
             $table->integer('total_biaya');
             $table->timestamps();
             $table->foreign('id_pembelian')->references('id')->on('pembelians')->onDelete('cascade')->onUpdate('cascade');

@@ -18,6 +18,7 @@ class CartController extends Controller
 
 public function handlePayment(Request $request)
 {
+    // dd($request->all());
     $pembelian = new Pembelian();
     $pembelian->id_user = auth()->id();
     $pembelian->jumlah_pembelian = $request->input('jumlah_pembelian');
