@@ -33,10 +33,13 @@
                         <a class="nav-link navlink active" aria-current="page" href="/beranda">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link navlink active" href="/produk">Product</a>
+                        <a class="nav-link navlink active" href="{{ route('produk') }}">Product</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link navlink active" href="/about">About</a>
+                        <a class="nav-link navlink active" href="{{ route('about') }}">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link navlink active" href="{{ route('contact') }}">Contact</a>
                     </li>
                 </ul>
                 <div class="d-lg-flex col-lg-3 justify-content-lg-start">
