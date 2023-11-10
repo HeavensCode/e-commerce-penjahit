@@ -8,4 +8,8 @@
     class Pembelian extends Model
     {
         use HasFactory;
+        public function detailPembelians()
+        {
+            return $this->hasMany(DetailPembelian::class, 'id_pembelian');
+        }
     }

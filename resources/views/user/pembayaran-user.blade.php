@@ -32,12 +32,22 @@
                                     <div class="mb-3">
                                         <input type="hidden" name="jumlah_pembelian" id="jumlah_pembelian">
                                         <input type="hidden" name="total_pembayaran" id="total_pembayaran">
-                                        <input type="hidden" name="sub_total" id="sub_total">
                                         <input type="hidden" name="nama_product" id="nama_product">
                                         <input type="hidden" name="total_biaya" id="total_biaya">
                                         <input type="hidden" name="pemasukan_admin" id="pemasukan_admin">
                                         <label for="exampleInputEmail1" class="form-label">Bukti Bayar</label>
-                                        <input type="file" class="form-control" id="bukti_pembayaran" name="bukti_pembayaran" required >
+
+                                        @foreach ($cart as $productId => $item)
+                                        {{-- {{ dd($cart) }} --}}
+                                        <div class="mb-3">
+                                            <input type="hidden" name="id_produk_array[]" id="id_produk_array" value="{{ $productId }}">
+                                            {{-- @dump($productId) --}}
+                                            <input type="hidden" name="jumlah_pembelian_array[]" id="jumlah_pembelian" value="{{ $item['quantity'] }}">
+                                            <input type="hidden" name="sub_total_array[]" id="sub_total" value="{{ $item['quantity'] * $item['price'] }}">
+                                            <input type="hidden" name="nama_product_array[]" id="nama_product" value="{{ $item['name'] }}">
+                                            <input type="file" class="form-control" id="bukti_pembayaran" name="bukti_pembayaran[]" required >
+                                        </div>
+                                    @endforeach
                                       </div>
                                     <div class="row card mb-3 rounded">
                                         <button type="submit" class="btn btn-primary" onclick="preparePayment()">Bayar</button>
@@ -145,21 +155,15 @@
 
 function preparePayment() {
     var totalharga = document.getElementById('totalPrice').value;
-
     var totalBiayaValue = parseFloat(totalharga) * 0.1;
     document.getElementById('jumlah_pembelian').value = document.querySelector('.form-control[name="quantity"]').value;
-
     document.getElementById('total_pembayaran').value = totalharga;
     document.getElementById('jumlah_pembelian').value = document.querySelector('.form-control[name="quantity"]').value;
-
-    // Extract only the numeric part of the subtotal value
     var subtotalNumeric = parseFloat(document.querySelector('.form-control.subtotal').value.replace('Rp. ', '').replace(',', ''));
     document.getElementById('sub_total').value = subtotalNumeric;
-
     document.getElementById('nama_product').value = document.querySelector('.col-12.mb-2 b').innerText;
     document.getElementById('total_biaya').value = totalBiayaValue.toFixed(2);
     document.getElementById('pemasukan_admin').value = (parseFloat(totalharga) * 0.1).toFixed(2);
-
     document.getElementById('paymentForm').submit();
 }
 

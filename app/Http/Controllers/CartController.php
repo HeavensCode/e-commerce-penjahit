@@ -15,46 +15,45 @@ use App\Models\PemasukanAdmin;
 use App\Models\LokasiUser;
 class CartController extends Controller
 {
-    public function handlePayment(Request $request)
-    {
-        // dd($request->all());
 
-        $pembelian = new Pembelian();
-        $pembelian->id_user = auth()->id();
-        $pembelian->jumlah_pembelian = $request->input('jumlah_pembelian');
-        $pembelian->total_pembayaran = $request->input('total_pembayaran');
-        $pembelian->subtotal = $request->input('sub_total');
-        // $pembelian->no_faktur = $request->input('no_faktur');
-
-        if ($pembelian->save()) {
+public function handlePayment(Request $request)
+{
+    $pembelian = new Pembelian();
+    $pembelian->id_user = auth()->id();
+    $pembelian->jumlah_pembelian = $request->input('jumlah_pembelian');
+    $pembelian->total_pembayaran = $request->input('total_pembayaran');
+    if ($pembelian->save()) {
+        foreach ($request->input('nama_product_array') as $key => $productName) {
             $detailPembelian = new DetailPembelian();
             $detailPembelian->id_pembelian = $pembelian->id;
-            // $detailPembelian->no_faktur = $request->input('no_faktur');
-            $detailPembelian->nama_product = $request->input('nama_product');
-            $detailPembelian->jumlah_pembelian = $request->input('jumlah_pembelian');
-            $detailPembelian->total_biaya = $request->input('total_biaya');
-            $detailPembelian->bukti_pembayaran = $request->input('bukti_pembayaran');
-            // $detailPembelian->bukti_pembayaran = "ok";
-
-            if ($request->hasFile('gambarProduk')) {
-                foreach ($request->file('gambarProduk') as $file) {
-                    $namaFile = time() . '_' . $file->getClientOriginalName();
-                    Storage::disk('public')->put('bukti/' . $namaFile, file_get_contents($file));
-                    $detailPembelian->bukti_pembayaran = $namaFile; // You might want to use .= instead of =
-                }
+            $detailPembelian->id_product = $request->input('id_produk_array')[$key];
+            $detailPembelian->nama_product = $productName;
+            $detailPembelian->jumlah_pembelian = $request->input('jumlah_pembelian_array')[$key];
+            $detailPembelian->total_biaya = $request->input('sub_total_array')[$key];
+            if ($request->hasFile('bukti_pembayaran') && $request->file('bukti_pembayaran')[$key]->isValid()) {
+                $file = $request->file('bukti_pembayaran')[$key];
+                $namaFile = time() . '_' . $file->getClientOriginalName();
+                Storage::disk('public')->put('bukti/' . $namaFile, file_get_contents($file));
+                $detailPembelian->bukti_pembayaran = $namaFile;
             }
-                if ($detailPembelian->save()) {
-                    $pemasukanAdmin = new PemasukanAdmin();
-                    $pemasukanAdmin->id_pembelian = $pembelian->id;
-                    $pemasukanAdmin->pemasukan = $request->input('total_biaya') * 0.1;
-                    if ($pemasukanAdmin->save()) {
-                        return redirect()->back()->with('success', 'Pembelian berhasil');
-                    }
-                }
+            if ($detailPembelian->save()) {
+                $product = Product::find($detailPembelian->id_product);
+                $product->stock -= $detailPembelian->jumlah_pembelian;
+                $product->save();
+                $pemasukanAdmin = new PemasukanAdmin();
+                $pemasukanAdmin->id_pembelian = $pembelian->id;
+                $pemasukanAdmin->pemasukan = $request->input('pemasukan_admin');
+                $pemasukanAdmin->save();
             }
+        }
 
-        return redirect()->back()->with('error', 'Terjadi kesalahan saat melakukan pembelian');
+        return redirect()->back()->with('success', 'Pembelian berhasil');
     }
+
+    return redirect()->back()->with('error', 'Terjadi kesalahan saat melakukan pembelian');
+}
+
+
 
     // app/Http/Controllers/CartController.php
     public function addToCart(Request $request)
@@ -68,8 +67,6 @@ class CartController extends Controller
         if (!$product) {
             return redirect()->back()->with('error', 'Product not found.');
         }
-
-        // Buat atau update session keranjang
         $cart = session()->get('cart', []);
 
         if (isset($cart[$productId])) {
@@ -90,40 +87,19 @@ class CartController extends Controller
         return redirect()->back()->with('success', 'Product added to cart.');
     }
 
-    // public function shoppingcart()
-    // {
-    //     $cart = session()->get('cart', []);
-    //     $totalPrice = 0;
-    //     foreach ($cart as $item) {
-    //         $totalPrice += $item['quantity'] * $item['price'];
-    //     }
-
-    //     return view('user.pembayaran-user', [
-    //         'cart' => $cart,
-    //         'totalPrice' => $totalPrice,
-    //     ]);
-    // }
     public function shoppingcart()
     {
         $cart = session()->get('cart', []);
         // dd($cart);
-
-        // Assuming you have a User model with a relationship to LokasiUser
-        $user = auth()->user(); // You can replace this with your own logic to get the user
-
-        // Fetch the LokasiUser data if available
+        $user = auth()->user();
         $lokasiUser = $user->lokasiUser ?? null;
-
-        // Perform error handling if the data is not available
         if (!$lokasiUser) {
             return view('user.pembayaran-user', [
                 'cart' => $cart,
                 'totalPrice' => 0,
-                'lokasiUser' => null, // Pass null to indicate that data is not available
+                'lokasiUser' => null,
             ]);
         }
-
-        // Calculate total price from the cart
         $totalPrice = 0;
         foreach ($cart as $item) {
             $totalPrice += $item['quantity'] * $item['price'];

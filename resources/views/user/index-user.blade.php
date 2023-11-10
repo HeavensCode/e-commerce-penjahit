@@ -47,6 +47,7 @@
                         <button class="btn btn-light" type="submit" style="margin: 0 5px 0 5px">
                             <i class="fa-solid fa-bag-shopping"></i>
                             <span class="badge bg-danger">{{ count($cart) }}</span>
+
                         </button>
                     </form>
                     <button id="userButton" class="btn btn-light" style="margin: 0 5px 0 5px">
