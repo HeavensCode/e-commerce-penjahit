@@ -54,8 +54,6 @@ public function handlePayment(Request $request)
 }
 
 
-
-    // app/Http/Controllers/CartController.php
     public function addToCart(Request $request)
     {
         $productId = $request->input('product_id');
@@ -90,16 +88,18 @@ public function handlePayment(Request $request)
     public function shoppingcart()
     {
         $cart = session()->get('cart', []);
-        // dd($cart);
         $user = auth()->user();
         $lokasiUser = $user->lokasiUser ?? null;
+
         if (!$lokasiUser) {
             return view('user.pembayaran-user', [
                 'cart' => $cart,
                 'totalPrice' => 0,
                 'lokasiUser' => null,
+                'addressNotSet' => true, // Add this variable to indicate that the address is not set
             ]);
         }
+
         $totalPrice = 0;
         foreach ($cart as $item) {
             $totalPrice += $item['quantity'] * $item['price'];
@@ -109,8 +109,10 @@ public function handlePayment(Request $request)
             'cart' => $cart,
             'totalPrice' => $totalPrice,
             'lokasiUser' => $lokasiUser,
+            'addressNotSet' => false, // Add this variable to indicate that the address is set
         ]);
     }
+
 
     public function updateCart(Request $request, $productId)
     {

@@ -50,7 +50,10 @@
                                     @endforeach
                                       </div>
                                     <div class="row card mb-3 rounded">
-                                        <button type="submit" class="btn btn-primary" onclick="preparePayment()">Bayar</button>
+                                        <button type="submit" class="btn btn-primary" onclick="preparePayment()"  {{ $addressNotSet ? 'disabled' : '' }}>Bayar</button>
+                                        @if ($addressNotSet)
+                                            <p>Harap set alamat dahulu.</p>
+                                        @endif
                                     </div>
                                 </form>
                             </div>
