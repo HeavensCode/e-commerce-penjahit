@@ -36,25 +36,25 @@
     <div class="profiles-user mt-4 p-3" style="width: 100%; height: 100%;background-color: #EDCEB1">
         <h3 class="section-title">Alamat Saya</h3>
         <div class="w-100 h-100 container">
-            <label for="inputPassword6" class="col-form-label">alamat lengkap</label>
-            <div class="col-md-8 mx-2">
-                <input value="" type="text" name="alamatlengkap" id="alamatlengkap" class="form-control" disabled>
-            </div>
             <label for="inputPassword6" class="col-form-label">kota</label>
             <div class="col-md-8 mx-2">
-                <input value="" type="text" name="kota" id="kota" class="form-control" disabled>
+                <input value="{{ $lokasiuser->kota }}" type="text" name="kota" id="kota" class="form-control"
+                    disabled>
             </div>
             <label for="inputPassword6" class="col-form-label">kecamatan</label>
             <div class="col-md-8 mx-2">
-                <input value="" type="text" name="kecamatan" id="kecamatan" class="form-control" disabled>
+                <input value="{{ $lokasiuser->kecamatan }}" type="text" name="kecamatan" id="kecamatan"
+                    class="form-control" disabled>
             </div>
             <label for="inputPassword6" class="col-form-label">provinsi</label>
             <div class="col-md-8 mx-2">
-                <input value="" type="text" name="provinsi" id="provinsi" class="form-control" disabled>
+                <input value="{{ $lokasiuser->provinsi }}" type="text" name="provinsi" id="provinsi"
+                    class="form-control" disabled>
             </div>
             <label for="inputPassword6" class="col-form-label">kode pos</label>
             <div class="col-md-8 mx-2">
-                <input value="" type="text" name="kodepos" id="kodepos" class="form-control" disabled>
+                <input value="{{ $lokasiuser->kode_pos }}" type="text" name="kodepos" id="kodepos" class="form-control"
+                    disabled>
             </div>
             <div class="col-md-8 mx-2">
                 <button type="button" class="btn btn-primary my-2" data-bs-toggle="modal"

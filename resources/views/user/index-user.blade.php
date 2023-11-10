@@ -4,7 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>Jahitku</title>
+    <link rel="icon" type="image/png" href="{{ asset('image/navbar/logo.png') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     {{-- font awesome --}}
     <script src="https://kit.fontawesome.com/9f3246d2c8.js" crossorigin="anonymous"></script>
@@ -15,6 +16,7 @@
     <link href="https://site-assets.fontawesome.com/releases/v5.15.4/css/all.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 </head>
 
 <body>
@@ -26,23 +28,24 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="navbar-collapse d-lg-flex collapse" id="navbarsExample11">
-                <a class="navbar-brand col-lg-3 me-0" href="#"><img src="{{ asset('image/navbar/logo.png') }}"
-                        alt=""></a>
+                <a class="navbar-brand col-lg-3 me-0" href="#">
+                    <img src="{{ asset('image/navbar/logo.png') }}" alt="">
+                </a>
                 <ul class="navbar-nav col-lg-6 justify-content-lg-center">
-                    <li class="nav-item">
-                        <a class="nav-link navlink active" aria-current="page" href="/beranda">Home</a>
+                    <li class="nav-item linav">
+                        <a class="nav-link navlink active" aria-current="page" href="{{ route('beranda') }}">Home</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item linav">
                         <a class="nav-link navlink active" href="{{ route('produk') }}">Product</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item linav">
                         <a class="nav-link navlink active" href="{{ route('about') }}">About</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item linav">
                         <a class="nav-link navlink active" href="{{ route('contact') }}">Contact</a>
                     </li>
                 </ul>
-                <div class="d-lg-flex col-lg-3 justify-content-lg-start">
+                <div class="d-flex col-lg-3 justify-content-center">
                     <button id="searchButton" class="btn btn-light" style="margin: 0 5px 0 5px">
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </button>
@@ -212,6 +215,10 @@
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
     </script>
     <script id="dsq-count-scr" src="//jahitku.disqus.com/count.js" async></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
 </body>
 
 </html>

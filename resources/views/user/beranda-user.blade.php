@@ -40,7 +40,7 @@
         </div>
     </section>
 
-    <section class="feature-section reveal active my-4 mb-5" id="feature-promo-section ">
+    <section data-aos="fade-up" class="feature-section reveal active my-4 mb-5" id="feature-promo-section ">
         <div class="container-features container">
             <!-- Judul Feature -->
             <div class="header my-5 mb-3 mt-5">
@@ -140,7 +140,7 @@
 
     <section class="product-section reveal active my-4 mb-5" id="product-recom-section ">
         <!-- Judul dan Deskripsi Recom Section -->
-        <div class="header my-5 mb-3 mt-5">
+        <div class="header my-5 mb-3 mt-5" data-aos="fade-up">
             <h2 class="section-title text-center">Rekomendasi <span class="title-span">Penjahit</span></h2>
             <p class="text-center">Makanan adalah setiap zat yang dikonsumsi untuk memberikan dukungan nutrisi bagi suatu
                 organisme.</p>
@@ -150,7 +150,7 @@
         <div class="pro-container container">
             <div class="row g-3">
                 @foreach ($products as $product)
-                    <div class="col-6 col-lg-3">
+                    <div class="col-6 col-lg-3" data-aos="zoom-in-down">
                         <a class="text-decoration-none" href="{{ route('detail', ['id' => $product->id]) }}">
                             <div class="pro-card rounded border p-3">
                                 <!-- image product -->
@@ -193,76 +193,4 @@
             </div>
         </div>
     </section>
-
-    {{-- <section class="banncta-section reveal active" id="banner-cta-section"5
-        <div class="cta-container">
-
-            <!-- List of CTA Banner -->
-            <ul class="cta-banner-list">
-                <!-- Large Banner -->
-                <li class="banner-item banner-lg">
-                    <div class="banner-card">
-                        <img src="/img/banner/cta-banner1.webp" width="550" height="450" loading="lazy"
-                            alt="CTA Banner Picture" class="banner-img">
-
-                        <div class="banner-item-content">
-                            <p class="banner-subtitle">100% Free Admin Fees!</p>
-                            <h4 class="banner-title">Try Our Delicious Tasty Product!</h4>
-                            <p class="banner-text">Free Admin Fees! For Any Transaction</p>
-                            <button class="btn"><a class="text-decoration-none" href="/product">Order Now</a></button>
-                        </div>
-                    </div>
-                </li>
-
-                <!-- Small Banner1 -->
-                <li class="banner-item banner-sm banner-sm1">
-                    <div class="banner-card">
-                        <img src="/img/banner/cta-banner2.webp" width="550" height="465" loading="lazy"
-                            alt="CTA Banner Picture" class="banner-img">
-
-                        <div class="banner-item-content">
-                            <h4 class="banner-title">Delicious Sausage</h4>
-
-                            <p class="banner-text">100% Free Admin Fees</p>
-
-                            <button class="btn"><a class="text-decoration-none" href="/product">Order Now</a></button>
-                        </div>
-                    </div>
-                </li>
-
-                <!-- Small Banner2 -->
-                <li class="banner-item banner-sm banner-sm2">
-                    <div class="banner-card">
-                        <img src="/img/banner/cta-banner3.webp" width="550" height="465" loading="lazy"
-                            alt="CTA Banner Picture" class="banner-img">
-
-                        <div class="banner-item-content">
-                            <h3 class="banner-title">Delicious Meatballs</h3>
-
-                            <p class="banner-text">100% Free Admin Fees</p>
-
-                            <button class="btna"><a class="text-decoration-none" href="/product">Order Now</a></button>
-                        </div>
-                    </div>
-                </li>
-
-                <!-- Medium Banner -->
-                <li class="banner-item banner-md">
-                    <div class="banner-card">
-                        <img src="/img/banner/cta-banner4.webp" width="550" height="220" loading="lazy"
-                            alt="CTA Banner Picture" class="banner-img">
-
-                        <div class="banner-item-content">
-                            <h3 class="banner-title">Delicious Fish Rolls</h3>
-
-                            <p class="banner-text">Free Admin Fees for Certain Period</p>
-
-                            <button class="btn"><a class="text-decoration-none" href="/product">Order Now</a></button>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-
-        </div>
-    </section> --}}
 @endsection

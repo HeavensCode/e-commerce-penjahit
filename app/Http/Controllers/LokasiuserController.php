@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\lokasiuser;
+use Illuminate\Http\Request;
 use App\Http\Requests\StorelokasiuserRequest;
 use App\Http\Requests\UpdatelokasiuserRequest;
 
@@ -18,69 +19,31 @@ class LokasiuserController extends Controller
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function updateAlamatUser(Request $request, lokasiuser $lokasiuser, $id)
     {
-        //
-    }
+        $lokasiuser = Lokasiuser::find($id);
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StorelokasiuserRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StorelokasiuserRequest $request)
-    {
-        //
-    }
+        if (!$lokasiuser) {
+            return redirect()->back()->with('error', 'Lokasi User not found.');
+        }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\lokasiuser  $lokasiuser
-     * @return \Illuminate\Http\Response
-     */
-    public function show(lokasiuser $lokasiuser)
-    {
-        //
-    }
+        // Validasi dan simpan pembaruan data
+        $request->validate([
+            'kota' => 'required|string',
+            'kecamatan' => 'required|string',
+            'provinsi' => 'required|string',
+            'kodepos' => 'required|string',
+        ]);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\lokasiuser  $lokasiuser
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(lokasiuser $lokasiuser)
-    {
-        //
-    }
+        $lokasiuser->kota = $request->input('kota');
+        $lokasiuser->kecamatan = $request->input('kecamatan');
+        $lokasiuser->provinsi = $request->input('provinsi');
+        $lokasiuser->kode_pos = $request->input('kodepos');
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdatelokasiuserRequest  $request
-     * @param  \App\Models\lokasiuser  $lokasiuser
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdatelokasiuserRequest $request, lokasiuser $lokasiuser)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\lokasiuser  $lokasiuser
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(lokasiuser $lokasiuser)
-    {
-        //
+        if ($lokasiuser->save()) {
+            return redirect()->route('profile')->with('success', 'Lokasi User updated successfully.');
+        } else {
+            return redirect()->route('profile')->with('error', 'Failed to update Lokasi User.');
+        }
     }
 }

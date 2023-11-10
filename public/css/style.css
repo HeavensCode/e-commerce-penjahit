@@ -173,10 +173,12 @@ body {
     background-color: #724e2d;
 }
 
+/* Gaya untuk Navlink */
 .navlink {
     position: relative;
     text-decoration: none;
-    color: #000;
+    font-weight: var(--fw-500);
+    color: var(--platinum);
 }
 
 .navlink::before,
