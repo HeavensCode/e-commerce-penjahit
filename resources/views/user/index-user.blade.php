@@ -38,20 +38,17 @@
                     <li class="nav-item">
                         <a class="nav-link navlink active" href="/about">About</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link navlink active" href="/contact">Contact</a>
-                        <!-- Contoh penggunaan di suatu view -->
-                        <p>Cart Quantity: {{ count($cart) }}</p>
-                        {{-- {{ dd($cart) }} --}}
-                    </li>
                 </ul>
                 <div class="d-lg-flex col-lg-3 justify-content-lg-start">
                     <button id="searchButton" class="btn btn-light" style="margin: 0 5px 0 5px">
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </button>
-                    <button class="btn btn-light" style="margin: 0 5px 0 5px">
-                        <i class="fa-solid fa-bag-shopping"></i>
-                    </button>
+                    <form action="{{ route('shopping-cart') }}" method="GET">
+                        <button class="btn btn-light" type="submit" style="margin: 0 5px 0 5px">
+                            <i class="fa-solid fa-bag-shopping"></i>
+                            <span class="badge bg-danger">{{ count($cart) }}</span>
+                        </button>
+                    </form>
                     <button id="userButton" class="btn btn-light" style="margin: 0 5px 0 5px">
                         <i class="fa-solid fa-user"></i>
                     </button>

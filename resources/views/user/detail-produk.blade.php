@@ -71,65 +71,66 @@
                                 </div>
                             </div>
                         </div>
-                    <!-- Kuantitas Produk -->
-                    <div class="product-text col-12">
-                        <div class="row align-items-center g-2">
-                            <div class="col-4 col-md-2 text-center">
-                                <p class="m-0 p-1 text-start">Kuantitas: </p>
+                        <!-- Kuantitas Produk -->
+                        <div class="product-text col-12">
+                            <div class="row align-items-center g-2">
+                                <div class="col-4 col-md-2 text-center">
+                                    <p class="m-0 p-1 text-start">Kuantitas: </p>
+                                </div>
+                                <div class="col-4 col-md-2 kuantitas">
+                                    <form action="{{ route('add-to-cart') }}" method="post">
+                                        @csrf
+                                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                        <div class="input-group">
+                                            <input type="number" class="form-control text-center" name="quantity"
+                                                value="1" min="1" max="50">
+                                            <button type="submit" class="btn btn-primary">Add to Cart</button>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
-                            <div class="col-4 col-md-2 kuantitas">
-                                <form action="{{ route('add-to-cart') }}" method="post">
-                                    @csrf
-                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                    <div class="input-group">
-                                        <input type="number" class="form-control text-center" name="quantity" value="1" min="1" max="50">
-                                        <button type="submit" class="btn btn-primary">Add to Cart</button>
-                                    </div>
-                                </form>
+                        </div>
+
+                        <!-- Description & Information Product Details -->
+                        <div class="row border-bottom py-4">
+                            <h4 class="description-title">Deskripsi Produk : </h4>
+                            <p class="description-text">
+                                {{ $product->detailProduct->deskripsi }}
+                            </p>
+                        </div>
+
+                        <div class="row border-bottom py-4">
+                            <h4 class="description-title">Spesifiksi Produk : </h4>
+                            <div class="row">
+                                <div class="col-12 col-sm-10 col-md-8 col-lg-6">
+                                    <table class="table-responsive table">
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">Bahan</th>
+                                                <td>{{ $product->detailProduct->bahan }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Ukuran</th>
+                                                <td>{{ $product->detailProduct->size }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Motif</th>
+                                                <td>{{ $product->detailProduct->motif }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Stok</th>
+                                                <td>{{ $product->stock }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Dikirim dari</th>
+                                                <td>{{ $product->toko->nama_toko }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
-
-            <!-- Description & Information Product Details -->
-            <div class="row border-bottom py-4">
-                <h4 class="description-title">Deskripsi Produk : </h4>
-                <p class="description-text">
-                    {{ $product->detailProduct->deskripsi }}
-                </p>
-            </div>
-
-            <div class="row border-bottom py-4">
-                <h4 class="description-title">Spesifiksi Produk : </h4>
-                <div class="row">
-                    <div class="col-12 col-sm-10 col-md-8 col-lg-6">
-                        <table class="table-responsive table">
-                            <tbody>
-                                <tr>
-                                    <th scope="row">Bahan</th>
-                                    <td>{{ $product->detailProduct->bahan }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Ukuran</th>
-                                    <td>{{ $product->detailProduct->size }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Motif</th>
-                                    <td>{{ $product->detailProduct->motif }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Stok</th>
-                                    <td>{{ $product->stock }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Dikirim dari</th>
-                                    <td>{{ $product->toko->nama_toko }}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
     </section>
 
 
