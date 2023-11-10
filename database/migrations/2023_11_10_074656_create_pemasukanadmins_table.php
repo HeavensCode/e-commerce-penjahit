@@ -14,9 +14,9 @@ class CreatePemasukanadminsTable extends Migration
     public function up()
     {
         Schema::create('pemasukanadmins', function (Blueprint $table) {
-            $table->id();
+
             $table->foreignId('id_pembelian')->nullable();
-            $table->string("pemasukan");
+            $table->integer	("pemasukan");
             $table->timestamps();
 
             $table->foreign('id_pembelian')->references('id')->on('pembelians')->onDelete('cascade')->onUpdate('cascade');

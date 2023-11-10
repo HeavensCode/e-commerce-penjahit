@@ -16,8 +16,9 @@ class CreateDetailPembeliansTable extends Migration
         Schema::create('detail_pembelians', function (Blueprint $table) {
             $table->foreignId('id_pembelian')->nullable();
             $table->string('nama_product');
+            $table->string('bukti_pembayaran');
             $table->string('jumlah_pembelian');
-            $table->string('total_biaya');
+            $table->integer('total_biaya');
             $table->timestamps();
             $table->foreign('id_pembelian')->references('id')->on('pembelians')->onDelete('cascade')->onUpdate('cascade');
         });

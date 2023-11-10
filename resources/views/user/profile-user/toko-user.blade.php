@@ -71,7 +71,7 @@
                             <th>Harga</th>
                             <th class="text-center">Gambar</th>
                             <th>Stok</th>
-                            <th>Aksi</th> <!-- Kolom untuk tombol aksi -->
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>

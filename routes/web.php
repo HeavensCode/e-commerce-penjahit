@@ -66,7 +66,6 @@ Route::get('/about', function () {
 Route::get('/dashboard', function () {
     return view('user.profile-user.index-profile-user');
 });
-
 Route::get('/profile', [TokoController::class, 'profil'])->name('profile');
 
 Route::post('/toko/{id}/update', [UserLoginController::class, 'updateProfile'])->name('user-profile.update');
@@ -87,6 +86,8 @@ Route::post('/update-cart/{productId}', [CartController::class, 'updateCart'])->
 
 Route::get('/shopping-cart', [CartController::class, 'shoppingcart'])->name('shopping-cart');
 
+// payment
+Route::post('/handle-payment', [CartController::class, 'handlePayment'])->name('handle-payment');
 
 
 

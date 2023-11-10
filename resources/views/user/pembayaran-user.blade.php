@@ -16,10 +16,10 @@
                         <div class="row p-3">
                             <div class="col-12">
                                 <div class="row card mb-3 rounded border p-2">
-                                    <div class="col-12">alamat : </div>
-                                    <div class="col-12">Kota : </div>
-                                    <div class="col-12">Provinsi : </div>
-                                    <div class="col-12">Kode Pos : </div>
+                                    <div class="col-12">alamat: {{ $lokasiUser ? $lokasiUser->alamat : 'alamat belum diisi' }}</div>
+                                    <div class="col-12">Kota: {{ $lokasiUser ? $lokasiUser->kota : 'alamat belum diisi' }}</div>
+                                    <div class="col-12">Provinsi: {{ $lokasiUser ? $lokasiUser->provinsi : 'alamat belum diisi' }}</div>
+                                    <div class="col-12">Kode Pos: {{ $lokasiUser ? $lokasiUser->kode_pos : 'alamat belum diisi' }}</div>
                                 </div>
                                 <div class="row card mb-3 rounded">
                                     <div class="col-12 btn btn-primary p-2 text-center">My Profile</div>
@@ -27,9 +27,22 @@
                                 <div class="row card mb-3 rounded">
                                     <div class="col-12 btn btn-info p-2 text-center">Hubungi Penjual</div>
                                 </div>
-                                <div class="row card mb-3 rounded">
-                                    <div class="col-12 btn btn-success p-2 text-center">Bayar</div>
-                                </div>
+                                <form action="{{ route('handle-payment') }}" method="POST" id="paymentForm" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="mb-3">
+                                        <input type="hidden" name="jumlah_pembelian" id="jumlah_pembelian">
+                                        <input type="hidden" name="total_pembayaran" id="total_pembayaran">
+                                        <input type="hidden" name="sub_total" id="sub_total">
+                                        <input type="hidden" name="nama_product" id="nama_product">
+                                        <input type="hidden" name="total_biaya" id="total_biaya">
+                                        <input type="hidden" name="pemasukan_admin" id="pemasukan_admin">
+                                        <label for="exampleInputEmail1" class="form-label">Bukti Bayar</label>
+                                        <input type="file" class="form-control" id="bukti_pembayaran" name="bukti_pembayaran" required >
+                                      </div>
+                                    <div class="row card mb-3 rounded">
+                                        <button type="submit" class="btn btn-primary" onclick="()">Bayar</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -66,9 +79,13 @@
                                                     </form>
                                                 </div>
                                                 <div class="col-12 mb-2">
+                                                    (Harga Satuan)
                                                     <input type="text" name="subtotal"
-                                                        value="Rp. {{ number_format($item['price'] * $item['quantity']) }}"
+                                                        value="Rp. {{ $item['price'] }}"
                                                         class="form-control" id="subtotal" readonly>
+                                                </div>
+                                                <div class="col-12 mb-2">
+                                                    <input type="text" name="subtotal" value="Rp. {{ ($item['price'] * $item['quantity']) }}" class="form-control subtotal" readonly>
                                                 </div>
                                                 <div class="col-12 mb-2">
                                                     <input type="text" name="merk" value="{{ $item['merk'] }}"
@@ -87,13 +104,13 @@
                                     <div class="col-12 border-bottom pt-3">
                                         <div class="d-flex w-100 justify-content-between">
                                             <p>Ongkos Kirim</p>
-                                            <p class="ml-auto">Belum Termasuk</p>
+                                            <p class="ml-auto">Rp 15.000</p>
                                         </div>
                                     </div>
                                     <div class="col-12 border-bottom pt-3">
                                         <div class="d-flex w-100 justify-content-between">
                                             <p><b>Total</b></p>
-                                            <p class="ml-auto"><b>Rp 8.0000</b></p>
+                                            <input type="number" name="totalharga" id="totalPrice" readonly class="form-check-label">
                                         </div>
                                     </div>
                                 </div>
@@ -105,3 +122,43 @@
         </div>
     </section>
 @endsection
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var subtotalElements = document.querySelectorAll('.subtotal');
+        var totalPrice = 0;
+        subtotalElements.forEach(function (subtotalElement) {
+            var subtotalValue = parseInt(subtotalElement.value.replace('Rp. ', '').replace(',', ''), 10);
+            totalPrice += subtotalValue;
+        });
+        var ongkosKirim = 15000;
+        totalPrice += ongkosKirim;
+        document.getElementById('totalPrice').value = totalPrice;
+        document.getElementById('yourFormId').addEventListener('submit', function (event) {
+            var totalHarga = document.getElementById('totalPrice').value;
+            var totalHargaInput = document.createElement('input');
+            totalHargaInput.type = 'number';
+            totalHargaInput.name = 'totalharga';
+            totalHargaInput.value = totalHarga;
+            this.appendChild(totalHargaInput);
+        });
+    });
+</script>
+
+<script>
+    function preparePayment() {
+        var totalharga = document.getElementById('totalPrice').value;
+
+        var totalBiayaValue = parseFloat(totalharga) * 0.1;
+        document.getElementById('jumlah_pembelian').value = document.querySelector('.form-control[name="jumlah_pembelian"]').value;
+
+        document.getElementById('total_pembayaran').value = totalharga;
+        document.getElementById('sub_total').value = document.querySelector('.form-control.subtotal').value;
+        document.getElementById('nama_product').value = document.querySelector('.col-12.mb-2 b').innerText;
+        document.getElementById('total_biaya').value = totalBiayaValue.toFixed(2);
+
+        // Set the value for pemasukan_admin or remove the field if not needed
+        document.getElementById('pemasukan_admin').value = totalBiayaValue.toFixed(2);
+
+        document.getElementById('paymentForm').submit();
+    }
+</script>
