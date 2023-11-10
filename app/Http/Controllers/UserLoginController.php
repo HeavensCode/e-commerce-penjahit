@@ -63,7 +63,7 @@ class UserLoginController extends Controller
             $toko->kota ='Belum di set';
             $toko->kecamatan ='Belum di set';
             $toko->provinsi ='Belum di set';
-            $toko->kode_pos ='55555';
+            $toko->kode_pos ='00000';
             // Menyimpan toko baru
             if ($toko->save()) {
                 return redirect()->back()->with('success', 'Akun dan toko berhasil dibuat!');
