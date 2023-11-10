@@ -15,7 +15,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="stok" class="form-label">Stok</label>
-                        <input type="text" class="form-control" id="stok" name="stok" required>
+                        <input type="number" class="form-control" id="stok" name="stok" required>
                     </div>
                     <div class="mb-3">
                         <label for="merk" class="form-label">Merk</label>
@@ -23,11 +23,11 @@
                     </div>
                     <div class="mb-3">
                         <label for="harga" class="form-label">Harga</label>
-                        <input type="text" class="form-control" id="harga" name="harga" required>
+                        <input type="number" class="form-control" id="harga" name="harga" required>
                     </div>
                     <div class="mb-3">
                         <label for="rating" class="form-label">Rating</label>
-                        <input type="text" class="form-control" id="rating" name="rating" required>
+                        <input type="number" class="form-control" id="rating" name="rating" required>
                     </div>
                     <div class="mb-3">
                         <label for="deskripsi" class="form-label">Deskripsi Produk</label>
@@ -39,7 +39,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="panjangKain" class="form-label">Panjang Kain</label>
-                        <input type="text" class="form-control" id="panjangKain" name="panjangKain" required>
+                        <input type="number" class="form-control" id="panjangKain" name="panjangKain" required>
                     </div>
                     <div class="mb-3">
                         <label for="seller" class="form-label">Seller</label>

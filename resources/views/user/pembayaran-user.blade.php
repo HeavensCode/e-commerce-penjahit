@@ -25,6 +25,9 @@
                                     <div class="col-12 btn btn-primary p-2 text-center">My Profile</div>
                                 </div>
                                 <div class="row card mb-3 rounded">
+                                    <div class="col-12 btn btn-info p-2 text-center">Hubungi Penjual</div>
+                                </div>
+                                <div class="row card mb-3 rounded">
                                     <div class="col-12 btn btn-success p-2 text-center">Bayar</div>
                                 </div>
                             </div>

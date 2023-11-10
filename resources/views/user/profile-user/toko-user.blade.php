@@ -69,6 +69,7 @@
                         <tr>
                             <th>Nama Produk</th>
                             <th>Harga</th>
+                            <th class="text-center">Gambar</th>
                             <th>Stok</th>
                             <th>Aksi</th> <!-- Kolom untuk tombol aksi -->
                         </tr>
@@ -78,6 +79,11 @@
                             <tr>
                                 <td>{{ $product->nama_product }}</td>
                                 <td>{{ $product->harga }}</td>
+                                <td>
+                                    @foreach ($product->detailGambarProduct as $detailGambar)
+                                    <img src="{{ asset('storage/gambar/' . $detailGambar->gambar) }}" alt="Gambar Produk" width="100px">
+                                    @endforeach
+                                </td>
                                 <td>{{ $product->stock }}</td>
                                 <td>
                                     <!-- Tombol Edit -->

@@ -24,6 +24,7 @@ class TokoController extends Controller
         $toko = Toko::find($request->user()->id);
         $productcount = Product::where('id_toko', $toko->id)->count();
         $productarray = Product::where('id_toko', $toko->id)->get();
+        // dd($products);
         return view('user.profile-user.toko-user', [
             'toko' => $toko,
             'productcount' => $productcount,
