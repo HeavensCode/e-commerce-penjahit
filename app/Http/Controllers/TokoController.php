@@ -8,6 +8,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StoreTokoRequest;
+use App\Models\lokasiuser;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Storage;
 
@@ -45,9 +46,13 @@ class TokoController extends Controller
     public function profil(Request $request)
     {
         $user = User::with('toko')->find($request->user()->id);
-        // dd($user);
-        return view('user.profile-user.profile-user', ['user' => $user]);
+
+        // Mengambil lokasi user berdasarkan is_user yang sama dengan id user
+        $lokasiuser = LokasiUser::where('id_user', $request->user()->id)->first();
+
+        return view('user.profile-user.profile-user', ['user' => $user, 'lokasiuser' => $lokasiuser]);
     }
+
 
     public function updateDataToko(Request $request, Toko $toko)
     {
@@ -167,5 +172,4 @@ class TokoController extends Controller
 
         return redirect()->route('toko')->with('success', 'Produk berhasil dihapus.');
     }
-
 }

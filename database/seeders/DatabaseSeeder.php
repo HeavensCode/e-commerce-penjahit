@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\lokasiuser;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -56,5 +57,7 @@ class DatabaseSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now()
         ]);
+
+        $this->call(LokasiuserSeeder::class);
     }
 }

@@ -26,7 +26,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="provinsi" class="form-label">Provinsi</label>
-                        <input value="{{ $toko->provinsi }}" type="text" name "provinsi" id="provinsi"
+                        <input value="{{ $toko->provinsi }}" type="text" name="provinsi" id="provinsi"
                             class="form-control" disabled>
                     </div>
                     <div class="mb-3">

@@ -62,14 +62,21 @@
                     <div class="col-12 col-lg-6">
                         <h2 class="title text-start">Order Summary</h2>
                         <div class="row p-3">
+                            @php
+                                $totalOrder = 0;
+                            @endphp
+
                             @foreach ($cart as $productId => $item)
                                 <div class="col-12 border-bottom pb-4">
                                     <div class="row card-produk mb-3 rounded border p-2">
-                                        <div class="col-3">
-                                            <img src="{{ asset('storage/gambar/' . $item['gambar']) }}"
-                                                alt="{{ $item['name'] }}" class="pro-animation img-fluid rounded"
-                                                loading="lazy">
+                                        <!-- Konten kartu produk ... -->
+
+                                        <div class="col-12 mb-2">
+                                            <input type="text" name="subtotal"
+                                                value="Rp. {{ number_format($item['price'] * $item['quantity']) }}"
+                                                class="form-control" id="subtotal" readonly>
                                         </div>
+
                                         <div class="col">
                                             <div class="row">
                                                 <div class="col-12 mb-2"><b>{{ $item['name'] }}</b></div>
@@ -106,7 +113,15 @@
                                                 </div>
                                             </div>
 
+
+                                        <div class="col-12 mb-2">
+                                            <input type="text" name="merk" value="{{ $item['merk'] }}"
+                                                class="form-control" id="merk" readonly>
                                         </div>
+
+                                        @php
+                                            $totalOrder += $item['price'] * $item['quantity'];
+                                        @endphp
                                     </div>
                                 </div>
                             @endforeach
@@ -123,12 +138,13 @@
                                     <div class="col-12 border-bottom pt-3">
                                         <div class="d-flex w-100 justify-content-between">
                                             <p><b>Total</b></p>
-                                            <input type="number" name="totalharga" id="totalPrice" readonly class="form-check-label">
+                                            <p class="ml-auto"><b>Rp. {{ number_format($totalOrder) }}</b></p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>

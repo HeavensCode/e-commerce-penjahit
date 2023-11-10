@@ -14,7 +14,7 @@ use App\Http\Controllers\DashboardAdminController;
 use App\Http\Controllers\ProdukAdminController;
 use App\Http\Controllers\VoucherController;
 use App\Http\Controllers\CartController;
-
+use App\Http\Controllers\LokasiuserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,7 +67,7 @@ Route::get('/dashboard', function () {
     return view('user.profile-user.index-profile-user');
 });
 Route::get('/profile', [TokoController::class, 'profil'])->name('profile');
-
+Route::post('profile/update-alamat/{id}', [LokasiuserController::class, 'updateAlamatUser'])->name('lokasiuser.update');
 Route::post('/toko/{id}/update', [UserLoginController::class, 'updateProfile'])->name('user-profile.update');
 Route::get('/toko', [TokoController::class, 'index'])->name('toko');
 Route::post('/toko/edit-alamat', [TokoController::class, 'updateToko'])->name('edit-alamat-toko');

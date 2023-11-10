@@ -13,7 +13,7 @@
         <div class="pro-container container">
             <div class="row g-3">
                 @foreach ($products as $product)
-                    <div class="col-6 col-lg-3">
+                    <div class="col-6 col-lg-3" data-aos="zoom-in-down">
                         <a class="text-decoration-none" href="{{ route('detail', ['id' => $product->id]) }}">
                             <div class="pro-card rounded border p-3">
                                 <!-- image product -->
