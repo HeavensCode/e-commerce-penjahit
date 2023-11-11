@@ -94,6 +94,7 @@
                                         <input type="hidden" name="total_biaya" id="total_biaya">
                                         <input type="hidden" name="pemasukan_admin" id="pemasukan_admin">
                                         <label for="exampleInputEmail1" class="form-label">Bukti Bayar</label>
+                                        <input type="file" class="form-control" id="bukti_pembayaran" name="bukti_pembayaran" required >
 
                                         @foreach ($cart as $productId => $item)
                                         {{-- {{ dd($cart) }} --}}
@@ -103,7 +104,6 @@
                                             <input type="hidden" name="jumlah_pembelian_array[]" id="jumlah_pembelian" value="{{ $item['quantity'] }}">
                                             <input type="hidden" name="sub_total_array[]" id="sub_total" value="{{ $item['quantity'] * $item['price'] }}">
                                             <input type="hidden" name="nama_product_array[]" id="nama_product" value="{{ $item['name'] }}">
-                                            <input type="file" class="form-control" id="bukti_pembayaran" name="bukti_pembayaran[]" required >
                                         </div>
                                     @endforeach
                                       </div>

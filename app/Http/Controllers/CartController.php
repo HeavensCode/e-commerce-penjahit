@@ -17,8 +17,16 @@ use App\Models\LokasiUser;
 class CartController extends Controller
 {
 
-public function handlePayment(Request $request)
-{
+    public function handlePayment(Request $request)
+    {
+        try {
+            $jumlahPembelian = $request->input('jumlah_pembelian');
+            $totalPembayaran = $request->input('total_pembayaran');
+
+            if (!$jumlahPembelian || !$totalPembayaran) {
+                throw new \Exception('Input jumlah_pembelian atau total_pembayaran tidak valid.');
+            }
+
             $pembelian = new Pembelian();
             $pembelian->id_user = auth()->id();
             $pembelian->jumlah_pembelian = $jumlahPembelian;
@@ -36,7 +44,9 @@ public function handlePayment(Request $request)
 
                     $detailPembelian = new DetailPembelian();
                     $detailPembelian->id_pembelian = $pembelian->id;
+                    $detailPembelian->id_user = auth()->id();
                     $detailPembelian->id_product = $request->input('id_produk_array')[$key];
+                    $detailPembelian->id_toko = $request->input('id_toko_array')[$key];
                     $detailPembelian->nama_product = $productName;
                     $detailPembelian->jumlah_pembelian = $request->input('jumlah_pembelian_array')[$key];
                     $detailPembelian->total_biaya = $request->input('sub_total_array')[$key];
@@ -78,14 +88,8 @@ public function handlePayment(Request $request)
             }
 
             return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+            }
         }
-    }
-
-
-
-
-
-
 
 public function addToCart(Request $request)
 {

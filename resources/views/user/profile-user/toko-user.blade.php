@@ -12,7 +12,7 @@
             <div class="row align-content-start">
                 <div class="col-12">
                     <div class="mb-3">
-                        <h5>Produk : <b>{{ $productcount }}</b></h5>
+                        <h5>Produk : <b>{{ $productCount }}</b></h5>
                     </div>
                     <div class="mb-3">
                         <h5>Lokasi : <b>{{ $toko->alamat_toko }}</b></h5>
@@ -75,7 +75,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($productarray as $product)
+                        @foreach ($productArray as $product)
                             <tr>
                                 <td>{{ $product->nama_product }}</td>
                                 <td>{{ $product->harga }}</td>

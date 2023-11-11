@@ -28,7 +28,6 @@ class TokoController extends Controller
             if (!$toko) {
                 return redirect()->back()->with('error', 'Toko tidak ditemukan.');
             }
-
             $productCount = Product::where('id_toko', $toko->id)->count();
             $productArray = Product::where('id_toko', $toko->id)->get();
 
