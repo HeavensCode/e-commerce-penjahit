@@ -1,7 +1,7 @@
 @extends('user.profile-user.index-profile-user')
 
 @section('container')
-    <div class="profiles-user p-3" style="width: 100%; height: 100%;background-color: #EDCEB1">
+    <div class="profiles-user rounded p-3" style="width: 100%; height: 100%;background-color:  #724e2d">
         <h3 class="section-title">Profile Saya</h3>
         <div class="w-100 h-100 container">
             <label for="inputPassword6" class="col-form-label">Username</label>
@@ -33,7 +33,7 @@
         </div>
     </div>
 
-    <div class="profiles-user mt-4 p-3" style="width: 100%; height: 100%;background-color: #EDCEB1">
+    <div class="profiles-user mt-4 rounded p-3" style="width: 100%; height: 100%;background-color: #724e2d">
         <h3 class="section-title">Alamat Saya</h3>
         <div class="w-100 h-100 container">
             <label for="inputPassword6" class="col-form-label">kota</label>

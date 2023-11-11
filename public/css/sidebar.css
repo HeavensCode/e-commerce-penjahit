@@ -1,10 +1,10 @@
 html {
     scroll-behavior: smooth;
-  }
+}
 
- body{
+body {
     background: #eee;
- }
+}
 .icon {
     color: #000;
     font-size: 25px;
@@ -13,28 +13,26 @@ html {
     margin-top: 8px;
 }
 
-
-.navbar .user{
+.navbar .user {
     margin-right: 7px;
     margin-top: 10px;
     font-size: 15px;
 }
-.navbar{
-    background-color: #DEB887;
+.navbar {
+    background-color: #deb887;
 }
 
-
 /* sidebar */
-#side_nav{
-    background: #F3EEEA;
-     min-width: 200px;
+#side_nav {
+    background: #f3eeea;
+    min-width: 200px;
     max-width: 250px;
-     width: 250px;
+    width: 250px;
     transition: all 0.3s;
 }
 
-.sidebar .sidebar-heading{
-    padding-left:0.5rem;
+.sidebar .sidebar-heading {
+    padding-left: 0.5rem;
     padding-bottom: 15px;
 }
 .content {
@@ -42,35 +40,33 @@ html {
     width: 100%;
 }
 
-hr .h-color{
+hr .h-color {
     background: #eee;
 }
-.sidebar li.active{
+.sidebar li.active {
     background: #eee;
     border-radius: 8px;
 }
 
 .sidebar li.active a,
-.sidebar li.active a:hover{
+.sidebar li.active a:hover {
     color: #000;
 }
-.sidebar li a{
+.sidebar li a {
     color: #000;
 }
 
-.list-unstyled .toggler-sidebar{
+.list-unstyled .toggler-sidebar {
     text-align: center;
 }
 .sidebar.active {
     width: 300px;
 }
 
-
 /* sidebar end*/
 
-.content-box{
+.content-box {
     position: relative;
-
 }
 
 .cards {
@@ -83,14 +79,14 @@ hr .h-color{
 .card {
     width: 230px;
     height: 130px;
-    background: #F0E68C;
+    background: #f0e68c;
     display: flex;
     margin-top: 10px;
     align-items: center;
     flex-wrap: wrap;
     justify-content: center;
-    box-shadow: 10px 10px 10px 0px rgba(10, 206, 85, 0.2), 10px 10px 10px 0px rgba(14, 149, 190, 0.19);
-
+    box-shadow: 10px 10px 10px 0px rgba(10, 206, 85, 0.2),
+        10px 10px 10px 0px rgba(14, 149, 190, 0.19);
 }
 
 .container-bar {
@@ -100,9 +96,9 @@ hr .h-color{
     height: 100%;
     width: 100%;
     background-color: #f1f1f1;
-  }
+}
 
-  .content-chart {
+.content-chart {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -111,17 +107,17 @@ hr .h-color{
     max-width: 1200px;
     margin: 0 auto;
     padding: 50px;
-  }
+}
 
-  .charts {
+.charts {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     width: 100%;
-  }
+}
 
-  .chart-box {
+.chart-box {
     padding-top: 4rem;
     /* padding-left: 4rem; */
     justify-content: space-around;
@@ -129,26 +125,23 @@ hr .h-color{
     justify-content: center;
     align-items: center;
     max-width: 400px;
-  }
-
-
+}
 
 /* navbar bottom start*/
-.navbar-bottom{
+.navbar-bottom {
     padding-top: 3rem;
 }
 /* navbar bottom end*/
 
 /* media queries */
-@media (max-width: 767px){
-    #side_nav{
+@media (max-width: 767px) {
+    #side_nav {
         margin-left: -250px;
         position: fixed;
         min-height: 100vh;
         z-index: 1;
     }
-    #side_nav.active{
+    #side_nav.active {
         margin-left: 0;
     }
 }
-
