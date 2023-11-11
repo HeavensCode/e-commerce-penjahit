@@ -14,6 +14,7 @@ class CreateDetailGambarProductsTable extends Migration
     public function up()
     {
         Schema::create('detail_gambar_products', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('id_product')->nullable();
             $table->string('gambar');
             $table->timestamps();

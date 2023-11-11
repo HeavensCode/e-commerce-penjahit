@@ -12,16 +12,23 @@
                 </div>
                 <div class="modal-body">
                     <input type="hidden" id="edit-product-id" name="edit_product_id">
-                    <div class="mb-3">
-                        <label for="gambarProduk" class="form-label">Upload Gambar</label>
-                        <input type="file" class="form-control" id="gambarProduk" name="gambarProduk[]" multiple>
-                    </div>
-                    <div class="mb-3">
-                        <label for="existingImages" class="form-label">Existing Images</label>
-                        @foreach ($product->detailGambarProduct as $detailGambar)
-                            <img src="{{ asset('storage/gambar/' . $detailGambar->gambar) }}" alt="Gambar Produk" width="100px">
-                        @endforeach
-                    </div>
+                    @foreach ($product->detailGambarProduct as $index => $detailGambar)
+                        <div class="mb-3">
+                            <label for="gambarProduk{{ $index }}" class="form-label">Upload Gambar</label>
+                            <input type="file" class="form-control" id="gambarProduk{{ $index }}"
+                                name="gambarProduk[]">
+                            <input type="hidden" name="index[]" value="{{ $index }}">
+                            <input type="hidden" name="detailGambarId[]" value="{{ $detailGambar->id }}">
+                            <!-- Tambahkan input hidden -->
+
+                            <!-- Tampilkan gambar saat ini jika ada -->
+                            @if ($detailGambar->gambar)
+                                <img src="{{ asset('storage/' . $detailGambar->gambar) }}" alt="Gambar Produk"
+                                    class="img-thumbnail" style="max-width: 200px;">
+                            @endif
+                        </div>
+                    @endforeach
+
                     <div class="mb-3">
                         <label for="namaProduk" class="form-label">Nama Produk</label>
                         <input value="{{ $product->nama_product }}" type="text" class="form-control"

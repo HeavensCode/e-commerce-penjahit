@@ -11,11 +11,8 @@ document.addEventListener('DOMContentLoaded', function() {
             });
             var voucherDiscountElement = document.querySelector('.voucher-discount');
             totalPrice -= voucherDiscountElement.value;
-
             var ongkosKirim = 15000;
             totalPrice += ongkosKirim;
-
-            // Set the calculated total price in the input field
             var totalPriceInput = document.getElementById('totalPrice');
             if (totalPriceInput) {
                 totalPriceInput.value = 'Rp ' + totalPrice.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
@@ -51,7 +48,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
             document.getElementById('jumlah_pembelian').value = jumlahPembelian;
             document.getElementById('total_pembayaran').value = totalPembayaran;
-            // document.getElementById('paymentForm').appendChild(totalHargaInput);
             document.getElementById('paymentForm').submit();
         }
     </script>

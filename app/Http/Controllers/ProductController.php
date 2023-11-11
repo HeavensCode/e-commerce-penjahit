@@ -48,114 +48,58 @@ class ProductController extends Controller
             return redirect()->route('toko')->with('error', 'Terjadi kesalahan saat menghapus produk.');
         }
     }
-
-    // public function updateProduct(Request $request, $id)
-    // {
-    //     DB::beginTransaction();
-
-    //     try {
-    //         $produk = Product::find($id);
-    //         if (!$produk) {
-    //             return redirect('/toko')->with('error', 'Produk tidak ditemukan.');
-    //         }
-
-    //         $produk->nama_product = $request->input('edit_namaProduk');
-    //         $produk->harga = $request->input('edit_harga');
-    //         $produk->stock = $request->input('edit_stok');
-
-    //         if ($produk->save()) {
-    //             // Menghapus gambar lama jika ada
-    //             $detailGambar = DetailGambarProduct::where('id_product', $produk->id)->delete();
-
-    //             if ($request->hasFile('gambarProduk')) {
-    //                 foreach ($request->file('gambarProduk') as $file) {
-    //                     $namaFile = time() . '_' . $file->getClientOriginalName();
-    //                     Storage::disk('public')->put('gambar/' . $namaFile, file_get_contents($file));
-
-    //                     $detailGambar = new DetailGambarProduct();
-    //                     $detailGambar->id_product = $produk->id;
-    //                     $detailGambar->gambar = $namaFile;
-    //                     $detailGambar->save();
-    //                 }
-    //             }
-
-    //             $detailProduk = DetailProduct::where('id_product', $produk->id)->first();
-
-    //             $detailProduk->rating = $request->input('edit_rating');
-    //             $detailProduk->deskripsi = $request->input('edit_deskripsi');
-    //             $detailProduk->merk = $request->input('edit_merk');
-    //             $detailProduk->motif = $request->input('edit_motif');
-    //             $detailProduk->panjang_kain = $request->input('edit_panjangKain');
-    //             $detailProduk->seller = $request->input('edit_seller');
-    //             $detailProduk->bahan = $request->input('edit_bahan');
-    //             $detailProduk->size = $request->input('edit_size');
-    //             $detailProduk->save();
-
-    //             DB::commit();
-    //             return redirect('/toko')->with('success', 'Produk berhasil diperbarui.');
-    //         } else {
-    //             DB::rollBack();
-    //             return redirect('/toko')->with('error', 'Gagal memperbarui produk.');
-    //         }
-    //     } catch (\Exception $e) {
-    //         DB::rollBack();
-    //         return redirect('/toko')->with('error', 'Terjadi kesalahan saat memperbarui produk: ' . $e->getMessage());
-    //     }
-    // }
-
     public function updateProduct(Request $request, $id)
-{
-    DB::beginTransaction();
+    {
+        DB::beginTransaction();
 
-    try {
-        $produk = Product::find($id);
-        if (!$produk) {
-            return redirect('/toko')->with('error', 'Produk tidak ditemukan.');
-        }
-
-        $produk->nama_product = $request->input('edit_namaProduk');
-        $produk->harga = $request->input('edit_harga');
-        $produk->stock = $request->input('edit_stok');
-
-        if ($produk->save()) {
-            // Menghapus gambar lama jika ada
-            if ($request->hasFile('gambarProduk')) {
-                DetailGambarProduct::where('id_product', $produk->id)->delete();
-
-                foreach ($request->file('gambarProduk') as $file) {
-                    $namaFile = time() . '_' . $file->getClientOriginalName();
-                    Storage::disk('public')->put('gambar/' . $namaFile, file_get_contents($file));
-
-                    $detailGambar = new DetailGambarProduct();
-                    $detailGambar->id_product = $produk->id;
-                    $detailGambar->gambar = $namaFile;
-                    $detailGambar->save();
-                }
+        try {
+            $produk = Product::find($id);
+            if (!$produk) {
+                return redirect('/toko')->with('error', 'Produk tidak ditemukan.');
             }
 
-            $detailProduk = DetailProduct::where('id_product', $produk->id)->first();
+            $produk->nama_product = $request->input('edit_namaProduk');
+            $produk->harga = $request->input('edit_harga');
+            $produk->stock = $request->input('edit_stok');
 
-            $detailProduk->rating = $request->input('edit_rating');
-            $detailProduk->deskripsi = $request->input('edit_deskripsi');
-            $detailProduk->merk = $request->input('edit_merk');
-            $detailProduk->motif = $request->input('edit_motif');
-            $detailProduk->panjang_kain = $request->input('edit_panjangKain');
-            $detailProduk->seller = $request->input('edit_seller');
-            $detailProduk->bahan = $request->input('edit_bahan');
-            $detailProduk->size = $request->input('edit_size');
-            $detailProduk->save();
+            if ($produk->save()) {
+                if ($request->hasFile('gambarProduk')) {
+                    foreach ($request->file('gambarProduk') as $index => $file) {
+                        if ($file) {
+                            // Hapus gambar lama jika ada gambar baru diupload
+                            $detailGambarId = $request->input('detailGambarId')[$index];
 
-            DB::commit();
-            return redirect('/toko')->with('success', 'Produk berhasil diperbarui.');
-        } else {
+                            $existingDetailGambar = DB::table('detail_gambar_products')
+                                ->where('id', $detailGambarId)
+                                ->first();
+
+                            if (!$existingDetailGambar) {
+                                DB::table('detail_gambar_products')->insert([
+                                    'id_product' => $produk->id,
+                                    'gambar' => $file->getClientOriginalName(),
+                                ]);
+                            } else {
+                                Storage::disk('public')->delete('gambar/' . $existingDetailGambar->gambar);
+                                DB::table('detail_gambar_products')
+                                    ->where('id', $detailGambarId)
+                                    ->update(['gambar' => $file->getClientOriginalName()]);
+                            }
+                            Storage::disk('public')->put('gambar/' . $file->getClientOriginalName(), file_get_contents($file));
+                        }
+                    }
+                }
+
+                DB::commit();
+                return redirect('/toko')->with('success', 'Produk berhasil diperbarui.');
+            } else {
+                DB::rollBack();
+                return redirect('/toko')->with('error', 'Gagal memperbarui produk.');
+            }
+        } catch (\Exception $e) {
             DB::rollBack();
-            return redirect('/toko')->with('error', 'Gagal memperbarui produk.');
+            return redirect('/toko')->with('error', 'Terjadi kesalahan saat memperbarui produk: ' . $e->getMessage());
         }
-    } catch (\Exception $e) {
-        DB::rollBack();
-        return redirect('/toko')->with('error', 'Terjadi kesalahan saat memperbarui produk: ' . $e->getMessage());
     }
-}
 
     /**
      * Store a newly created resource in storage.
