@@ -81,7 +81,8 @@
                                 <td>{{ $product->harga }}</td>
                                 <td>
                                     @foreach ($product->detailGambarProduct as $detailGambar)
-                                    <img src="{{ asset('storage/gambar/' . $detailGambar->gambar) }}" alt="Gambar Produk" width="100px">
+                                        <img src="{{ asset('storage/gambar/' . $detailGambar->gambar) }}"
+                                            alt="{{ $detailGambar->gambar }}" width="100px">
                                     @endforeach
                                 </td>
                                 <td>{{ $product->stock }}</td>
@@ -96,11 +97,11 @@
                                     @include('user.profile-user.edit-produk-modal')
                                     <!-- Tombol Hapus -->
                                     <form action="{{ route('delete-product', ['id' => $product->id]) }}" method="POST">
-                                    <form  method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger">Hapus</button>
-                                    </form>
+                                        <form method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger">Hapus</button>
+                                        </form>
                                 </td>
                             </tr>
                         @endforeach

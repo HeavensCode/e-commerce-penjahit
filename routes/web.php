@@ -87,6 +87,8 @@ Route::post('/update-cart/{productId}', [CartController::class, 'updateCart'])->
 
 Route::get('/shopping-cart', [CartController::class, 'shoppingcart'])->name('shopping-cart');
 
+Route::post('/shopping-cart/voucher', [CartController::class, 'shoppingcart'])->name('shopping-cart-voucher');
+
 // payment
 Route::post('/handle-payment', [CartController::class, 'handlePayment'])->name('handle-payment');
 

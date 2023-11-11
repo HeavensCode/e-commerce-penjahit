@@ -64,32 +64,37 @@ class ProductController extends Controller
             $produk->stock = $request->input('edit_stok');
 
             if ($produk->save()) {
-                // Menghapus gambar lama jika ada
-                $detailGambar = DetailGambarProduct::where('id_product', $produk->id)->delete();
-
                 if ($request->hasFile('gambarProduk')) {
-                    foreach ($request->file('gambarProduk') as $file) {
-                        $namaFile = time() . '_' . $file->getClientOriginalName();
-                        Storage::disk('public')->put('gambar/' . $namaFile, file_get_contents($file));
+                    foreach ($request->file('gambarProduk') as $index => $file) {
+                        if ($file) {
+                            // Hapus gambar lama jika ada gambar baru diupload
+                            $detailGambarId = $request->input('detailGambarId')[$index];
 
-                        $detailGambar = new DetailGambarProduct();
-                        $detailGambar->id_product = $produk->id;
-                        $detailGambar->gambar = $namaFile;
-                        $detailGambar->save();
+                            $existingDetailGambar = DB::table('detail_gambar_products')
+                                ->where('id', $detailGambarId)
+                                ->first();
+
+                            if (!$existingDetailGambar) {
+                                // Insert new record
+                                DB::table('detail_gambar_products')->insert([
+                                    'id_product' => $produk->id,
+                                    'gambar' => $file->getClientOriginalName(),
+                                ]);
+                            } else {
+                                // Hapus gambar lama
+                                Storage::disk('public')->delete('gambar/' . $existingDetailGambar->gambar);
+
+                                // Update existing image record
+                                DB::table('detail_gambar_products')
+                                    ->where('id', $detailGambarId)
+                                    ->update(['gambar' => $file->getClientOriginalName()]);
+                            }
+
+                            // Move the file to the desired location
+                            Storage::disk('public')->put('gambar/' . $file->getClientOriginalName(), file_get_contents($file));
+                        }
                     }
                 }
-
-                $detailProduk = DetailProduct::where('id_product', $produk->id)->first();
-
-                $detailProduk->rating = $request->input('edit_rating');
-                $detailProduk->deskripsi = $request->input('edit_deskripsi');
-                $detailProduk->merk = $request->input('edit_merk');
-                $detailProduk->motif = $request->input('edit_motif');
-                $detailProduk->panjang_kain = $request->input('edit_panjangKain');
-                $detailProduk->seller = $request->input('edit_seller');
-                $detailProduk->bahan = $request->input('edit_bahan');
-                $detailProduk->size = $request->input('edit_size');
-                $detailProduk->save();
 
                 DB::commit();
                 return redirect('/toko')->with('success', 'Produk berhasil diperbarui.');
@@ -102,6 +107,9 @@ class ProductController extends Controller
             return redirect('/toko')->with('error', 'Terjadi kesalahan saat memperbarui produk: ' . $e->getMessage());
         }
     }
+
+
+
 
     /**
      * Store a newly created resource in storage.

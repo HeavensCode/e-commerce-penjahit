@@ -13,6 +13,7 @@ use App\Models\DetailPembelian;
 use Illuminate\Support\Facades\Storage;
 use App\Models\PemasukanAdmin;
 use App\Models\LokasiUser;
+use App\Models\Voucher;
 
 class CartController extends Controller
 {
@@ -34,12 +35,18 @@ class CartController extends Controller
                 $detailPembelian->nama_product = $productName;
                 $detailPembelian->jumlah_pembelian = $request->input('jumlah_pembelian_array')[$key];
                 $detailPembelian->total_biaya = $request->input('sub_total_array')[$key];
-                if ($request->hasFile('bukti_pembayaran') && $request->file('bukti_pembayaran')[$key]->isValid()) {
-                    $file = $request->file('bukti_pembayaran')[$key];
+
+                $file = $request->file('bukti_pembayaran');
+
+                if ($file && $file->isValid()) {
                     $namaFile = time() . '_' . $file->getClientOriginalName();
-                    Storage::disk('public')->put('bukti/' . $namaFile, file_get_contents($file));
+                    $file->storeAs('bukti', $namaFile, 'public');
                     $detailPembelian->bukti_pembayaran = $namaFile;
+                } else {
+                    // Handle the case when no valid file is uploaded
+                    return redirect()->back()->with('error', 'Terjadi kesalahan saat menyimpan gambar');
                 }
+
                 if ($detailPembelian->save()) {
                     $product = Product::find($detailPembelian->id_product);
                     $product->stock -= $detailPembelian->jumlah_pembelian;
@@ -93,20 +100,42 @@ class CartController extends Controller
     }
 
 
-    public function shoppingcart()
+    public function shoppingcart(Request $request)
     {
         $cart = session()->get('cart', []);
         // dd($cart);
         $user = auth()->user();
         $lokasiUser = LokasiUser::where('id_user', $user->id)->first();
 
+        $voucherCode = $request->input('voucher');
+        $voucher = null;
+
+        if ($voucherCode) {
+            $voucher = Voucher::where('kode_voucher', $voucherCode)->first();
+
+            if (!$voucher) {
+                return redirect()->back()->with('error', 'voucher tidak ditemukan!');
+            }
+        }
+
         if (!$lokasiUser) {
-            return view('user.pembayaran-user', [
-                'cart' => $cart,
-                'totalPrice' => 0,
-                'lokasiUser' => null,
-                'addressNotSet' => true,
-            ]);
+            if ($voucherCode != null) {
+                return view('user.pembayaran-user', [
+                    'cart' => $cart,
+                    'totalPrice' => 0,
+                    'lokasiUser' => null,
+                    'addressNotSet' => true,
+                    'voucher' => $voucher,
+                ])->with('success', 'Voucher berhasil dipakai');
+            } else {
+                return view('user.pembayaran-user', [
+                    'cart' => $cart,
+                    'totalPrice' => 0,
+                    'lokasiUser' => null,
+                    'addressNotSet' => true,
+                    'voucher' => $voucher,
+                ]);
+            }
         }
 
         $totalPrice = 0;
@@ -119,6 +148,7 @@ class CartController extends Controller
             'totalPrice' => $totalPrice,
             'lokasiUser' => $lokasiUser,
             'addressNotSet' => false,
+            'voucher' => $voucher,
         ]);
     }
 
