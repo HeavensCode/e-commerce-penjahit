@@ -41,11 +41,10 @@
                                         {{-- {{ dd($cart) }} --}}
                                         <div class="mb-3">
                                             <input type="hidden" name="id_produk_array[]" id="id_produk_array" value="{{ $productId }}">
-                                            {{-- @dump($productId) --}}
+                                            <input type="hidden" name="id_toko_array[]" id="id_toko_array" value="{{ $item['id_toko'] }}">
                                             <input type="hidden" name="jumlah_pembelian_array[]" id="jumlah_pembelian" value="{{ $item['quantity'] }}">
                                             <input type="hidden" name="sub_total_array[]" id="sub_total" value="{{ $item['quantity'] * $item['price'] }}">
                                             <input type="hidden" name="nama_product_array[]" id="nama_product" value="{{ $item['name'] }}">
-                                            {{-- <input type="hidden" name="total_biaya_array[]" id="total_biaya" value="{{ $totalPrice }}"> --}}
                                             <input type="file" class="form-control" id="bukti_pembayaran" name="bukti_pembayaran[]" required >
                                         </div>
                                     @endforeach

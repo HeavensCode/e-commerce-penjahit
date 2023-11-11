@@ -27,7 +27,9 @@ public function handlePayment(Request $request)
         foreach ($request->input('nama_product_array') as $key => $productName) {
             $detailPembelian = new DetailPembelian();
             $detailPembelian->id_pembelian = $pembelian->id;
+            $detailPembelian->id_user = auth()->id();
             $detailPembelian->id_product = $request->input('id_produk_array')[$key];
+            $detailPembelian->id_toko = $request->input('id_toko_array')[$key];
             $detailPembelian->nama_product = $productName;
             $detailPembelian->jumlah_pembelian = $request->input('jumlah_pembelian_array')[$key];
             $detailPembelian->total_biaya = $request->input('sub_total_array')[$key];
@@ -55,40 +57,44 @@ public function handlePayment(Request $request)
 }
 
 
-    public function addToCart(Request $request)
-    {
-        $productId = $request->input('product_id');
-        $quantity = $request->input('quantity', 1);
-        $product = Product::find($productId);
-        $detailproduct = DetailProduct::find($productId);
-        $detailgambarproduct = DetailGambarProduct::find($productId);
+public function addToCart(Request $request)
+{
+    $productId = $request->input('product_id');
+    $id_toko = $request->input('id_toko');
+    $quantity = $request->input('quantity', 1);
+    $product = Product::find($productId);
+    $detailproduct = DetailProduct::find($productId);
+    $detailgambarproduct = DetailGambarProduct::find($productId);
 
-        if (!$product) {
-            return redirect()->back()->with('error', 'Product not found.');
-        }
-        $cart = session()->get('cart', []);
-
-        if (isset($cart[$productId])) {
-            $cart[$productId]['quantity'] += $quantity;
-        } else {
-            $cart[$productId] = [
-                'name' => $product->nama_product,
-                'gambar' => $detailgambarproduct->gambar,
-                'quantity' => $quantity,
-                'price' => $product->harga,
-                'merk' => $detailproduct->merk,
-            ];
-        }
-
-
-        session()->put('cart', $cart);
-
-        return redirect()->back()->with('success', 'Product added to cart.');
+    if (!$product) {
+        return redirect()->back()->with('error', 'Product not found.');
     }
+
+    $cart = session()->get('cart', []);
+
+    if (isset($cart[$productId])) {
+        $cart[$productId]['quantity'] += $quantity;
+    } else {
+        $cart[$productId] = [
+            'name' => $product->nama_product,
+            'gambar' => $detailgambarproduct->gambar,
+            'quantity' => $quantity,
+            'price' => $product->harga,
+            'merk' => $detailproduct->merk,
+            'id_toko' => $id_toko,
+        ];
+    }
+
+    session()->put('cart', $cart);
+    // dd($cart);
+    return redirect()->back()->with('success', 'Product added to cart.');
+}
+
 
     public function shoppingcart()
     {
         $cart = session()->get('cart', []);
+        // dd($cart);
         $user = auth()->user();
         $lokasiUser = $user->lokasiUser ?? null;
 
@@ -97,7 +103,7 @@ public function handlePayment(Request $request)
                 'cart' => $cart,
                 'totalPrice' => 0,
                 'lokasiUser' => null,
-                'addressNotSet' => true, // Add this variable to indicate that the address is not set
+                'addressNotSet' => true,
             ]);
         }
 
@@ -110,7 +116,7 @@ public function handlePayment(Request $request)
             'cart' => $cart,
             'totalPrice' => $totalPrice,
             'lokasiUser' => $lokasiUser,
-            'addressNotSet' => false, // Add this variable to indicate that the address is set
+            'addressNotSet' => false,
         ]);
     }
 
