@@ -17,16 +17,32 @@ use App\Models\LokasiUser;
 class CartController extends Controller
 {
 
+
     public function handlePayment(Request $request)
     {
         try {
+            $jumlahPembelian = $request->input('jumlah_pembelian');
+            $totalPembayaran = $request->input('total_pembayaran');
+
+            if (!$jumlahPembelian || !$totalPembayaran) {
+                throw new \Exception('Input jumlah_pembelian atau total_pembayaran tidak valid.');
+            }
+
             $pembelian = new Pembelian();
             $pembelian->id_user = auth()->id();
-            $pembelian->jumlah_pembelian = $request->input('jumlah_pembelian');
-            $pembelian->total_pembayaran = $request->input('total_pembayaran');
+            $pembelian->jumlah_pembelian = $jumlahPembelian;
+            $pembelian->total_pembayaran = $totalPembayaran;
 
             if ($pembelian->save()) {
-                foreach ($request->input('nama_product_array') as $key => $productName) {
+                foreach ($request->input('nama_product_array', []) as $key => $productName) {
+                    if (
+                        !isset($request->input('id_produk_array')[$key]) ||
+                        !isset($request->input('jumlah_pembelian_array')[$key]) ||
+                        !isset($request->input('sub_total_array')[$key])
+                    ) {
+                        throw new \Exception('Input produk tidak valid.');
+                    }
+
                     $detailPembelian = new DetailPembelian();
                     $detailPembelian->id_pembelian = $pembelian->id;
                     $detailPembelian->id_product = $request->input('id_produk_array')[$key];
@@ -34,8 +50,8 @@ class CartController extends Controller
                     $detailPembelian->jumlah_pembelian = $request->input('jumlah_pembelian_array')[$key];
                     $detailPembelian->total_biaya = $request->input('sub_total_array')[$key];
 
-                    if ($request->hasFile('bukti_pembayaran') && $request->file('bukti_pembayaran')[$key]->isValid()) {
-                        $file = $request->file('bukti_pembayaran')[$key];
+                    if ($request->hasFile('bukti_pembayaran') && $request->file('bukti_pembayaran')->isValid()) {
+                        $file = $request->file('bukti_pembayaran');
                         $namaFile = time() . '_' . $file->getClientOriginalName();
                         Storage::disk('public')->put('bukti/' . $namaFile, file_get_contents($file));
                         $detailPembelian->bukti_pembayaran = $namaFile;
@@ -48,7 +64,10 @@ class CartController extends Controller
 
                         $pemasukanAdmin = new PemasukanAdmin();
                         $pemasukanAdmin->id_pembelian = $pembelian->id;
-                        $pemasukanAdmin->pemasukan = $request->input('pemasukan_admin');
+
+                        $totalPemasukanAdmin = $request->input('pemasukan_admin');
+                        $potongan = $totalPemasukanAdmin * 0.10;
+                        $pemasukanAdmin->pemasukan = $totalPemasukanAdmin - $potongan;
                         $pemasukanAdmin->save();
                     }
                 }
@@ -57,9 +76,23 @@ class CartController extends Controller
 
             return redirect()->back()->with('error', 'Terjadi kesalahan saat melakukan pembelian');
         } catch (\Exception $e) {
+            // Hapus file gambar jika terjadi kesalahan
+            $file = $request->file('bukti_pembayaran');
+            if ($file && $file->isValid()) {
+                // Mendapatkan nama file dari path
+                $namaFile = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+
+                // Hapus file jika ada
+                Storage::disk('public')->delete('bukti/' . $namaFile);
+            }
+
             return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
     }
+
+
+
+
 
 
 
