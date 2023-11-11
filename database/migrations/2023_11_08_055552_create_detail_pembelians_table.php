@@ -18,7 +18,7 @@ class CreateDetailPembeliansTable extends Migration
             $table->integer('id_product');
             $table->integer('id_user');
             $table->string('nama_product');
-            $table->string('bukti_pembayaran');
+            $table->string('bukti_pembayaran')->nullable();
             $table->integer('jumlah_pembelian');
             $table->integer('id_toko');
             $table->integer('total_biaya');

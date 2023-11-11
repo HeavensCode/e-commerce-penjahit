@@ -111,6 +111,22 @@
     </div>
     <!-- navbar end -->
 
+    {{-- alert --}}
+    <div class="container">
+        <div class="row my-3">
+            @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
+            @if (session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
+        </div>
+    </div>
+
     <!-- side bar -->
     <div class="div-main-container d-flex">
         <div class="sidebar" id="side_nav">
@@ -151,6 +167,7 @@
             </ul>
         </div>
         <div class="content">
+
             {{-- main content --}}
             <div class="dashboard-content px-3 pt-4">
                 <div>

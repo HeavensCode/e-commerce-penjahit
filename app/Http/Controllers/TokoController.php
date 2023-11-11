@@ -21,36 +21,55 @@ class TokoController extends Controller
      */
     public function index(Request $request)
     {
-        $products = Product::with('detailProduct', 'detailGambarProduct', 'toko')->get();
-        $toko = Toko::find($request->user()->id);
-        $productcount = Product::where('id_toko', $toko->id)->count();
-        $productarray = Product::where('id_toko', $toko->id)->get();
-        // dd($products);
-        return view('user.profile-user.toko-user', [
-            'toko' => $toko,
-            'productcount' => $productcount,
-            'productarray' => $productarray,
-            'products' => $products
-        ]);
+        try {
+            $products = Product::with('detailProduct', 'detailGambarProduct', 'toko')->get();
+
+            $toko = Toko::find($request->user()->id);
+            if (!$toko) {
+                return redirect()->back()->with('error', 'Toko tidak ditemukan.');
+            }
+
+            $productCount = Product::where('id_toko', $toko->id)->count();
+            $productArray = Product::where('id_toko', $toko->id)->get();
+
+            return view('user.profile-user.toko-user', compact('toko', 'productCount', 'productArray', 'products'));
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        }
     }
 
     public function alamat(Request $request)
     {
+        try {
+            $toko = Toko::find($request->user()->id);
 
-        $toko = Toko::find($request->user()->id);
-        $product = Product::where('id_toko', $toko->id)->count();
+            if (!$toko) {
+                return redirect()->back()->with('error', 'Toko tidak ditemukan.');
+            }
 
-        return view('user.profile-user.alamat-user', ['toko' => $toko], ['product' => $product]);
+            $productCount = Product::where('id_toko', $toko->id)->count();
+
+            return view('user.profile-user.alamat-user', compact('toko', 'productCount'));
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        }
     }
 
     public function profil(Request $request)
     {
-        $user = User::with('toko')->find($request->user()->id);
+        try {
+            $user = User::with('toko')->find($request->user()->id);
 
-        // Mengambil lokasi user berdasarkan is_user yang sama dengan id user
-        $lokasiuser = LokasiUser::where('id_user', $request->user()->id)->first();
+            if (!$user) {
+                return redirect()->back()->with('error', 'Profil pengguna tidak ditemukan.');
+            }
 
-        return view('user.profile-user.profile-user', ['user' => $user, 'lokasiuser' => $lokasiuser]);
+            $lokasiuser = LokasiUser::where('id_user', $request->user()->id)->first();
+
+            return view('user.profile-user.profile-user', compact('user', 'lokasiuser'));
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        }
     }
 
 
@@ -106,50 +125,6 @@ class TokoController extends Controller
             DB::rollBack();
             return redirect('/alamat')->with('error', 'Terjadi kesalahan saat memperbarui data toko: ' . $e->getMessage());
         }
-    }
-
-
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreTokoRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreTokoRequest $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Toko  $toko
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Toko $toko)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Toko  $toko
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Toko $toko)
-    {
     }
 
     /**

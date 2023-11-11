@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\Product;
@@ -8,9 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\DetailProduct;
 use Illuminate\Support\Facades\DB;
 use App\Models\DetailGambarProduct;
-use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Storage;
-use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 
 class ProductController extends Controller
@@ -22,16 +21,32 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::with('detailProduct', 'detailGambarProduct', 'toko')->get();
-        // Mengarahkan ke halaman produk dengan data produk
-        return $products;
+        try {
+            $products = Product::with('detailProduct', 'detailGambarProduct', 'toko')->get();
+            // Mengarahkan ke halaman produk dengan data produk
+            return $products;
+        } catch (\Exception $e) {
+            // Tangani kesalahan umum
+            return redirect()->back()->with('error', 'An error occurred.');
+        }
     }
+
     public function delete($id)
     {
-        $product = Product::find($id);
-        $product->delete();
+        try {
+            $product = Product::find($id);
 
-        return redirect()->route('toko')->with('success', 'Produk berhasil dihapus.');
+            if (!$product) {
+                return redirect()->route('toko')->with('error', 'Produk tidak ditemukan.');
+            }
+
+            $product->delete();
+
+            return redirect()->route('toko')->with('success', 'Produk berhasil dihapus.');
+        } catch (\Exception $e) {
+            // Tangani kesalahan umum
+            return redirect()->route('toko')->with('error', 'Terjadi kesalahan saat menghapus produk.');
+        }
     }
 
     public function updateProduct(Request $request, $id)
@@ -86,17 +101,6 @@ class ProductController extends Controller
             DB::rollBack();
             return redirect('/toko')->with('error', 'Terjadi kesalahan saat memperbarui produk: ' . $e->getMessage());
         }
-    }
-
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -162,40 +166,5 @@ class ProductController extends Controller
         $products = Product::with('detailProduct', 'detailGambarProduct', 'toko')->get();
         // Mengarahkan ke halaman produk dengan data produk
         return view('user.produk', ['products' => $products]);
-    }
-
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Product $product)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateProductRequest  $request
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateProductRequest $request, Product $product)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Product $product)
-    {
-        //
     }
 }
