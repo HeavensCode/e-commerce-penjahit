@@ -69,7 +69,6 @@
             <div class="content my-5 mb-3 mt-5">
                 <div class="row">
                     <div class="col-12 col-lg-6">
-
                         <h2 class="title text-start">Payment Detail</h2>
                         <div class="row p-3">
                             <div class="col-12">
@@ -82,9 +81,18 @@
                                 <div class="row card mb-3 rounded">
                                     <div class="col-12 btn btn-primary p-2 text-center">My Profile</div>
                                 </div>
-                                <div class="row card mb-3 rounded">
-                                    <div class="col-12 btn btn-info p-2 text-center">Hubungi Penjual</div>
-                                </div>
+                                @foreach ($cart as $item)
+                                @if (isset($phoneNumbers[$item['id_toko']]))
+                                    <p>Nomor Telepon Penjual: {{ $phoneNumbers[$item['id_toko']] }}</p>
+                                    <a href="https://api.whatsapp.com/send?phone=+62{{ $phoneNumbers[$item['id_toko']] }}&text=Halo,%20saya%20ingin%20membeli%20barang%20ini"
+                                       class="btn btn-success" target="_blank">
+                                        Hubungi via WhatsApp
+                                    </a>
+                                @else
+                                    <p>Nomor Telepon Penjual: Belum Tersedia</p>
+                                @endif
+                            @endforeach
+
                                 <form action="{{ route('handle-payment') }}" method="POST" id="paymentForm">
                                     @csrf
                                     <div class="mb-3">

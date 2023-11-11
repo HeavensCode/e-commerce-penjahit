@@ -19,12 +19,16 @@ class CartController extends Controller
 
     public function handlePayment(Request $request)
     {
-        // dd($request->all());
         $pembelian = new Pembelian();
         $pembelian->id_user = auth()->id();
         $pembelian->jumlah_pembelian = $request->input('jumlah_pembelian');
         $pembelian->total_pembayaran = $request->input('total_pembayaran');
+        $pemasukanAdmin = new PemasukanAdmin();
+        $pemasukanAdmin->id_pembelian = $pembelian->id;
+        $pemasukanAdmin->pemasukan = $request->input('pemasukan_admin');
         if ($pembelian->save()) {
+            $pemasukanAdmin->id_pembelian = $pembelian->id;
+            $pemasukanAdmin->save();
             foreach ($request->input('nama_product_array') as $key => $productName) {
                 $detailPembelian = new DetailPembelian();
                 $detailPembelian->id_pembelian = $pembelian->id;
@@ -34,28 +38,30 @@ class CartController extends Controller
                 $detailPembelian->nama_product = $productName;
                 $detailPembelian->jumlah_pembelian = $request->input('jumlah_pembelian_array')[$key];
                 $detailPembelian->total_biaya = $request->input('sub_total_array')[$key];
+                $product = Product::find($detailPembelian->id_product);
+                if ($product->stock < $detailPembelian->jumlah_pembelian) {
+                    return redirect()->back()->with('error', 'Jumlah pembelian melebihi stok produk.');
+                }
+
                 if ($request->hasFile('bukti_pembayaran') && $request->file('bukti_pembayaran')[$key]->isValid()) {
                     $file = $request->file('bukti_pembayaran')[$key];
                     $namaFile = time() . '_' . $file->getClientOriginalName();
                     Storage::disk('public')->put('bukti/' . $namaFile, file_get_contents($file));
                     $detailPembelian->bukti_pembayaran = $namaFile;
                 }
+
                 if ($detailPembelian->save()) {
-                    $product = Product::find($detailPembelian->id_product);
                     $product->stock -= $detailPembelian->jumlah_pembelian;
                     $product->save();
-                    $pemasukanAdmin = new PemasukanAdmin();
-                    $pemasukanAdmin->id_pembelian = $pembelian->id;
-                    $pemasukanAdmin->pemasukan = $request->input('pemasukan_admin');
-                    $pemasukanAdmin->save();
                 }
             }
+
+            session()->forget('cart');
             return redirect()->back()->with('success', 'Pembelian berhasil');
         }
+
         return redirect()->back()->with('error', 'Terjadi kesalahan saat melakukan pembelian');
     }
-
-
 
 
 
@@ -88,10 +94,8 @@ class CartController extends Controller
         }
 
         session()->put('cart', $cart);
-        // dd($cart);
         return redirect()->back()->with('success', 'Product added to cart.');
     }
-
 
     public function shoppingcart()
     {
@@ -110,8 +114,18 @@ class CartController extends Controller
         }
 
         $totalPrice = 0;
+        $phoneNumbers = [];
+
         foreach ($cart as $item) {
             $totalPrice += $item['quantity'] * $item['price'];
+            $userId = DB::table('tokos')
+                ->where('id', $item['id_toko'])
+                ->value('id_user');
+
+            $phoneNumber = DB::table('users')
+                ->where('id', $userId)
+                ->value('no_telp');
+            $phoneNumbers[$item['id_toko']] = $phoneNumber;
         }
 
         return view('user.pembayaran-user', [
@@ -119,8 +133,10 @@ class CartController extends Controller
             'totalPrice' => $totalPrice,
             'lokasiUser' => $lokasiUser,
             'addressNotSet' => false,
+            'phoneNumbers' => $phoneNumbers,
         ]);
     }
+
 
     public function updateCart(Request $request, $productId)
     {

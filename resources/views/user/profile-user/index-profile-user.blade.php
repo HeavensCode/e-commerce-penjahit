@@ -156,7 +156,11 @@
                     </li>
                     <li class=""> <a href="{{ route('daftar-pembelian') }}"
                             class="text-decoration-none d-block px-3 py-2">
-                            <i class="fa-solid fa-store"></i> Daftar Pembelian</a>
+                            <i class="fa-solid fa-cart-shopping"></i> Daftar Pembelian</a>
+                    </li>
+                    <li class=""> <a href="{{ route('daftar-transaksi') }}"
+                            class="text-decoration-none d-block px-3 py-2">
+                            <i class="fa-solid fa-credit-card"></i> Daftar Transaksi</a>
                     </li>
                 </div>
             </ul>

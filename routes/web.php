@@ -93,7 +93,8 @@ Route::post('/handle-payment', [CartController::class, 'handlePayment'])->name('
 // daftar pembelian
 Route::get('/daftar-pembelian', [DaftarPembelianController::class, 'index'])->name('daftar-pembelian');
 
-
+// daftar tranasksi
+Route::get('/daftar-transaksi', [DaftarPembelianController::class, 'show'])->name('daftar-transaksi');
 
 // super admin start
 Route::post('/login', [AdminLoginController::class, 'login'])->name('login.admin');
