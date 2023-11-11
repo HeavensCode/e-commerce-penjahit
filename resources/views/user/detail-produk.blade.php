@@ -81,6 +81,7 @@
                                     </div>
                                     <div class="col-9 col-md-4 d-flex">
                                         <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                        <input type="hidden" name="id_toko" value="{{ $product->id_toko }}">
                                         <input type="number" class="form-control text-center" name="quantity"
                                             value="1" min="1" max="50">
                                     </div>

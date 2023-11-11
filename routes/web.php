@@ -10,6 +10,7 @@ use App\Http\Controllers\UserLoginController;
 use App\Http\Controllers\AdminLoginController;
 use App\Http\Controllers\DetailProductController;
 use App\Http\Controllers\DashboardAdminController;
+use App\Http\Controllers\DaftarPembelianController;
 
 use App\Http\Controllers\ProdukAdminController;
 use App\Http\Controllers\VoucherController;
@@ -88,6 +89,9 @@ Route::get('/shopping-cart', [CartController::class, 'shoppingcart'])->name('sho
 
 // payment
 Route::post('/handle-payment', [CartController::class, 'handlePayment'])->name('handle-payment');
+
+// daftar pembelian
+Route::get('/daftar-pembelian', [DaftarPembelianController::class, 'index'])->name('daftar-pembelian');
 
 
 

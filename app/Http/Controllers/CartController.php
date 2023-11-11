@@ -17,17 +17,8 @@ use App\Models\LokasiUser;
 class CartController extends Controller
 {
 
-
-    public function handlePayment(Request $request)
-    {
-        try {
-            $jumlahPembelian = $request->input('jumlah_pembelian');
-            $totalPembayaran = $request->input('total_pembayaran');
-
-            if (!$jumlahPembelian || !$totalPembayaran) {
-                throw new \Exception('Input jumlah_pembelian atau total_pembayaran tidak valid.');
-            }
-
+public function handlePayment(Request $request)
+{
             $pembelian = new Pembelian();
             $pembelian->id_user = auth()->id();
             $pembelian->jumlah_pembelian = $jumlahPembelian;
@@ -96,40 +87,44 @@ class CartController extends Controller
 
 
 
-    public function addToCart(Request $request)
-    {
-        $productId = $request->input('product_id');
-        $quantity = $request->input('quantity', 1);
-        $product = Product::find($productId);
-        $detailproduct = DetailProduct::find($productId);
-        $detailgambarproduct = DetailGambarProduct::find($productId);
+public function addToCart(Request $request)
+{
+    $productId = $request->input('product_id');
+    $id_toko = $request->input('id_toko');
+    $quantity = $request->input('quantity', 1);
+    $product = Product::find($productId);
+    $detailproduct = DetailProduct::find($productId);
+    $detailgambarproduct = DetailGambarProduct::find($productId);
 
-        if (!$product) {
-            return redirect()->back()->with('error', 'Product not found.');
-        }
-        $cart = session()->get('cart', []);
-
-        if (isset($cart[$productId])) {
-            $cart[$productId]['quantity'] += $quantity;
-        } else {
-            $cart[$productId] = [
-                'name' => $product->nama_product,
-                'gambar' => $detailgambarproduct->gambar,
-                'quantity' => $quantity,
-                'price' => $product->harga,
-                'merk' => $detailproduct->merk,
-            ];
-        }
-
-
-        session()->put('cart', $cart);
-
-        return redirect()->back()->with('success', 'Product added to cart.');
+    if (!$product) {
+        return redirect()->back()->with('error', 'Product not found.');
     }
+
+    $cart = session()->get('cart', []);
+
+    if (isset($cart[$productId])) {
+        $cart[$productId]['quantity'] += $quantity;
+    } else {
+        $cart[$productId] = [
+            'name' => $product->nama_product,
+            'gambar' => $detailgambarproduct->gambar,
+            'quantity' => $quantity,
+            'price' => $product->harga,
+            'merk' => $detailproduct->merk,
+            'id_toko' => $id_toko,
+        ];
+    }
+
+    session()->put('cart', $cart);
+    // dd($cart);
+    return redirect()->back()->with('success', 'Product added to cart.');
+}
+
 
     public function shoppingcart()
     {
         $cart = session()->get('cart', []);
+        // dd($cart);
         $user = auth()->user();
         $lokasiUser = LokasiUser::where('id_user', $user->id)->first();
 
@@ -151,7 +146,7 @@ class CartController extends Controller
             'cart' => $cart,
             'totalPrice' => $totalPrice,
             'lokasiUser' => $lokasiUser,
-            'addressNotSet' => false, // Add this variable to indicate that the address is set
+            'addressNotSet' => false,
         ]);
     }
 

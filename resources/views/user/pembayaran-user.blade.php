@@ -69,6 +69,52 @@
             <div class="content my-5 mb-3 mt-5">
                 <div class="row">
                     <div class="col-12 col-lg-6">
+
+                        <h2 class="title text-start">Payment Detail</h2>
+                        <div class="row p-3">
+                            <div class="col-12">
+                                <div class="row card mb-3 rounded border p-2">
+                                    <div class="col-12">alamat: {{ $lokasiUser ? $lokasiUser->alamat : 'alamat belum diisi' }}</div>
+                                    <div class="col-12">Kota: {{ $lokasiUser ? $lokasiUser->kota : 'alamat belum diisi' }}</div>
+                                    <div class="col-12">Provinsi: {{ $lokasiUser ? $lokasiUser->provinsi : 'alamat belum diisi' }}</div>
+                                    <div class="col-12">Kode Pos: {{ $lokasiUser ? $lokasiUser->kode_pos : 'alamat belum diisi' }}</div>
+                                </div>
+                                <div class="row card mb-3 rounded">
+                                    <div class="col-12 btn btn-primary p-2 text-center">My Profile</div>
+                                </div>
+                                <div class="row card mb-3 rounded">
+                                    <div class="col-12 btn btn-info p-2 text-center">Hubungi Penjual</div>
+                                </div>
+                                <form action="{{ route('handle-payment') }}" method="POST" id="paymentForm">
+                                    @csrf
+                                    <div class="mb-3">
+                                        <input type="hidden" name="jumlah_pembelian" id="jumlah_pembelian">
+                                        <input type="hidden" name="total_pembayaran" id="total_pembayaran">
+                                        <input type="hidden" name="nama_product" id="nama_product">
+                                        <input type="hidden" name="total_biaya" id="total_biaya">
+                                        <input type="hidden" name="pemasukan_admin" id="pemasukan_admin">
+                                        <label for="exampleInputEmail1" class="form-label">Bukti Bayar</label>
+
+                                        @foreach ($cart as $productId => $item)
+                                        {{-- {{ dd($cart) }} --}}
+                                        <div class="mb-3">
+                                            <input type="hidden" name="id_produk_array[]" id="id_produk_array" value="{{ $productId }}">
+                                            <input type="hidden" name="id_toko_array[]" id="id_toko_array" value="{{ $item['id_toko'] }}">
+                                            <input type="hidden" name="jumlah_pembelian_array[]" id="jumlah_pembelian" value="{{ $item['quantity'] }}">
+                                            <input type="hidden" name="sub_total_array[]" id="sub_total" value="{{ $item['quantity'] * $item['price'] }}">
+                                            <input type="hidden" name="nama_product_array[]" id="nama_product" value="{{ $item['name'] }}">
+                                            <input type="file" class="form-control" id="bukti_pembayaran" name="bukti_pembayaran[]" required >
+                                        </div>
+                                    @endforeach
+                                      </div>
+                                    <div class="row card mb-3 rounded">
+                                        <button type="submit" class="btn btn-primary" onclick="preparePayment()" >Bayar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6">
                         <h2 class="title text-start">Order Summary</h2>
                         <div class="row p-3">
                             @foreach ($cart as $productId => $item)

@@ -154,6 +154,10 @@
                             class="text-decoration-none d-block px-3 py-2">
                             <i class="fa-solid fa-store"></i> Toko Saya</a>
                     </li>
+                    <li class=""> <a href="{{ route('daftar-pembelian') }}"
+                            class="text-decoration-none d-block px-3 py-2">
+                            <i class="fa-solid fa-store"></i> Daftar Pembelian</a>
+                    </li>
                 </div>
             </ul>
             <hr class="h-color mx-2">
