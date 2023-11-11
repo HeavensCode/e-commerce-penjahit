@@ -85,7 +85,7 @@ Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('add-to-
 
 Route::post('/update-cart/{productId}', [CartController::class, 'updateCart'])->name('update-cart');
 
-Route::get('/shopping-cart', [CartController::class, 'shoppingcart'])->name('shopping-cart');
+Route::get('/shopping-cart', [CartController::class, 'shoppingcart'])->name('shopping-cart')->middleware('checkUserLogin');;
 
 // payment
 Route::post('/handle-payment', [CartController::class, 'handlePayment'])->name('handle-payment');

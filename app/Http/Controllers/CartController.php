@@ -122,7 +122,6 @@ class CartController extends Controller
         ]);
     }
 
-
     public function updateCart(Request $request, $productId)
     {
         $action = $request->input('action');

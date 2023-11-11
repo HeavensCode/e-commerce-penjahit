@@ -188,68 +188,6 @@
                         </div>
                     </div>
 
-                    <div class="col-12 col-lg-6">
-                        <h2 class="title text-start">Payment Detail</h2>
-                        <div class="row p-3">
-                            <div class="col-12">
-                                <div class="row card mb-3 rounded border p-2">
-                                    <div class="col-12">
-                                        Kecamatan : {{ $lokasiUser ? $lokasiUser->kecamatan : 'belum diisi' }}
-                                    </div>
-                                    <div class="col-12">
-                                        Kota : {{ $lokasiUser ? $lokasiUser->Kota : 'belum diisi' }}
-                                    </div>
-                                    <div class="col-12">
-                                        Provinsi : {{ $lokasiUser ? $lokasiUser->provinsi : 'belum diisi' }}
-                                    </div>
-                                    <div class="col-12">
-                                        Kode Pos : {{ $lokasiUser ? $lokasiUser->kode_pos : 'belum diisi' }}
-                                    </div>
-                                </div>
-                                <div class="row card mb-3 rounded">
-                                    <div class="col-12 btn btn-primary p-2 text-center"
-                                        onclick="window.location.href='{{ route('profile') }}'">
-                                        My Profile
-                                    </div>
-                                </div>
-
-                                <div class="row card mb-3 rounded">
-                                    <div class="col-12 btn btn-info p-2 text-center">Hubungi Penjual</div>
-                                </div>
-                                <form action="{{ route('handle-payment') }}" method="POST" id="paymentForm"
-                                    enctype="multipart/form-data">
-                                    @csrf
-                                    <div class="mb-3">
-                                        <input type="hidden" name="jumlah_pembelian" id="jumlah_pembelian">
-                                        <input type="hidden" name="total_pembayaran" id="total_pembayaran">
-                                        <input type="hidden" name="nama_product" id="nama_product">
-                                        <input type="hidden" name="total_biaya" id="total_biaya">
-                                        <input type="hidden" name="pemasukan_admin" id="pemasukan_admin">
-                                        <label for="exampleInputEmail1" class="form-label">Bukti Bayar</label>
-                                        <input type="file" class="form-control" name="bukti_pembayaran" required>
-
-                                        @foreach ($cart as $productId => $item)
-                                            <div class="mb-3">
-                                                <input type="hidden" name="id_produk_array[]"
-                                                    value="{{ $productId }}">
-                                                <input type="hidden" name="jumlah_pembelian_array[]"
-                                                    value="{{ $item['quantity'] }}">
-                                                <input type="hidden" name="sub_total_array[]"
-                                                    value="{{ $item['quantity'] * $item['price'] }}">
-                                                <input type="hidden" name="nama_product_array[]"
-                                                    value="{{ $item['name'] }}">
-                                            </div>
-                                        @endforeach
-
-                                    </div>
-                                    <div class="row card mb-3 rounded">
-                                        <button type="submit" class="btn btn-primary" onclick="preparePayment()"
-                                            {{ $addressNotSet ? 'disabled' : '' }}>Bayar</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
