@@ -85,12 +85,12 @@ Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('add-to-
 
 Route::post('/update-cart/{productId}', [CartController::class, 'updateCart'])->name('update-cart');
 
-Route::get('/shopping-cart', [CartController::class, 'shoppingcart'])->name('shopping-cart')->middleware('checkUserLogin');;
+Route::get('/shopping-cart', [CartController::class, 'shoppingcart'])->name('shopping-cart')->middleware('checkUserLogin');
 
 // payment
 Route::post('/handle-payment', [CartController::class, 'handlePayment'])->name('handle-payment');
 // Route::post('/voucher', [CartController::class, 'hitungVoucher'])->name('hitungVoucher');
-
+Route::post('/shopping-cart/voucher', [CartController::class, 'checkVoucher'])->name('checkVoucher');
 // daftar pembelian
 Route::get('/daftar-pembelian', [DaftarPembelianController::class, 'index'])->name('daftar-pembelian');
 

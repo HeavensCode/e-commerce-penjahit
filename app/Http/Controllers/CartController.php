@@ -12,12 +12,14 @@ use App\Models\DetailPembelian;
 use Illuminate\Support\Facades\Storage;
 use App\Models\PemasukanAdmin;
 use App\Models\LokasiUser;
+use App\Models\Voucher;
 
 class CartController extends Controller
 {
 
     public function handlePayment(Request $request)
     {
+        dd($request->all());
         try {
             $pembelian = new Pembelian();
             $pembelian->id_user = auth()->id();
@@ -38,8 +40,6 @@ class CartController extends Controller
                 $detailPembelian->nama_product = $productName;
                 $detailPembelian->jumlah_pembelian = $request->input('jumlah_pembelian_array')[$key];
                 $detailPembelian->total_biaya = $request->input('sub_total_array')[$key];
-
-                // Decrease product stock
                 $product = Product::find($detailPembelian->id_product);
                 if ($product->stock < $detailPembelian->jumlah_pembelian) {
                     throw new \Exception('Jumlah pembelian melebihi stok produk.');
@@ -95,45 +95,72 @@ class CartController extends Controller
         session()->put('cart', $cart);
         return redirect()->back()->with('success', 'Product added to cart.');
     }
-
-    public function shoppingcart()
+    public function shoppingcart(Request $request)
     {
         $cart = session()->get('cart', []);
-        // dd($cart);
         $user = auth()->user();
         $lokasiUser = LokasiUser::where('id_user', $user->id)->first();
+        $phoneNumbers = [];
 
-        if (!$lokasiUser) {
+        $voucherCode = $request->input('voucher');
+        $voucher = null;
+
+        if ($voucherCode) {
+            $voucher = Voucher::where('kode_voucher', $voucherCode)->first();
+
+            if (!$voucher) {
+                return redirect()->back()->with('error', 'Voucher tidak ditemukan!');
+            }
+        }
+
+        if ($lokasiUser) {
+            $totalPrice = 0;
+            foreach ($cart as $item) {
+                $totalPrice += $item['quantity'] * $item['price'];
+
+                $userId = DB::table('tokos')->where('id', $item['id_toko'])->value('id_user');
+                $userData = DB::table('users')->where('id', $userId)->first(); // Get user data
+                $phoneNumber = $userData ? $userData->no_telp : null;
+
+                $phoneNumbers[$item['id_toko']] = $phoneNumber;
+            }
+
             return view('user.pembayaran-user', [
+                'cart' => $cart,
+                'totalPrice' => $totalPrice,
+                'lokasiUser' => $lokasiUser,
+                'addressNotSet' => false,
+                'voucher' => $voucher,
+                'phoneNumbers' => $phoneNumbers,
+            ]);
+        } else {
+            return redirect()->back()->with([
+                'success' => 'Voucher berhasil dipakai',
                 'cart' => $cart,
                 'totalPrice' => 0,
                 'lokasiUser' => null,
                 'addressNotSet' => true,
+                'voucher' => $voucher,
+                'phoneNumbers' => $phoneNumbers,
             ]);
         }
+    }
+    public function checkVoucher(Request $request)
+    {
+        $voucherCode = $request->input('voucher');
+        $voucherDiscount = 0;
 
-        $totalPrice = 0;
-        $phoneNumbers = [];
+        if ($voucherCode) {
+            $voucher = Voucher::where('kode_voucher', $voucherCode)->first();
 
-        foreach ($cart as $item) {
-            $totalPrice += $item['quantity'] * $item['price'];
-            $userId = DB::table('tokos')
-                ->where('id', $item['id_toko'])
-                ->value('id_user');
-
-            $phoneNumber = DB::table('users')
-                ->where('id', $userId)
-                ->value('no_telp');
-            $phoneNumbers[$item['id_toko']] = $phoneNumber;
+            if ($voucher) {
+                $voucherDiscount = $voucher->jumlah_potongan;
+                return redirect()->back()->with('success', 'Voucher berhasil diterapkan')->with('voucherDiscount', $voucherDiscount);
+            } else {
+                return redirect()->back()->with('error', 'Voucher tidak ditemukan');
+            }
         }
-
-        return view('user.pembayaran-user', [
-            'cart' => $cart,
-            'totalPrice' => $totalPrice,
-            'lokasiUser' => $lokasiUser,
-            'addressNotSet' => false,
-            'phoneNumbers' => $phoneNumbers,
-        ]);
+        return redirect()->back()->with('voucherDiscount', $voucherDiscount);
     }
 
 
