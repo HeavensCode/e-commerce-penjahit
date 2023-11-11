@@ -17,6 +17,12 @@
                         <input type="file" class="form-control" id="gambarProduk" name="gambarProduk[]" multiple>
                     </div>
                     <div class="mb-3">
+                        <label for="existingImages" class="form-label">Existing Images</label>
+                        @foreach ($product->detailGambarProduct as $detailGambar)
+                            <img src="{{ asset('storage/gambar/' . $detailGambar->gambar) }}" alt="Gambar Produk" width="100px">
+                        @endforeach
+                    </div>
+                    <div class="mb-3">
                         <label for="namaProduk" class="form-label">Nama Produk</label>
                         <input value="{{ $product->nama_product }}" type="text" class="form-control"
                             id="edit-namaProduk" name="edit_namaProduk" required>

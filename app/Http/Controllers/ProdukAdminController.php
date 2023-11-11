@@ -80,15 +80,7 @@ class ProdukAdminController extends Controller
 
     public function update(Request $request, $id)
     {
-        // dd($request->all());
-        // Validasi request
-        // $request->validate([
-        //     'nama_product' => 'required',
-        //     'stock' => 'required|numeric',
-        //     'rating' => 'required|numeric',
-        // ]);
 
-        // Mengambil data dari tabel products
         $product = Product::find($id);
         if (!$product) {
             return redirect()->back()->with('error', 'Product not found');

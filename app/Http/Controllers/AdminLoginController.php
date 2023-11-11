@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\Return_;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class AdminLoginController extends Controller
 {
@@ -48,7 +49,7 @@ class AdminLoginController extends Controller
             $user->password = bcrypt($request->input('password'));
             $user->no_telp = $request->input('no_telp');
             $user->gender = $request->input('gender');
-            $user->role = 'admin'; // Assuming this is an admin registration
+            $user->role = 'admin';
             $user->save();
 
             return redirect()->back()->with('success', 'Akun berhasil dibuat!');
@@ -62,4 +63,10 @@ class AdminLoginController extends Controller
     {
         return view('admin.auth-admin.register-admin');
     }
+    public function logout()
+{
+    Auth::logout();
+
+    return redirect('/beranda');
+}
 }

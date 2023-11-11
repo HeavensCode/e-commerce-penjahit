@@ -17,12 +17,19 @@ class UserLoginController extends Controller
             'email' => 'required|email',
             'password' => 'required',
         ]);
+
         if (auth()->attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) {
-            return redirect('/beranda')->with('succes', 'Selamat Datang !.');
-        } else {
-            return redirect()->back()->with('error', 'Login gagal. Pastikan email dan password Anda benar.');
+            $user = auth()->user();
+            if ($user->role === 'admin') {
+                return redirect()->route('dashboard.admin')->with('success', 'Welcome Admin!');
+            } elseif ($user->role === 'user') {
+                return redirect('/beranda')->with('success', 'Welcome User!');
+            }
         }
+
+        return redirect()->back()->with('error', 'Login failed. Make sure your email and password are correct.');
     }
+
     public function showFormLogin()
     {
         return view('auth.login');
@@ -43,8 +50,6 @@ class UserLoginController extends Controller
             'no_telp' => 'required',
             'gender' => 'required',
         ]);
-
-        // Membuat user baru
         $user = new User();
         $user->nama = $request->input('nama');
         $user->email = $request->input('email');
@@ -75,18 +80,14 @@ class UserLoginController extends Controller
                 $lokasiuser->kecamatan = 'Belum di set';
                 $lokasiuser->provinsi = 'Belum di set';
                 $lokasiuser->kode_pos = '00000';
-
-                // Menyimpan lokasiuser baru
                 if ($lokasiuser->save()) {
                     return redirect()->route('form-login-user')->with('success', 'Akun, toko, dan lokasi berhasil dibuat!');
                 } else {
-                    // Rollback jika penyimpanan lokasiuser gagal
                     $user->delete();
                     $toko->delete();
                     return redirect()->back()->with('error', 'Gagal menyimpan lokasiuser.');
                 }
             } else {
-                // Rollback jika penyimpanan toko gagal
                 $user->delete();
                 return redirect()->back()->with('error', 'Gagal menyimpan toko.');
             }

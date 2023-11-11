@@ -44,6 +44,7 @@ class DaftarPembelianController extends Controller
                 )
                 ->where('detail_pembelians.id_toko', $userId)
                 ->get();
+                // dd($transactions);
 
             return view('user.profile-user.daftar-transaksi', compact('transactions'));
         }

@@ -19,7 +19,6 @@ class AdminMiddleware
         if (auth()->check() && auth()->user()->role === 'admin') {
             return $next($request);
         }
-
-        return redirect()->route('login');
+        return redirect('/')->with("error", 'Tidak Ada Akses');
     }
 }

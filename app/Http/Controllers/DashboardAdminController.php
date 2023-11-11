@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Models\User;
 use App\Models\Toko;
 use App\Models\Product;
+use App\Models\PemasukanAdmin;
 
 class DashboardAdminController extends Controller
 {
@@ -18,20 +19,19 @@ class DashboardAdminController extends Controller
             $jumlahUser = User::count();
             $jumlahToko = Toko::count();
             $jumlahProduk = Product::count();
+            $totalPemasukan = PemasukanAdmin::sum('pemasukan');
 
             return view('admin.dashboard-admin', [
                 'jumlahUser' => $jumlahUser,
                 'jumlahToko' => $jumlahToko,
                 'jumlahProduk' => $jumlahProduk,
+                'totalPemasukan' => $totalPemasukan,
             ]);
         } catch (QueryException $e) {
-            // Tangani kesalahan query database
             return back()->with('error', 'Error executing database query.');
         } catch (ModelNotFoundException $e) {
-            // Tangani kesalahan model tidak ditemukan
             return back()->with('error', 'Error finding model.');
         } catch (\Exception $e) {
-            // Tangani kesalahan umum
             return back()->with('error', 'An error occurred.');
         }
     }

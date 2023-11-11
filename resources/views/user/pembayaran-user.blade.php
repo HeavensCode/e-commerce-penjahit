@@ -93,19 +93,18 @@
                                 @endif
                             @endforeach
 
-                                <form action="{{ route('handle-payment') }}" method="POST" id="paymentForm">
-                                    @csrf
-                                    <div class="mb-3">
-                                        <input type="hidden" name="jumlah_pembelian" id="jumlah_pembelian">
-                                        <input type="hidden" name="total_pembayaran" id="total_pembayaran">
-                                        <input type="hidden" name="nama_product" id="nama_product">
-                                        <input type="hidden" name="total_biaya" id="total_biaya">
-                                        <input type="hidden" name="pemasukan_admin" id="pemasukan_admin">
-                                        <label for="exampleInputEmail1" class="form-label">Bukti Bayar</label>
-                                        <input type="file" class="form-control" id="bukti_pembayaran" name="bukti_pembayaran" required >
+                            <form action="{{ route('handle-payment') }}" method="POST" id="paymentForm" enctype="multipart/form-data">
+                                @csrf
+                                <div class="mb-3">
+                                    <input type="hidden" name="jumlah_pembelian" id="jumlah_pembelian">
+                                    <input type="hidden" name="total_pembayaran" id="total_pembayaran">
+                                    <input type="hidden" name="nama_product" id="nama_product">
+                                    <input type="hidden" name="total_biaya" id="total_biaya">
+                                    <input type="hidden" name="pemasukan_admin" id="pemasukan_admin">
+                                    <label for="bukti_pembayaran" class="form-label">Bukti Bayar</label>
+                                    <input type="file" class="form-control" id="bukti_pembayaran" name="bukti_pembayaran" required>
 
-                                        @foreach ($cart as $productId => $item)
-                                        {{-- {{ dd($cart) }} --}}
+                                    @foreach ($cart as $productId => $item)
                                         <div class="mb-3">
                                             <input type="hidden" name="id_produk_array[]" id="id_produk_array" value="{{ $productId }}">
                                             <input type="hidden" name="id_toko_array[]" id="id_toko_array" value="{{ $item['id_toko'] }}">
@@ -114,11 +113,11 @@
                                             <input type="hidden" name="nama_product_array[]" id="nama_product" value="{{ $item['name'] }}">
                                         </div>
                                     @endforeach
-                                      </div>
-                                    <div class="row card mb-3 rounded">
-                                        <button type="submit" class="btn btn-primary" onclick="preparePayment()" >Bayar</button>
-                                    </div>
-                                </form>
+                                </div>
+                                <div class="row card mb-3 rounded">
+                                    <button type="submit" class="btn btn-primary" onclick="preparePayment()">Bayar</button>
+                                </div>
+                            </form>
                             </div>
                         </div>
                     </div>
@@ -189,6 +188,21 @@
                                             <p><b>Total</b></p>
                                             <input type="number" name="totalharga" id="totalPrice" readonly
                                                 class="form-check-label">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 totals pt-4">
+                                <h2 class="title text-start">Voucher</h2>
+                                <div class="row">
+                                    <div class="col-12 border-bottom pt-3">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <form action="" method="post">
+                                                <p><b>Masukkan Kode Voucher</b></p>
+                                                <input type="text" name="voucher" id="voucher"
+                                                    class="form-check-label">
+                                                    <button type="submit" class="btn btn-primary">Cek Voucher</button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
