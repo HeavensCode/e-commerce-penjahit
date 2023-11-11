@@ -1,7 +1,7 @@
 @extends('user.index-user')
 @section('container')
     <div class="register">
-        <div class="container kontainer">
+        <div class="kontainer container">
             <div class="judulregister d-flex justify-content-center text-center">
                 <h1 class="text-dark">Register</h1>
             </div>
@@ -11,8 +11,9 @@
             </div>
         </div>
     </div>
+
     <div class="container">
-        <form class="row mt-5 px-4 py-4 border border-black rounded" style="background-color: #A17449" method="post"
+        <form class="row mt-5 rounded border border-black px-4 py-4" style="background-color: #A17449" method="post"
             action="{{ route('user.register') }}">
             @csrf
             <h4>Registration</h4>
@@ -58,7 +59,8 @@
                 <button type="submit" class="btn btn-primary w-100">Register</button>
             </div>
             <div class="text-center">
-                <p>Sudah Punya Akun? <a href="/login-user" class="text-decoration-none text" style="color: #AC1818">Login</a>
+                <p>Sudah Punya Akun? <a href="/login-user" class="text-decoration-none text"
+                        style="color: #AC1818">Login</a>
                 </p>
             </div>
         </form>

@@ -13,46 +13,54 @@ use App\Models\DetailPembelian;
 use Illuminate\Support\Facades\Storage;
 use App\Models\PemasukanAdmin;
 use App\Models\LokasiUser;
+
 class CartController extends Controller
 {
 
-public function handlePayment(Request $request)
-{
-    // dd($request->all());
-    $pembelian = new Pembelian();
-    $pembelian->id_user = auth()->id();
-    $pembelian->jumlah_pembelian = $request->input('jumlah_pembelian');
-    $pembelian->total_pembayaran = $request->input('total_pembayaran');
-    if ($pembelian->save()) {
-        foreach ($request->input('nama_product_array') as $key => $productName) {
-            $detailPembelian = new DetailPembelian();
-            $detailPembelian->id_pembelian = $pembelian->id;
-            $detailPembelian->id_product = $request->input('id_produk_array')[$key];
-            $detailPembelian->nama_product = $productName;
-            $detailPembelian->jumlah_pembelian = $request->input('jumlah_pembelian_array')[$key];
-            $detailPembelian->total_biaya = $request->input('sub_total_array')[$key];
-            if ($request->hasFile('bukti_pembayaran') && $request->file('bukti_pembayaran')[$key]->isValid()) {
-                $file = $request->file('bukti_pembayaran')[$key];
-                $namaFile = time() . '_' . $file->getClientOriginalName();
-                Storage::disk('public')->put('bukti/' . $namaFile, file_get_contents($file));
-                $detailPembelian->bukti_pembayaran = $namaFile;
-            }
-            if ($detailPembelian->save()) {
-                $product = Product::find($detailPembelian->id_product);
-                $product->stock -= $detailPembelian->jumlah_pembelian;
-                $product->save();
-                $pemasukanAdmin = new PemasukanAdmin();
-                $pemasukanAdmin->id_pembelian = $pembelian->id;
-                $pemasukanAdmin->pemasukan = $request->input('pemasukan_admin');
-                $pemasukanAdmin->save();
-            }
-        }
+    public function handlePayment(Request $request)
+    {
+        try {
+            $pembelian = new Pembelian();
+            $pembelian->id_user = auth()->id();
+            $pembelian->jumlah_pembelian = $request->input('jumlah_pembelian');
+            $pembelian->total_pembayaran = $request->input('total_pembayaran');
 
-        return redirect()->back()->with('success', 'Pembelian berhasil');
+            if ($pembelian->save()) {
+                foreach ($request->input('nama_product_array') as $key => $productName) {
+                    $detailPembelian = new DetailPembelian();
+                    $detailPembelian->id_pembelian = $pembelian->id;
+                    $detailPembelian->id_product = $request->input('id_produk_array')[$key];
+                    $detailPembelian->nama_product = $productName;
+                    $detailPembelian->jumlah_pembelian = $request->input('jumlah_pembelian_array')[$key];
+                    $detailPembelian->total_biaya = $request->input('sub_total_array')[$key];
+
+                    if ($request->hasFile('bukti_pembayaran') && $request->file('bukti_pembayaran')[$key]->isValid()) {
+                        $file = $request->file('bukti_pembayaran')[$key];
+                        $namaFile = time() . '_' . $file->getClientOriginalName();
+                        Storage::disk('public')->put('bukti/' . $namaFile, file_get_contents($file));
+                        $detailPembelian->bukti_pembayaran = $namaFile;
+                    }
+
+                    if ($detailPembelian->save()) {
+                        $product = Product::find($detailPembelian->id_product);
+                        $product->stock -= $detailPembelian->jumlah_pembelian;
+                        $product->save();
+
+                        $pemasukanAdmin = new PemasukanAdmin();
+                        $pemasukanAdmin->id_pembelian = $pembelian->id;
+                        $pemasukanAdmin->pemasukan = $request->input('pemasukan_admin');
+                        $pemasukanAdmin->save();
+                    }
+                }
+                return redirect()->back()->with('success', 'Pembelian berhasil');
+            }
+
+            return redirect()->back()->with('error', 'Terjadi kesalahan saat melakukan pembelian');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        }
     }
 
-    return redirect()->back()->with('error', 'Terjadi kesalahan saat melakukan pembelian');
-}
 
 
     public function addToCart(Request $request)
@@ -90,14 +98,14 @@ public function handlePayment(Request $request)
     {
         $cart = session()->get('cart', []);
         $user = auth()->user();
-        $lokasiUser = $user->lokasiUser ?? null;
+        $lokasiUser = LokasiUser::where('id_user', $user->id)->first();
 
         if (!$lokasiUser) {
             return view('user.pembayaran-user', [
                 'cart' => $cart,
                 'totalPrice' => 0,
                 'lokasiUser' => null,
-                'addressNotSet' => true, // Add this variable to indicate that the address is not set
+                'addressNotSet' => true,
             ]);
         }
 

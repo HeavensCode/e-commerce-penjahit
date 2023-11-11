@@ -16,14 +16,26 @@
                         <div class="row p-3">
                             <div class="col-12">
                                 <div class="row card mb-3 rounded border p-2">
-                                    <div class="col-12">alamat: {{ $lokasiUser ? $lokasiUser->alamat : 'alamat belum diisi' }}</div>
-                                    <div class="col-12">Kota: {{ $lokasiUser ? $lokasiUser->kota : 'alamat belum diisi' }}</div>
-                                    <div class="col-12">Provinsi: {{ $lokasiUser ? $lokasiUser->provinsi : 'alamat belum diisi' }}</div>
-                                    <div class="col-12">Kode Pos: {{ $lokasiUser ? $lokasiUser->kode_pos : 'alamat belum diisi' }}</div>
+                                    <div class="col-12">
+                                        Kecamatan : {{ $lokasiUser ? $lokasiUser->kecamatan : 'belum diisi' }}
+                                    </div>
+                                    <div class="col-12">
+                                        Kota : {{ $lokasiUser ? $lokasiUser->Kota : 'belum diisi' }}
+                                    </div>
+                                    <div class="col-12">
+                                        Provinsi : {{ $lokasiUser ? $lokasiUser->provinsi : 'belum diisi' }}
+                                    </div>
+                                    <div class="col-12">
+                                        Kode Pos : {{ $lokasiUser ? $lokasiUser->kode_pos : 'belum diisi' }}
+                                    </div>
                                 </div>
                                 <div class="row card mb-3 rounded">
-                                    <div class="col-12 btn btn-primary p-2 text-center">My Profile</div>
+                                    <div class="col-12 btn btn-primary p-2 text-center"
+                                        onclick="window.location.href='{{ route('profile') }}'">
+                                        My Profile
+                                    </div>
                                 </div>
+
                                 <div class="row card mb-3 rounded">
                                     <div class="col-12 btn btn-info p-2 text-center">Hubungi Penjual</div>
                                 </div>
@@ -38,20 +50,26 @@
                                         <label for="exampleInputEmail1" class="form-label">Bukti Bayar</label>
 
                                         @foreach ($cart as $productId => $item)
-                                        {{-- {{ dd($cart) }} --}}
-                                        <div class="mb-3">
-                                            <input type="hidden" name="id_produk_array[]" id="id_produk_array" value="{{ $productId }}">
-                                            {{-- @dump($productId) --}}
-                                            <input type="hidden" name="jumlah_pembelian_array[]" id="jumlah_pembelian" value="{{ $item['quantity'] }}">
-                                            <input type="hidden" name="sub_total_array[]" id="sub_total" value="{{ $item['quantity'] * $item['price'] }}">
-                                            <input type="hidden" name="nama_product_array[]" id="nama_product" value="{{ $item['name'] }}">
-                                            {{-- <input type="hidden" name="total_biaya_array[]" id="total_biaya" value="{{ $totalPrice }}"> --}}
-                                            <input type="file" class="form-control" id="bukti_pembayaran" name="bukti_pembayaran[]" required >
-                                        </div>
-                                    @endforeach
-                                      </div>
+                                            {{-- {{ dd($cart) }} --}}
+                                            <div class="mb-3">
+                                                <input type="hidden" name="id_produk_array[]" id="id_produk_array"
+                                                    value="{{ $productId }}">
+                                                {{-- @dump($productId) --}}
+                                                <input type="hidden" name="jumlah_pembelian_array[]" id="jumlah_pembelian"
+                                                    value="{{ $item['quantity'] }}">
+                                                <input type="hidden" name="sub_total_array[]" id="sub_total"
+                                                    value="{{ $item['quantity'] * $item['price'] }}">
+                                                <input type="hidden" name="nama_product_array[]" id="nama_product"
+                                                    value="{{ $item['name'] }}">
+                                                {{-- <input type="hidden" name="total_biaya_array[]" id="total_biaya" value="{{ $totalPrice }}"> --}}
+                                                <input type="file" class="form-control" id="bukti_pembayaran"
+                                                    name="bukti_pembayaran[]" required>
+                                            </div>
+                                        @endforeach
+                                    </div>
                                     <div class="row card mb-3 rounded">
-                                        <button type="submit" class="btn btn-primary" onclick="preparePayment()" >Bayar</button>
+                                        <button type="submit" class="btn btn-primary" onclick="preparePayment()"
+                                            {{ $addressNotSet ? 'disabled' : '' }}>Bayar</button>
                                     </div>
                                 </form>
                             </div>
@@ -92,11 +110,13 @@
                                                 <div class="col-12 mb-2">
                                                     (Harga Satuan)
                                                     <input type="text" name="subtotal"
-                                                        value="Rp. {{ $item['price'] }}"
-                                                        class="form-control" id="subtotal" readonly>
+                                                        value="Rp. {{ $item['price'] }}" class="form-control"
+                                                        id="subtotal" readonly>
                                                 </div>
                                                 <div class="col-12 mb-2">
-                                                    <input type="text" name="subtotal" value="Rp. {{ ($item['price'] * $item['quantity']) }}" class="form-control subtotal" readonly>
+                                                    <input type="text" name="subtotal"
+                                                        value="Rp. {{ $item['price'] * $item['quantity'] }}"
+                                                        class="form-control subtotal" readonly>
                                                 </div>
                                                 <div class="col-12 mb-2">
                                                     <input type="text" name="merk" value="{{ $item['merk'] }}"
@@ -121,7 +141,8 @@
                                     <div class="col-12 border-bottom pt-3">
                                         <div class="d-flex w-100 justify-content-between">
                                             <p><b>Total</b></p>
-                                            <input type="number" name="totalharga" id="totalPrice" readonly class="form-check-label">
+                                            <input type="number" name="totalharga" id="totalPrice" readonly
+                                                class="form-check-label">
                                         </div>
                                     </div>
                                 </div>
@@ -134,44 +155,46 @@
     </section>
 @endsection
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-    var subtotalElements = document.querySelectorAll('.subtotal');
-    var totalPrice = 0;
-    subtotalElements.forEach(function (subtotalElement) {
-        var subtotalValue = parseFloat(subtotalElement.value.replace('Rp. ', '').replace(',', ''));
-        totalPrice += subtotalValue;
+    document.addEventListener('DOMContentLoaded', function() {
+        var subtotalElements = document.querySelectorAll('.subtotal');
+        var totalPrice = 0;
+        subtotalElements.forEach(function(subtotalElement) {
+            var subtotalValue = parseFloat(subtotalElement.value.replace('Rp. ', '').replace(',', ''));
+            totalPrice += subtotalValue;
+        });
+        var ongkosKirim = 15000;
+        totalPrice += ongkosKirim;
+        document.getElementById('totalPrice').value = totalPrice;
+        document.getElementById('yourFormId').addEventListener('submit', function(event) {
+            var totalHarga = document.getElementById('totalPrice').value;
+            var totalHargaInput = document.createElement('input');
+            totalHargaInput.type = 'number';
+            totalHargaInput.name = 'totalharga';
+            totalHargaInput.value = totalHarga;
+            this.appendChild(totalHargaInput);
+        });
     });
-    var ongkosKirim = 15000;
-    totalPrice += ongkosKirim;
-    document.getElementById('totalPrice').value = totalPrice;
-    document.getElementById('yourFormId').addEventListener('submit', function (event) {
-        var totalHarga = document.getElementById('totalPrice').value;
-        var totalHargaInput = document.createElement('input');
-        totalHargaInput.type = 'number';
-        totalHargaInput.name = 'totalharga';
-        totalHargaInput.value = totalHarga;
-        this.appendChild(totalHargaInput);
-    });
-});
 
-function preparePayment() {
-    var totalharga = document.getElementById('totalPrice').value;
+    function preparePayment() {
+        var totalharga = document.getElementById('totalPrice').value;
 
-    var totalBiayaValue = parseFloat(totalharga) * 0.1;
-    document.getElementById('jumlah_pembelian').value = document.querySelector('.form-control[name="quantity"]').value;
+        var totalBiayaValue = parseFloat(totalharga) * 0.1;
+        document.getElementById('jumlah_pembelian').value = document.querySelector('.form-control[name="quantity"]')
+            .value;
 
-    document.getElementById('total_pembayaran').value = totalharga;
-    document.getElementById('jumlah_pembelian').value = document.querySelector('.form-control[name="quantity"]').value;
+        document.getElementById('total_pembayaran').value = totalharga;
+        document.getElementById('jumlah_pembelian').value = document.querySelector('.form-control[name="quantity"]')
+            .value;
 
-    // Extract only the numeric part of the subtotal value
-    var subtotalNumeric = parseFloat(document.querySelector('.form-control.subtotal').value.replace('Rp. ', '').replace(',', ''));
-    document.getElementById('sub_total').value = subtotalNumeric;
+        // Extract only the numeric part of the subtotal value
+        var subtotalNumeric = parseFloat(document.querySelector('.form-control.subtotal').value.replace('Rp. ', '')
+            .replace(',', ''));
+        document.getElementById('sub_total').value = subtotalNumeric;
 
-    document.getElementById('nama_product').value = document.querySelector('.col-12.mb-2 b').innerText;
-    document.getElementById('total_biaya').value = totalBiayaValue.toFixed(2);
-    document.getElementById('pemasukan_admin').value = (parseFloat(totalharga) * 0.1).toFixed(2);
+        document.getElementById('nama_product').value = document.querySelector('.col-12.mb-2 b').innerText;
+        document.getElementById('total_biaya').value = totalBiayaValue.toFixed(2);
+        document.getElementById('pemasukan_admin').value = (parseFloat(totalharga) * 0.1).toFixed(2);
 
-    document.getElementById('paymentForm').submit();
-}
-
+        document.getElementById('paymentForm').submit();
+    }
 </script>

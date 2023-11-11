@@ -129,6 +129,7 @@
             @endif
         </div>
     </div>
+
     {{-- main content --}}
     <div>
         @yield('container')

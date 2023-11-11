@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
-Use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\DB;
 use App\Models\DetailGambarProduct;
 use Illuminate\Support\Facades\Storage;
 use App\Models\DetailProduct;
+
 class ProdukAdminController extends Controller
 {
     /**
@@ -17,69 +18,39 @@ class ProdukAdminController extends Controller
      */
     public function index()
     {
-        $products = DB::table('products')
-            ->join('detail_gambar_products', 'products.id', '=', 'detail_gambar_products.id_product')
-            ->join('detail_products', 'products.id', '=', 'detail_products.id_product')
-            ->select('products.*', 'detail_gambar_products.gambar', 'detail_products.*')
-            ->distinct('detail_gambar_products.gambar')
-            ->get();
+        try {
+            $products = DB::table('products')
+                ->join('detail_gambar_products', 'products.id', '=', 'detail_gambar_products.id_product')
+                ->join('detail_products', 'products.id', '=', 'detail_products.id_product')
+                ->select('products.*', 'detail_gambar_products.gambar', 'detail_products.*')
+                ->distinct('detail_gambar_products.gambar')
+                ->get();
 
-        return view('admin.produk.index', ['products' => $products]);
+            return view('admin.produk.index', ['products' => $products]);
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        }
     }
 
-
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function edit($id)
     {
-        //
+        try {
+            $product = DB::table('products')
+                ->join('detail_gambar_products', 'products.id', '=', 'detail_gambar_products.id_product')
+                ->join('detail_products', 'products.id', '=', 'detail_products.id_product')
+                ->select('products.*', 'detail_gambar_products.*', 'detail_products.*')
+                ->where('products.id', '=', $id)
+                ->first();
+
+            if ($product) {
+                return view('admin.produk.edit', compact('product'));
+            } else {
+                return redirect()->back()->with('error', 'Produk tidak ditemukan.');
+            }
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        }
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    // public function store(StoreRequest $request)
-    // {
-    //     //
-    // }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\  $
-     * @return \Illuminate\Http\Response
-     */
-    public function show()
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\  $
-     * @return \Illuminate\Http\Response
-     */
-
-     public function edit($id)
-     {
-         $products = DB::table('products')
-             ->join('detail_gambar_products', 'products.id', '=', 'detail_gambar_products.id_product')
-             ->join('detail_products', 'products.id', '=', 'detail_products.id_product')
-             ->select('products.*', 'detail_gambar_products.*', 'detail_products.*')
-             ->where('products.id', '=', $id)
-             ->first();
-
-         return view('admin.produk.edit', compact('products'));
-     }
-
 
     /**
      * Update the specified resource in storage.

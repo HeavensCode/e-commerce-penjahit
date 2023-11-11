@@ -59,7 +59,7 @@
             <div class="col-md-8 mx-2">
                 <button type="button" class="btn btn-primary my-2" data-bs-toggle="modal"
                     data-bs-target="#edit-alamat-user-modal">
-                    Edit Profile
+                    Edit Alamat
                 </button>
                 @include('user.profile-user.alamat-user-modal')
             </div>
