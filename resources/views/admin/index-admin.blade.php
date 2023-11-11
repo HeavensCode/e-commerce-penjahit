@@ -24,24 +24,6 @@
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
-                </div>
-                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
-            </a>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href="index.html">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
-            </li>
-
             <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -58,7 +40,7 @@
                     <span>User Menu</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
+                    <div class="collapse-inner rounded bg-white py-2">
                         <h6 class="collapse-header">Menu:</h6>
                         <a class="collapse-item" href="/users">Manage User</a>
                         {{-- <a class="collapse-item" href="cards.html">Jumlah Toko</a> --}}
@@ -75,7 +57,7 @@
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
+                    <div class="collapse-inner rounded bg-white py-2">
                         <h6 class="collapse-header">Menu Toko:</h6>
                         <a class="collapse-item" href="/toko-admin">Daftar Toko</a>
                     </div>
@@ -91,7 +73,7 @@
                 </a>
                 <div id="collapseUtilitiess" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
+                    <div class="collapse-inner rounded bg-white py-2">
                         <h6 class="collapse-header">Menu Product:</h6>
                         <a class="collapse-item" href="/produk-admin">Daftar Product</a>
                     </div>
@@ -106,7 +88,7 @@
                 </a>
                 <div id="collapseUtilitiesss" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
+                    <div class="collapse-inner rounded bg-white py-2">
                         <h6 class="collapse-header">Menu Product:</h6>
                         <a class="collapse-item" href="/voucher-admin">Daftar Voucher</a>
                     </div>
@@ -123,7 +105,7 @@
             <hr class="sidebar-divider d-none d-md-block">
 
             <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
+            <div class="d-none d-md-inline text-center">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
 
@@ -137,7 +119,7 @@
             <div id="content">
 
                 <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                <nav class="navbar navbar-expand navbar-light topbar static-top mb-4 bg-white shadow">
 
                     <!-- Sidebar Toggle (Topbar) -->
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
@@ -146,9 +128,9 @@
 
                     <!-- Topbar Search -->
                     <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        class="d-none d-sm-inline-block form-inline ml-md-3 my-md-0 mw-100 navbar-search my-2 mr-auto">
                         <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small"
+                            <input type="text" class="form-control bg-light small border-0"
                                 placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="button">
@@ -168,11 +150,11 @@
                                 <i class="fas fa-search fa-fw"></i>
                             </a>
                             <!-- Dropdown - Messages -->
-                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                            <div class="dropdown-menu dropdown-menu-right animated--grow-in p-3 shadow"
                                 aria-labelledby="searchDropdown">
-                                <form class="form-inline mr-auto w-100 navbar-search">
+                                <form class="form-inline w-100 navbar-search mr-auto">
                                     <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small"
+                                        <input type="text" class="form-control bg-light small border-0"
                                             placeholder="Search for..." aria-label="Search"
                                             aria-describedby="basic-addon2">
                                         <div class="input-group-append">
@@ -190,20 +172,20 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Menu</span>
+                                <span class="d-none d-lg-inline small mr-2 text-gray-600">Menu</span>
                             </a>
                             <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                            aria-labelledby="userDropdown">
-                            <div class="dropdown-divider"></div>
-                            <form action="{{ route('logout.admin') }}" method="POST">
-                                @csrf
-                                <button type="submit" class="dropdown-item">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
-                                </button>
-                            </form>
-                        </div>
+                            <div class="dropdown-menu dropdown-menu-right animated--grow-in shadow"
+                                aria-labelledby="userDropdown">
+                                <div class="dropdown-divider"></div>
+                                <form action="{{ route('logout.admin') }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item">
+                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Logout
+                                    </button>
+                                </form>
+                            </div>
                         </li>
                     </ul>
                 </nav>
@@ -234,7 +216,7 @@
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
+                    <div class="copyright my-auto text-center">
                         <span>Copyright &copy; Your Website 2021</span>
                     </div>
                 </div>

@@ -1,14 +1,14 @@
 @extends('user.profile-user.index-profile-user')
 
 @section('container')
-    <div class="profiles-user" style="width: 100%; height: 100%;background-color: #EDCEB1">
+    <div class="profiles-user rounded" style="width: 100%; height: 100%;background-color:  #724e2d">
         <div class="mx-5 py-5">
             <div class="title">
                 <h3 class="section-title">Daftar Tranaksi</h3>
             </div>
             <div class="row align-content-start">
 
-                @if(count($transactions) > 0)
+                @if (count($transactions) > 0)
                     <table class="table">
                         <thead>
                             <tr>
@@ -31,32 +31,39 @@
                                     <td>{{ $transaction->total_biaya }}</td>
                                     <td>
                                         @if ($transaction->bukti_pembayaran)
-                                            <img src="{{ asset('bukti/' . $transaction->bukti_pembayaran) }}" alt="Bukti Pembayaran" width="100px">
+                                            <img src="{{ asset('bukti/' . $transaction->bukti_pembayaran) }}"
+                                                alt="Bukti Pembayaran" width="100px">
                                         @else
                                             Tidak Ada Bukti Pembayaran
                                         @endif
                                     </td>
                                     <td>
-                                        <a type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $index }}">
+                                        <a type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                            data-bs-target="#exampleModal{{ $index }}">
                                             Bukti Pembelian
                                         </a>
                                         <!-- Modal -->
-                                        <div class="modal fade" id="exampleModal{{ $index }}" tabindex="-1" aria-labelledby="exampleModalLabel{{ $index }}" aria-hidden="true">
+                                        <div class="modal fade" id="exampleModal{{ $index }}" tabindex="-1"
+                                            aria-labelledby="exampleModalLabel{{ $index }}" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h1 class="modal-title fs-5" id="exampleModalLabel{{ $index }}">Modal title</h1>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        <h1 class="modal-title fs-5"
+                                                            id="exampleModalLabel{{ $index }}">Modal title</h1>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
                                                         @if ($transaction->bukti_pembayaran)
-                                                            <img src="{{ asset('bukti/' . $transaction->bukti_pembayaran) }}" alt="Bukti Pembayaran" width="100px">
+                                                            <img src="{{ asset('bukti/' . $transaction->bukti_pembayaran) }}"
+                                                                alt="Bukti Pembayaran" width="100px">
                                                         @else
                                                             Tidak Ada Bukti Pembayaran
                                                         @endif
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">Close</button>
                                                         <button type="button" class="btn btn-primary">Save changes</button>
                                                     </div>
                                                 </div>

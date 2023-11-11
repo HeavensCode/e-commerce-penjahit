@@ -1,7 +1,7 @@
 @extends('user.profile-user.index-profile-user')
 
 @section('container')
-    <section class="profiles-user mb-3" style="width: 100%; height: 100%;background-color: #EDCEB1">
+    <section class="profiles-user mb-3 rounded" style="width: 100%; height: 100%;background-color: #724e2d">
         <div class="mx-5 py-5">
             <div class="title row">
                 <h3 class="section-title p-0">Toko Saya</h3>
@@ -34,7 +34,7 @@
         </div>
 
     </section>
-    <section class="profiles-user" style="width: 100%; height: 100%; background-color: #EDCEB1">
+    <section class="profiles-user rounded" style="width: 100%; height: 100%; background-color: #724e2d">
         <div class="mx-5 py-5">
             <div class="title row">
                 <h3 class="section-title p-0">Produk Saya</h3>
@@ -43,27 +43,8 @@
                     aliquam voluptatibus nulla necessitatibus aut!</p>
             </div>
 
-            <div class="row my-1 filter">
-                <div class="col-6 col-md-2 col-lg-3 p-2">
-                    <a
-                        class="text-decoration-none filter-btn d-flex justify-content-center align-items-center p-2 text-black">Terbaru</a>
-                </div>
-                <div class="col-6 col-md-2 col-lg-3 p-2">
-                    <a
-                        class="text-decoration-none filter-btn d-flex justify-content-center align-items-center p-2 text-black">Terlama</a>
-                </div>
-                <div class="col-6 col-md-2 col-lg-3 p-2">
-                    <a
-                        class="text-decoration-none filter-btn d-flex justify-content-center align-items-center p-2 text-black">Nama</a>
-                </div>
-                <div class="col-6 col-md-2 col-lg-3 p-2">
-                    <a
-                        class="text-decoration-none filter-btn d-flex justify-content-center align-items-center p-2 text-black">Terlaris</a>
-                </div>
-            </div>
-
             <!-- Tabel Data Produk -->
-            <div class="table-responsive row my-2">
+            <div class="table-responsive row my-2 rounded">
                 <table class="table">
                     <thead>
                         <tr>
@@ -81,7 +62,8 @@
                                 <td>{{ $product->harga }}</td>
                                 <td>
                                     @foreach ($product->detailGambarProduct as $detailGambar)
-                                    <img src="{{ asset('storage/gambar/' . $detailGambar->gambar) }}" alt="Gambar Produk" width="100px">
+                                        <img src="{{ asset('storage/gambar/' . $detailGambar->gambar) }}"
+                                            alt="Gambar Produk" width="100px">
                                     @endforeach
                                 </td>
                                 <td>{{ $product->stock }}</td>
@@ -96,11 +78,11 @@
                                     @include('user.profile-user.edit-produk-modal')
                                     <!-- Tombol Hapus -->
                                     <form action="{{ route('delete-product', ['id' => $product->id]) }}" method="POST">
-                                    <form  method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger">Hapus</button>
-                                    </form>
+                                        <form method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger">Hapus</button>
+                                        </form>
                                 </td>
                             </tr>
                         @endforeach

@@ -1,14 +1,14 @@
 @extends('user.profile-user.index-profile-user')
 
 @section('container')
-    <div class="profiles-user" style="width: 100%; height: 100%;background-color: #EDCEB1">
+    <div class="profiles-user rounded" style="width: 100%; height: 100%;background-color: #724e2d">
         <div class="mx-5 py-5">
             <div class="title">
                 <h3 class="section-title">Daftar Pembelian</h3>
             </div>
             <div class="row align-content-start">
 
-                @if(count($purchases) > 0)
+                @if (count($purchases) > 0)
                     <table class="table">
                         <thead>
                             <tr>
