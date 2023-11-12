@@ -12,10 +12,10 @@
             </div>
         </div>
     </div>
-    <div class="container my-5 py-5  border border-black rounded ">
+    <div class="container my-5 py-5 border border-black rounded ">
         <div class="row">
             <div class="col-md-6">
-                <img src="{{ asset('image/contact-2.png') }}" alt="working" width="500px" class="animated-image">
+                <img src="{{ asset('image/contact-2.png') }}" alt="working" width="400px" class="animated-image">
             </div>
             <div class="col-md-6">
                 <h2 class="text-center">Tell Us Something</h2>
@@ -33,7 +33,7 @@
                         <textarea class="form-control" id="messages" name="messages" rows="3" placeholder="Enter Your Messages"></textarea>
                     </div>
                     <div class="text-center pt-3">
-                        <button type="submit" class="btn btn-primary w-100">Send Message</button>
+                        <button type="submit" class="btn btn-primary ">Send Message</button>
                     </div>
                 </form>
             </div>

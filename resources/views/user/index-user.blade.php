@@ -21,14 +21,14 @@
 
 <body>
     {{-- navbar --}}
-    <nav class="navbar navbar-expand-lg" aria-label="Thirteenth navbar example">
+    <nav class="navbar navbar-expand-lg p-0" aria-label="Thirteenth navbar example">
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample11"
                 aria-controls="navbarsExample11" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="navbar-collapse d-lg-flex collapse" id="navbarsExample11">
-                <a class="navbar-brand col-lg-3 me-0" href="#">
+                <a class="navbar-brand col-lg-3 me-0 p-0" href="#">
                     <img src="{{ asset('image/navbar/logo.png') }}" alt="">
                 </a>
                 <ul class="navbar-nav col-lg-6 justify-content-lg-center">
@@ -63,9 +63,9 @@
             </div>
         </div>
     </nav>
-
     <div class="position-absolute container" style="display: flex; justify-content: flex-end; z-index: 99;">
-        <div id="userDropdown" class="user-dropdown position-absolute" style="margin-left: auto;">
+        <div id="userDropdown" class="user-dropdown position-absolute shadow-blur bg-opacity-25 p-3 shadow"
+            style="margin-left: auto;">
             <div class="judul d-flex justify-content-end">
                 <img src="{{ asset('image/logo-user.jpg') }}" alt="" width="50px" class="rounded-circle">
                 @auth
@@ -91,7 +91,7 @@
                     </a>
                 @endguest
                 @auth
-                    <a class="btn btn-primary col-5 mx-1" href="{{ route('profile') }}">Profil</a>
+                    <a class="btn btn-success col-5 mx-1" href="{{ route('profile') }}">Profil</a>
                 @endauth
                 @guest
                     <a class="btn btn-primary col-5 mx-1" href="/register">Register</a>
@@ -175,7 +175,7 @@
                         <h5>Company</h5>
                         <hr>
                         <ul class="nav flex-column">
-                            <li class="nav-item fs-5 mb-2"><a href="/product"
+                            <li class="nav-item fs-5 mb-2"><a href="/produk"
                                     class="nav-link text-body-secondary p-0"><i class="fa fa-arrow-right"></i>
                                     Products</a>
                             </li>
