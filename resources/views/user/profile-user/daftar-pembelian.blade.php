@@ -1,24 +1,23 @@
 @extends('user.profile-user.index-profile-user')
 
 @section('container')
-    <div class="profiles-user" style="width: 100%; height: 100%;background-color: #EDCEB1">
+    <div class="profiles-user rounded-4" style="width: 100%; height: 100%;background-color: #EDCEB1">
         <div class="mx-5 py-5">
-            <div class="title">
-                <h3 class="section-title">Daftar Pembelian</h3>
+            <div>
+                <h3>Daftar Pembelian</h3>
             </div>
-            <div class="row align-content-start">
-
-                @if(count($purchases) > 0)
-                    <table class="table">
+            <div class="table-responsive">
+                @if (count($purchases) > 0)
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Nama Produk</th>
-                                <th scope="col">Nama Toko</th>
-                                <th scope="col">Jumlah Pembelian</th>
-                                <th scope="col">Nama Seller</th>
-                                <th scope="col">Total Biaya</th>
-                                <th scope="col">Action</th>
+                                <th>No</th>
+                                <th>Nama Produk</th>
+                                <th>Nama Toko</th>
+                                <th>Jumlah Pembelian</th>
+                                <th>Nama Seller</th>
+                                <th>Total Biaya</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>

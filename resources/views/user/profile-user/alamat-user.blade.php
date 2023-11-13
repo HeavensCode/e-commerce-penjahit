@@ -1,10 +1,10 @@
 @extends('user.profile-user.index-profile-user')
 
 @section('container')
-    <div class="profiles-user" style="width: 100%; height: 100%;background-color: #EDCEB1">
+    <div class="profiles-user rounded-4" style="width: 100%; height: 100%;background-color: #EDCEB1">
         <div class="mx-5 py-5">
             <div class="title">
-                <h3 class="section-title">Alamat Toko</h3>
+                <h3 class="">Alamat Toko</h3>
                 <p>Deskripsi singkat tentang kelola informasi alamat Anda...</p>
             </div>
             <div class="row align-content-start">
