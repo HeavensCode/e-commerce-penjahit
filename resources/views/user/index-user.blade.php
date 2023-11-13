@@ -33,16 +33,20 @@
                 </a>
                 <ul class="navbar-nav col-lg-6 justify-content-lg-center">
                     <li class="nav-item linav">
-                        <a class="nav-link navlink active" aria-current="page" href="{{ route('beranda') }}">Home</a>
+                        <a class="nav-link navlink active fs-4" aria-current="page" href="{{ route('beranda') }}"
+                            style="color: white">Home</a>
                     </li>
                     <li class="nav-item linav">
-                        <a class="nav-link navlink active" href="{{ route('produk') }}">Product</a>
+                        <a class="nav-link navlink active fs-4" href="{{ route('produk') }}"
+                            style="color: white">Product</a>
                     </li>
                     <li class="nav-item linav">
-                        <a class="nav-link navlink active" href="{{ route('about') }}">About</a>
+                        <a class="nav-link navlink active fs-4" href="{{ route('about') }}"
+                            style="color: white">About</a>
                     </li>
                     <li class="nav-item linav">
-                        <a class="nav-link navlink active" href="{{ route('contact') }}">Contact</a>
+                        <a class="nav-link navlink active fs-4" href="{{ route('contact') }}"
+                            style="color: white">Contact</a>
                     </li>
                 </ul>
                 <div class="d-flex col-lg-3 justify-content-center">
@@ -141,7 +145,7 @@
     <footer class="footer mt-5" id="footer" style="background-color: #ED7D31">
         <div class="container py-0 pt-4">
             <footer>
-                <div class="row">
+                <div class="row text-white">
                     <div class="col-6 col-md-6 mb-3">
                         <h2>Subscribe for Offers and News</h1>
                             <h6>Get E-mail updates about our latest Products and <span class="text-warning">

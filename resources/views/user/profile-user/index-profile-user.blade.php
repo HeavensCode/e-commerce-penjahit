@@ -192,17 +192,20 @@
                             </a>
                             <ul class="navbar-nav col-lg-6 justify-content-lg-center">
                                 <li class="nav-item linav">
-                                    <a class="nav-link navlink active" aria-current="page"
+                                    <a class="nav-link navlink active text-white" aria-current="page"
                                         href="{{ route('beranda') }}">Home</a>
                                 </li>
                                 <li class="nav-item linav">
-                                    <a class="nav-link navlink active" href="{{ route('produk') }}">Product</a>
+                                    <a class="nav-link navlink active text-white"
+                                        href="{{ route('produk') }}">Product</a>
                                 </li>
                                 <li class="nav-item linav">
-                                    <a class="nav-link navlink active" href="{{ route('about') }}">About</a>
+                                    <a class="nav-link navlink active text-white"
+                                        href="{{ route('about') }}">About</a>
                                 </li>
                                 <li class="nav-item linav">
-                                    <a class="nav-link navlink active" href="{{ route('contact') }}">Contact</a>
+                                    <a class="nav-link navlink active text-white"
+                                        href="{{ route('contact') }}">Contact</a>
                                 </li>
                             </ul>
                             <div class="d-flex col-lg-3 justify-content-center">
